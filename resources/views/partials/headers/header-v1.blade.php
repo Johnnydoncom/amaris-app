@@ -1,4 +1,4 @@
-<header class="js-page-header top-0 z-50 w-full backdrop-blur shadow-md bg-white dark:bg-gray-800 transition-colors" :class="{'h-full fixed':menuOpened, 'sticky': !menuOpened}">
+<header class="js-page-header top-0 z-50 w-full backdrop-blur shadow-md bg-white dark:bg-gray-900 transition-colors" :class="{'h-full fixed':menuOpened, 'sticky': !menuOpened}">
     <div class="flex items-center px-6 py-2 container">
 
         <a href="{{ route('index') }}" class="shrink-0">
@@ -293,7 +293,7 @@
         @endif
 
         <!-- Menu / Actions -->
-        <div class="js-mobile-menu dark:bg-jacarta-800 invisible fixed inset-0 z-10 ml-auto items-center bg-white opacity-0 lg:visible lg:relative lg:inset-auto lg:flex lg:bg-transparent lg:opacity-100 dark:lg:bg-transparent w-full lg:justify-end" :class="{'nav-menu--is-open': menuOpened}" x-transition>
+        <div class="js-mobile-menu dark:bg-jacarta-800 invisible fixed inset-0 z-10 ml-auto items-center bg-white opacity-0 lg:visible lg:relative lg:inset-auto lg:flex lg:bg-transparent lg:opacity-100 dark:lg:bg-transparent max-w-sm w-full lg:justify-end" :class="{'nav-menu--is-open': menuOpened}" x-transition>
             <!-- Mobile Logo / Menu Close -->
             <div class="t-0 dark:bg-jacarta-800 fixed left-0 z-10 flex w-full items-center justify-between bg-white px-6 py-2 lg:hidden">
                 <a href="{{ route('index') }}" class="shrink-0">
@@ -409,7 +409,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="collections.html"
+                                    href="#"
                                     class="dark:hover:bg-jacarta-600 hover:text-accent focus:text-accent hover:bg-jacarta-50 flex items-center rounded-xl px-5 py-2 transition-colors"
                                 >
                       <span class="mr-3 rounded-xl bg-[#FDF7EE] p-[0.375rem]">
@@ -431,7 +431,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="collections.html"
+                                    href="#"
                                     class="dark:hover:bg-jacarta-600 hover:text-accent focus:text-accent hover:bg-jacarta-50 flex items-center rounded-xl px-5 py-2 transition-colors"
                                 >
                       <span class="mr-3 rounded-xl bg-[#F2EEFF] p-[0.375rem]">
@@ -718,7 +718,7 @@
                 <a href="{{route('login')}}" class="text-primary font-display hover:text-accent focus:text-accent dark:hover:text-accent dark:focus:text-accent flex items-center justify-between py-3.5 text-base dark:text-white font-semibold lg:px-5">Sign In</a>
                 @endguest
 
-                <a type="button" class="btn btn-primary btn-sm">Get started</a>
+                <a href="{{route('pages.contact')}}" class="btn btn-primary btn-sm">Get started</a>
 
                 @auth
                 <!-- Profile -->
@@ -733,21 +733,21 @@
                             <path d="M11 14.062V20h2v-5.938c3.946.492 7 3.858 7 7.938H4a8.001 8.001 0 0 1 7-7.938zM12 13c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6z"/>
                         </svg>
                     </a>
-                    <ul class="dropdown-menu dark:bg-jacarta-800 left-0 top-[85%] z-10 hidden min-w-[200px] gap-x-4 whitespace-nowrap rounded-xl bg-white transition-all will-change-transform group-hover:visible group-hover:opacity-100 lg:invisible lg:absolute lg:grid lg:translate-y-4 lg:py-4 lg:px-2 lg:opacity-0 lg:shadow-2xl lg:group-hover:translate-y-2" aria-labelledby="accountDropdown">
+                    <ul class="dropdown-menu dark:bg-jacarta-800 right-0 top-[85%] z-10 hidden min-w-[200px] gap-x-4 whitespace-nowrap rounded-xl bg-white transition-all will-change-transform group-hover:visible group-hover:opacity-100 lg:invisible lg:absolute lg:grid lg:translate-y-4 lg:py-4 lg:px-2 lg:opacity-0 lg:shadow-2xl lg:group-hover:translate-y-2" aria-labelledby="accountDropdown">
                         <li>
-                            <a href="{{route('pages.about-us')}}"
+                            <a href="{{route('account.index')}}"
                                class="dark:hover:bg-jacarta-600 hover:text-accent focus:text-accent hover:bg-jacarta-50 flex items-center rounded-xl px-5 py-2 transition-colors">
-                                <span class="font-display text-jacarta-700 text-sm dark:text-white">The Company</span>
+                                <span class="font-display text-jacarta-700 text-sm dark:text-primary">My Account</span>
                             </a>
                         </li>
 
                         <li>
-                            <a
-                                href="tos.html"
-                                class="dark:hover:bg-jacarta-600 hover:text-accent focus:text-accent hover:bg-jacarta-50 flex items-center rounded-xl px-5 py-2 transition-colors"
-                            >
-                                <span class="font-display text-jacarta-700 text-sm dark:text-white">Terms of Service</span>
-                            </a>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <a class="dark:hover:bg-jacarta-600 hover:text-accent focus:text-accent hover:bg-jacarta-50 flex items-center rounded-xl px-5 py-2 transition-colors" href="{{route('logout')}}" onclick="event.preventDefault(); this.closest('form').submit();">
+                                    <span class="font-display text-jacarta-700 text-sm dark:text-primary">{{ __('Log Out') }}</span>
+                                </a>
+                            </form>
                         </li>
                     </ul>
                 </div>

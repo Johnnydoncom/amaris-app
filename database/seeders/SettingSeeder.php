@@ -10,7 +10,7 @@ class SettingSeeder extends Seeder
 {
     public function run()
     {
-        $settingArray['site_name']          = 'Amaris Giftcard Store';
+        $settingArray['site_name']          = 'Amaris Synergy Limited';
         $settingArray['site_email']         = 'info@amaris.com';
         $settingArray['site_phone_number']  = '+12055759342';
         $settingArray['site_currency_name'] = 'NGN';
@@ -20,7 +20,7 @@ class SettingSeeder extends Seeder
         $settingArray['site_logo']          = 'amaris-logo.png';
         $settingArray['site_logo_white']    = 'amaris-white-logo.png';
         $settingArray['site_favicon']       = 'favicon/apple-touch-icon.png';
-        $settingArray['site_description']   = 'Amaris is an online store platform in Nigeria.';
+        $settingArray['site_description']   = 'Amaris Synergy Limited is an online store platform in Nigeria.';
 
         $settingArray['mail_host']         = '';
         $settingArray['mail_port']         = '';

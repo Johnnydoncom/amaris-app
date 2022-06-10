@@ -23,11 +23,12 @@ class Verification extends Component
     public $verifyType=1;
     public $verifyDoc;
     public $verified = false;
-    public $nin,$passport_no,$dv_license_no,$vin;
+    public $id_no,$passport_no,$dv_license_no,$vin;
     public $verificationData = [];
 
     protected $rules = [
-        'nin' => 'required_if:verifyType,1'
+        'id_no' => 'required',
+        'verifyDoc' => 'required|image'
     ];
 
     public function mount(){
@@ -38,25 +39,30 @@ class Verification extends Component
         $this->last_name = auth()->user()->last_name;
         $this->first_name = auth()->user()->first_name;
         $this->dob = auth()->user()->dob;
-
-        $this->verification_record = auth()->user()->verifications()->latest()->first();
     }
 
     public function updatedVerifyType(){
-        $this->reset(['nin']);
+        $this->reset(['id_no']);
     }
 
     public function render()
     {
+        $this->verification_record = auth()->user()->verifications()->latest()->first();
+        if($this->verification_record){
+            $this->verifyType =  $this->verification_record->verification_type_id;
+            $this->id_no =  $this->verification_record->id_no;
+        }
+
         return view('livewire.account.verification')->layout('layouts.account');
     }
 
     public function verify(){
+        $this->validate();
 
         $verifyType = VerificationType::find($this->verifyType);
 
         if($verifyType->slug=='nin') {
-            $response = $this->verifyNIN($this->nin);
+            $response = $this->verifyNIN($this->id_no);
             if ($response && count($response->response)) {
 
                 $this->verificationData = $this->saveNINVerificationRecord($response->response[0]);
@@ -72,7 +78,7 @@ class Verification extends Component
             }
         }elseif ($verifyType->slug=='passport'){
             $response = $this->verifyPassport([
-                'passport_no' => $this->passport_no,
+                'passport_no' => $this->id_no,
                 'first_name' => auth()->user()->first_name,
                 'last_name' => auth()->user()->last_name,
                 'dob' => auth()->user()->dob
@@ -87,7 +93,7 @@ class Verification extends Component
             }
 
         }elseif($verifyType->slug=='drivers_license'){
-            $response = $this->verifyByDriversLicense($this->dv_license_no, $this->first_name, $this->last_name, $this->phone, $this->dob);
+            $response = $this->verifyByDriversLicense($this->id_no, $this->first_name, $this->last_name, $this->phone, $this->dob);
 
             echo json_encode($response);
             exit();
@@ -117,15 +123,15 @@ class Verification extends Component
 //            $this->addError('vin', 'Invalid Voters Card Information');
 
             $response = $this->verifyVotersCard([
-                'vin' => $this->vin,
+                'vin' => $this->id_no,
                 'country' => auth()->user()->country->name,
                 'selfie' => $base64string,
                 'match_selfie_to_db' => true
             ]);
 
 //            $this->addError('vin', 'Invalid Voters Card Information');
-            echo json_encode($response);
-            exit();
+//            echo json_encode($response);
+//            exit();
 
             if ($response && isset($response->response)) {
                 $this->verificationData = $this->saveVotersCardVerificationRecord($response->response);
@@ -138,6 +144,7 @@ class Verification extends Component
 
         session()->flash('verified');
     }
+
 
     private function saveNINVerificationRecord($data){
         $verifyType = VerificationType::find($this->verifyType);
@@ -159,6 +166,8 @@ class Verification extends Component
         $record->birth_state = $data->birthstate;
         $record->religion = $data->religion;
         $record->save();
+
+        $record->addMedia($this->verifyDoc->getRealPath())->toMediaCollection('doc');
 
         $imageName = Str::random(10).'.'.'png';
         Storage::disk('public')->put($imageName, base64_decode($data->photo));
@@ -186,6 +195,8 @@ class Verification extends Component
         $record->issued_date = $data->issued_date;
         $record->save();
 
+        $record->addMedia($this->verifyDoc->getRealPath())->toMediaCollection('doc');
+
         $imageName = Str::random(10).'.'.'png';
         Storage::disk('public')->put($imageName, base64_decode($data->photo));
         $record->addMediaFromUrl(Storage::disk('public')->url($imageName))->toMediaCollection('user_photo');
@@ -212,6 +223,8 @@ class Verification extends Component
         $record->issued_date = $data->issued_date;
         $record->save();
 
+        $record->addMedia($this->verifyDoc->getRealPath())->toMediaCollection('doc');
+
         $imageName = Str::random(10).'.'.'png';
         Storage::disk('public')->put($imageName, base64_decode($data->photo));
         $record->addMediaFromUrl(Storage::disk('public')->url($imageName))->toMediaCollection('user_photo');
@@ -219,4 +232,5 @@ class Verification extends Component
 
         return $record;
     }
+
 }

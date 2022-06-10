@@ -134,24 +134,20 @@ id="aside"
                             All Users
                         </span>
                     </a>
-                    <!-- end::Menu link -->
 
-                    <!-- start::Menu link -->
-                    <a
-                        x-data="{ linkHover: false }"
-                        @mouseover = "linkHover = true"
-                        @mouseleave = "linkHover = false"
-                        href="{{ route('admin.users.create') }}"
-                        class="flex items-center text-gray-400 px-6 py-3 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200"
-                    >
+                    <a x-data="{ linkHover: false }" @mouseover = "linkHover = true" @mouseleave = "linkHover = false" href="{{ route('admin.users.create') }}" class="flex items-center text-gray-400 px-6 py-3 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200">
                         <svg class="w-5 h-5 transition duration-200" :class=" linkHover ? 'text-gray-100' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
-                        <span
-                            class="ml-3 transition duration-200"
-                            :class="linkHover ? 'text-gray-100' : ''">
+                        <span class="ml-3 transition duration-200" :class="linkHover ? 'text-gray-100' : ''">
                             Add User
                         </span>
                     </a>
-                    <!-- end::Menu link -->
+
+                    <a x-data="{ linkHover: false }" @mouseover = "linkHover = true" @mouseleave = "linkHover = false" href="{{ route('admin.users.verifications.index') }}" class="flex items-center text-gray-400 px-6 py-3 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200">
+                        <svg class="w-5 h-5 transition duration-200" :class=" linkHover ? 'text-gray-100' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                        <span class="ml-3 transition duration-200" :class="linkHover ? 'text-gray-100' : ''">
+                           Verifications
+                        </span>
+                    </a>
                     @endhasanyrole
 
                     @hasanyrole(\App\Enums\UserRole::ADMIN.'|'.\App\Enums\UserRole::SUPERADMIN)

@@ -174,4 +174,8 @@ class Product extends Model implements HasMedia
         return $query->where('product_type', 'default');
     }
 
+    public function scopeGiftCard($query)
+    {
+        return $query->where('product_type', 'gift_card');
+    }
 }

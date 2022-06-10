@@ -8,17 +8,17 @@
 
         </div>
 
-        <form method="POST" class="mt-10 sm:mt-20 space-y-4 sm:space-y-6" action="{{ route('register') }}">
+        <form method="POST" class="mt-10 sm:mt-0 space-y-4 sm:space-y-6" action="{{ route('register') }}">
             @csrf
 
-            <x-floating-input id="last_name" :label="__('Last Name')" name="last_name" wrapperClass="" type="text" placeholder="__('Last Name')" :value="old('last_name')" required autofocus />
+            <x-floating-input id="last_name" :label="__('Last Name')" name="last_name" wrapperClass="" type="text" :placeholder="__('Last Name')" :value="old('last_name')" required autofocus />
 
-            <x-floating-input id="first_name" :label="__('First Name')" name="first_name" wrapperClass="" type="text" placeholder="__('First Name')" :value="old('first_name')" required autofocus />
+            <x-floating-input id="first_name" :label="__('First Name')" name="first_name" wrapperClass="" type="text" :placeholder="__('First Name')" :value="old('first_name')" required autofocus />
 
             <!-- Email Address -->
             <x-floating-input id="email" label="Email" name="email" wrapperClass="" type="email" placeholder="Email" :value="old('email')" required autofocus />
 
-            <x-floating-input id="phone" :label="__('Phone Number')" name="phone" wrapperClass="" type="text" placeholder="__('Phone Number')" :value="old('phone')" required />
+            <x-floating-input id="phone" :label="__('Phone Number')" name="phone" wrapperClass="" type="text" :placeholder="__('Phone Number')" :value="old('phone')" required />
 
             <!-- Password -->
             <x-floating-input id="password" wrapperClass="" name="password" label="Password" type="password" placeholder="Password" required autocomplete="new-password" />

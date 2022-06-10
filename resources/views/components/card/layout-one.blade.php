@@ -7,8 +7,8 @@
                 <img src="{{$product->featured_img_thumb}}" alt="{{$product->title}}" width="230" height="230" class="w-full rounded-[0.625rem]"/>
 
                 @if($product->country)
-                    <div class="absolute right-2 top-0">
-                        <span class="dark:border-jacarta-600 flex items-center whitespace-nowrap rounded-lg overflow-hidden py-0 px-0">
+                    <div class="absolute right-2 top-2">
+                        <span class="dark:border-jacarta-600 flex items-center whitespace-nowrap rounded-full overflow-hidden py-0 px-0">
                             <span class="text-2xl leading-none">{!!$product->country->emoji!!}</span>
                         </span>
                     </div>

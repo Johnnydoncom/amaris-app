@@ -129,7 +129,10 @@ a.active{
     @apply w-full;
 }
 .btn-sm{
-    @apply
+    @apply px-3 py-2 text-sm font-medium;
+}
+.btn-xs{
+    @apply px-3 py-2 text-xs font-medium;
 }
 .btn-outline-white{
     @apply text-white hover:text-white border border-white hover:bg-transparent focus:ring-4 focus:outline-none focus:ring-white dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800;

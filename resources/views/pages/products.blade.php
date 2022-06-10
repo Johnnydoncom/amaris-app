@@ -36,23 +36,15 @@
                             </p>
                             <p><strong>Introducing The Ninja Power System Backups</strong></p>
                         </div>
-                        <div class="order-first sm:order-last grid grid-cols-5 grid-rows-4 gap-4">
-                            <div class="col-span-2 row-span-4">
-                                <img src="https://tailus.io/sources/blocks/ecommerce-site/preview/images/products/kushagra.webp" class="rounded-full" width="640" height="960" alt="shoes" loading="lazy">
-                            </div>
-                            <div class="col-span-2 row-span-2">
-                                <img src="https://tailus.io/sources/blocks/ecommerce-site/preview/images/products/iman.webp" class="w-full h-full object-cover object-top rounded-xl" width="640" height="640" alt="shoe" loading="lazy">
-                            </div>
-                            <div class="col-span-3 row-span-3">
-                                <img src="https://tailus.io/sources/blocks/ecommerce-site/preview/images/products/daniel.webp" class="w-full h-full object-cover object-top rounded-xl" width="640" height="427" alt="shoes" loading="lazy">
-                            </div>
+                        <div class="order-first sm:order-last">
+                            <img src="{{ Storage::url('lithium-ion-batteries-hybrid-power-systems.jpg') }}" class="object-cover rounded-full h-56" alt="Product Image">
                         </div>
                     </div>
                 </div>
             </div>
-
             <div class="divider"></div>
         </section>
+
 
         <section class="container mb-8">
             <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 sm:gap-4 px-2">
@@ -61,7 +53,7 @@
                             <div class="dark:bg-jacarta-700 dark:border-jacarta-700 border-jacarta-100 rounded-3xl block border bg-white p-[1.1875rem] transition-shadow hover:shadow-lg h-full">
                                 <figure>
                                     <a href="{{ route('product.show',$product->slug) }}">
-                                        <img src="{{$product->getFirstMediaUrl('featured_image','thumb')}}" alt="{{$product->title}}" class="w-full rounded-[0.625rem] h-44 object-cover sm:max-h-40"/>
+                                        <img src="{{$product->getFirstMediaUrl('featured_image','thumb')}}" alt="{{$product->title}}" class="w-full rounded-[0.625rem] sm:h-56 object-cover sm:max-h-[15rem]"/>
                                     </a>
                                 </figure>
                                 <div class="mt-4">
@@ -72,12 +64,12 @@
                                     </h2>
 
                                     <div class="flex justify-between mt-2">
-                                            <span class="dark:border-jacarta-600 border-jacarta-100 flex items-center whitespace-nowrap rounded-md border py-1 px-2">
+                                            <span class="dark:border-jacarta-600 border-jacarta-100 flex items-center whitespace-nowrap rounded-md border py-1 px-2 text-xs sm:text-sm lg:text-sm xl:text-base">
                                                 {{app_money_format($product->regular_price)}}
                                             </span>
                                         <span>
                                                 <a href="{{ route('product.show', $product->slug) }}" class="btn btn-primary btn-sm">Quick View</a>
-                                           </span>
+                                        </span>
                                     </div>
 
                                 </div>

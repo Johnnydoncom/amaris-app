@@ -1,13 +1,13 @@
 
 
-<footer class="p-4 bg-white sm:p-6 dark:bg-gray-800 border-t">
+<footer class="p-4 bg-white sm:p-6 dark:bg-gray-900 border-t">
    <div class="container">
        <div class="md:flex md:justify-between">
            <div class="mb-6 md:mb-0">
                <a href="{{ route('index') }}" class="flex items-center mb-6">
                    <x-application-logo class="h-12 sm:h-16 max-h-20 dark:hidden fill-current text-gray-600" type="light" />
                </a>
-               <p class="dark:text-jacarta-300 mb-12 max-w-sm">
+               <p class="dark:text-gray-400 mb-12 max-w-sm">
                    We create a solution where anyone can pick up a device, pick up a digital or physical product and would be sure to get it in due time.
                </p>
            </div>

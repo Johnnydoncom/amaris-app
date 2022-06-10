@@ -13,6 +13,8 @@ class UserVerification extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
 
+    protected $fillable = ['status'];
+
     public function registerMediaCollections() : void
     {
         $this->addMediaCollection('doc')
@@ -20,5 +22,9 @@ class UserVerification extends Model implements HasMedia
 
         $this->addMediaCollection('user_photo')
             ->singleFile();
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

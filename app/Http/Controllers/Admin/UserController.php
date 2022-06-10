@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Enums\UserRole;
+use App\Enums\UserStatus;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserVerification;
 use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -141,4 +143,28 @@ class UserController extends Controller
     {
         //
     }
+
+    public function verifications(){
+        return view('admin.user.verifications',[
+            'verifications' => UserVerification::whereStatus('pending')->paginate()
+        ]);
+    }
+
+    public function showVerification(UserVerification $userVerification){
+        return view('admin.user.show-verification',[
+            'verification' => $userVerification
+        ]);
+    }
+
+    public function verificationAction(Request $request, UserVerification $userVerification){
+       $request->validate(['status'=>'required']);
+       $userVerification->update(['status'=>$request->status]);
+
+       if($request->status == 'verified'){
+
+           $userVerification->user->update(['verified'=>true]);
+        }
+        return redirect()->back()->withSuccess('Record Updated');
+    }
+
 }

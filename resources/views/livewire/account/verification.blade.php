@@ -4,38 +4,68 @@
             <h2 class="font-semibold text-xl sm:text-2xl">Account Verification</h2>
             <div class="divider my-0"></div>
             @if($verified)
-                Verified
+                Account Verified
             @else
 
-                <form method="POST" wire:submit.prevent="verify" class="flex flex-col gap-4 w-full sm:w-1/2">
+                <form method="POST" wire:submit.prevent="verify" class="flex flex-col gap-4 w-full sm:w-1/2 mt-4">
                     @csrf
-                    <x-floating-select x-model="verifyType" wire:model="verifyType" id="verifyType" :label="__('Verification Type')" name="verifyType" wrapperClass="w-full" placeholder="__('Verification Type')">
-                        <option value="">Select</option>
-                        @foreach($verificationTypes as $vtype)
-                            <option value="{{$vtype->id}}" @if($verification_record && $vtype->id==$verification_record->verification_type_id) selected @endif>{{$vtype->name}}</option>
-                        @endforeach
-                    </x-floating-select>
 
-                    @if($verifyType == 1)
-                        <x-floating-input id="nin" :label="__('NIN *')" name="nin" wrapperClass="w-full" wire:model.defer="nin" type="text" placeholder="__('National Identification Number')" />
-
-                    @elseif($verifyType==2)
-
-                        <x-floating-input id="passport_no" :label="__('Passport Number *')" name="passport_no" wrapperClass="" wire:model.defer="passport_no" type="text" placeholder="__('Passport Number')" required autofocus />
-
-                    @elseif($verifyType==3)
-                        <x-floating-input id="dv_license_no" :label="__('Drivers License Number *')" name="dv_license_no" wrapperClass="" wire:model.defer="dv_license_no" type="text" placeholder="__('Driver's License Number')" required autofocus />
-                    @elseif($verifyType==4)
-                        <x-floating-input id="vin" :label="__('VIN *')" name="vin" wrapperClass="" wire:model.defer="vin" type="text" placeholder="__('VIN')" required autofocus />
-
+                    @if($verification_record)
+                        <x-floating-select x-model="verifyType" wire:model="verifyType" id="verifyType" label="Verification Type" name="verifyType" wrapperClass="w-full" placeholder="Verification Type" readonly>
+                            <option value="">Select</option>
+                            @foreach($verificationTypes as $vtype)
+                                <option value="{{$vtype->id}}" @if($verification_record && $vtype->id==$verification_record->verification_type_id) selected @endif>{{$vtype->name}}</option>
+                            @endforeach
+                        </x-floating-select>
+                    @else
+                        <x-floating-select x-model="verifyType" wire:model="verifyType" id="verifyType" label="Verification Type" name="verifyType" wrapperClass="w-full" placeholder="Verification Type">
+                            <option value="">Select</option>
+                            @foreach($verificationTypes as $vtype)
+                                <option value="{{$vtype->id}}" @if($verification_record && $vtype->id==$verification_record->verification_type_id) selected @endif>{{$vtype->name}}</option>
+                            @endforeach
+                        </x-floating-select>
                     @endif
 
-{{--                    <x-file-attachment wire:model="verifyDoc" :file="$verifyDoc" required="required" />--}}
-                    <x-file-attachment wire:model="verifyDoc" :file="$verifyDoc" />
+                    @if($verifyType == 1)
+                        @if($verification_record)
+                            <x-floating-input id="nin" label="National Identification Number *" name="id_no" wrapperClass="w-full" wire:model.defer="id_no" type="text" placeholder="National Identification Number" value="{{$verification_record->id_no}}" readonly="readonly" />
+                        @else
+                            <x-floating-input id="nin" label="National Identification Number *" name="id_no" wrapperClass="w-full" wire:model.defer="id_no" type="text" placeholder="National Identification Number" />
+                        @endif
+
+                    @elseif($verifyType==2)
+                        @if($verification_record)
+                            <x-floating-input id="passport_no" label="Passport Number *" name="id_no" wrapperClass="" wire:model.defer="id_no" type="text" placeholder="Passport Number" readonly />
+                        @else
+                            <x-floating-input id="passport_no" label="Passport Number *" name="id_no" wrapperClass="" wire:model.defer="id_no" type="text" placeholder="Passport Number" required autofocus />
+                        @endif
+                    @elseif($verifyType==3)
+                        @if($verification_record)
+                        <x-floating-input id="dv_license_no" label="Drivers License Number *" name="id_no" wrapperClass="" wire:model.defer="id_no" type="text" placeholder="Driver's License Number" readonly />
+                        @else
+                            <x-floating-input id="dv_license_no" label="Drivers License Number *" name="id_no" wrapperClass="" wire:model.defer="id_no" type="text" placeholder="Driver's License Number" required autofocus />
+                        @endif
+                    @elseif($verifyType==4)
+                        @if($verification_record)
+                        <x-floating-input id="vin" label="VIN *" name="id_no" wrapperClass="" wire:model.defer="id_no" type="text" placeholder="VIN" readonly />
+                        @else
+                            <x-floating-input id="vin" label="VIN *" name="id_no" wrapperClass="" wire:model.defer="id_no" type="text" placeholder="VIN" required autofocus />
+                        @endif
+                    @endif
+
+                    @if($verification_record)
+                        <img src="{{$verification_record->getFirstMediaUrl('doc')}}" class="w-32 h-32" alt="Doc">
+                    @else
+                        <x-file-attachment wire:model="verifyDoc" :file="$verifyDoc" />
+                    @endif
 
                     @if(!$verified)
                         <div class="col-span-1 sm:col-span-2">
-                            <x-button class="btn btn-primary btn-block" wire:loading.class="loading" wire:target="verify" wire:loading.attr="disabled">{{ __('Verify Account') }}</x-button>
+                            @if(isset($verification_record) && $verification_record->status=='pending')
+                            <x-button class="btn btn-primary btn-block" wire:loading.class="loading" wire:target="verify" wire:loading.attr="disabled" disabled="disabled">{{ __('Verify Account') }}</x-button>
+                            @else
+                                <x-button class="btn btn-primary btn-block" wire:loading.class="loading" wire:target="verify" wire:loading.attr="disabled">{{ __('Verify Account') }}</x-button>
+                            @endif
                         </div>
                     @endif
                 </form>

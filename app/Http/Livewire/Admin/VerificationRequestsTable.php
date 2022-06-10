@@ -5,13 +5,14 @@ namespace App\Http\Livewire\Admin;
 use App\Enums\UserRole;
 use App\Enums\UserStatus;
 use App\Models\User;
+use App\Models\UserVerification;
 use Mediconesystems\LivewireDatatables\Action;
 use Mediconesystems\LivewireDatatables\Column;
 use Mediconesystems\LivewireDatatables\DateColumn;
 use Mediconesystems\LivewireDatatables\Http\Livewire\LivewireDatatable;
 use Spatie\Permission\Models\Role;
 
-class UsersTable extends LivewireDatatable
+class VerificationRequestsTable extends LivewireDatatable
 {
     public $persistComplexQuery = true;
     public $afterTableSlot = 'components.selected';
@@ -23,41 +24,40 @@ class UsersTable extends LivewireDatatable
 
     public function builder()
     {
-        return User::whereHas('roles', function ($q){
-            $q->where('name', '!=', UserRole::SUPERADMIN);
-        });
+        return UserVerification::where('status','pending');
     }
 
     public function columns()
     {
        return [
-           Column::checkbox(),
+           Column::name('user.account_id')->label('Account ID'),
+
            Column::callback(['last_name','first_name'], function ($last_name,$first_name) {
                return $last_name.' '.$first_name;
            })->exportCallback(function ($last_name,$first_name){
                return $last_name.' '.$first_name;
            })->searchable()->label('Name'),
+
            Column::name('email')->searchable()->label('Email'),
-           Column::name('roles.name')
-               ->filterable($this->roles->pluck('name'))
-               ->label('User Role'),
+
            Column::callback(['status'], function ($status) {
-               return $status == UserStatus::ACTIVE ? '<span class="badge badge-success badge-sm">Active</span>' : '<span class="badge badge-danger badge-sm">Inactive</span>';
+               return '<span class="badge badge-danger badge-sm">'.$status.'</span>';
            })->exportCallback(function ($status){
-               return $status == UserStatus::ACTIVE ? 'Active' : 'Inactive';
+               return $status;
            })->label('Status'),
 
            DateColumn::name('created_at')
-               ->label('Created at'),
+               ->label('Request Date'),
+
            Column::callback(['id','last_name', 'first_name'], function ($id,$last_name,$first_name) {
-               return view('admin.user.table-actions', ['id' => $id,  'name'=>$last_name.' '.$first_name]);
+               return view('admin.user.verification-table-actions', ['id' => $id,  'name'=>$last_name.' '.$first_name]);
            })->unsortable()->label('Action')->excludeFromExport()
        ];
     }
 
-    public function getRolesProperty()
+    public function getUserProperty()
     {
-        return Role::where('name', '!=', UserRole::SUPERADMIN)->get();
+        return User::get();
     }
 
 

@@ -30,7 +30,7 @@
 
     <section class="py-10 lg:py-16">
         <div class="container">
-            <h2 class="font-bold text-2xl lg:text-4xl max-w-4xl">A global software house delivering and integrating proprietary IT products.</h2>
+            <h2 class="font-bold text-2xl lg:text-4xl max-w-4xl dark:text-gray-200">A global software house delivering and integrating proprietary IT products.</h2>
         </div>
     </section>
 
@@ -55,7 +55,7 @@
                 </div>
             </div>
             <div class="">
-                <img src="{{Storage::url('amaris-3d-mock-up.jpg')}}" alt="About Us" class=" object-cover">
+                <img src="{{Storage::url('amaris-3d-mock-up.jpg')}}" alt="About Us" class="h-full object-cover">
             </div>
         </div>
     </section>
@@ -121,11 +121,12 @@
    @endif
 
 
-    <section class="pt-10 pb-10 sm:pb-16">
+    <section class="pt-10 pb-10 sm:pb-16 dark:bg-gray-900">
         <div class="container">
             <div class="flex gap-2 justify-between items-center border-b my-6">
-                <h2 class="font-bold text-2xl sm:text-3xl text-left">
-                    <span class="mr-1 inline-block h-6 w-6 bg-contain bg-center text-xl" style="background-image: url('https://cdn.jsdelivr.net/npm/emoji-datasource-apple@7.0.2/img/apple/64/1f525.png');"></span> <span class="text-primary">Gift Cards</span> </h2>
+                <h2 class="font-display font-bold text-jacarta-700 text-center text-xl sm:text-3xl dark:text-gray-200">
+                    <span class="mr-1 inline-block h-6 w-6 bg-contain bg-center text-xl" style="background-image: url('https://cdn.jsdelivr.net/npm/emoji-datasource-apple@7.0.2/img/apple/64/1f525.png');"></span> <span class="text-primary dark:text-gray-200">Gift Cards</span>
+                </h2>
                 <div>
                     <a class="btn btn-sm btn-link" href="{{route('cards.index')}}">Browse All</a>
                 </div>
@@ -158,10 +159,10 @@
     </section>
 
 
-    <section class="dark:bg-jacarta-800 relative pb-10 sm:pb-16">
+    <section class="dark:bg-gray-900 relative pb-10 sm:pb-16">
         <div class="container">
             <div class="flex gap-2 justify-between items-center border-b my-6">
-                <h2 class="font-display font-bold text-jacarta-700 text-center text-3xl dark:text-white">
+                <h2 class="font-display font-bold text-jacarta-700 text-center text-xl sm:text-3xl dark:text-gray-200">
                     <span class="animate-heartBeat mr-1 inline-block h-6 w-6 bg-contain bg-center text-xl" style="background-image: url(https://cdn.jsdelivr.net/npm/emoji-datasource-apple@7.0.2/img/apple/64/2764-fe0f.png);"></span>
                     Ninja Power System
                 </h2>
@@ -181,7 +182,7 @@
                                 <div class="dark:bg-jacarta-700 dark:border-jacarta-700 border-jacarta-100 rounded-3xl block border bg-white p-[1.1875rem] transition-shadow hover:shadow-lg h-full">
                                     <figure>
                                         <a href="{{ route('product.show',$product->slug) }}">
-                                            <img src="{{$product->getFirstMediaUrl('featured_image','thumb')}}" alt="{{$product->title}}" width="200" height="200" class="w-full rounded-[0.625rem] sm:h-56 object-cover sm:max-h-[5rem]"/>
+                                            <img src="{{$product->getFirstMediaUrl('featured_image','thumb')}}" alt="{{$product->title}}" width="200" height="200" class="w-full rounded-[0.625rem] sm:h-56 object-cover sm:max-h-[15rem]"/>
                                         </a>
                                     </figure>
                                     <div class="mt-4">
@@ -192,7 +193,7 @@
                                         </h2>
 
                                         <div class="flex justify-between mt-2">
-                                            <span class="dark:border-jacarta-600 border-jacarta-100 flex items-center whitespace-nowrap rounded-md border py-1 px-2">
+                                            <span class="dark:border-jacarta-600 border-jacarta-100 flex items-center whitespace-nowrap rounded-md border py-1 px-2 text-xs sm:text-sm lg:text-sm xl:text-base">
                                                 {{app_money_format($product->regular_price)}}
                                             </span>
                                            <span>

@@ -12,6 +12,7 @@
         <link rel="icon" type="image/png" sizes="16x16" href="{{Storage::url('favicon/favicon-16x16.png')}}">
         <link rel="manifest" href="{{Storage::url('favicon/site.webmanifest')}}">
 
+
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,7 +28,7 @@
         @stack('styles')
     </head>
     <body x-data="{menuOpened:false}" class="font-sans antialiased overflow-x-hidden" :class="{'nav-open-noscroll': menuOpened }">
-        <div class="min-h-screen bg-white">
+        <div class="min-h-screen bg-white dark:bg-gray-900">
                 @include('partials.headers.header-v1')
 
 

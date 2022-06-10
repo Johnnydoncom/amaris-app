@@ -19,13 +19,11 @@ class Home extends Component
 
     public function mount(){
         $this->platforms = Platform::all();
-//        $this->categories = Category::get(['id','name']);
-//        $this->countries = Country::get(['id','name']);
     }
 
     public function render()
     {
-        $products = Product::whereStatus(true);
+        $products = Product::giftCard()->whereStatus(true);
 
         if($this->code){
             $products->whereHas('platform', function ($q){

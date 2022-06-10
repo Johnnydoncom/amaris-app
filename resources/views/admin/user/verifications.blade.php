@@ -5,7 +5,7 @@
         {{-- <livewire:entries-table /> --}}
 
         {{--        <livewire:datatable model="App\Models\User" name="all-users" />--}}
-        <livewire:admin.users-table/>
+        <livewire:admin.verification-requests-table/>
     </div>
 
 </x-admin-layout>

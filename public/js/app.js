@@ -25838,9 +25838,12 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
 /*!*******************************!*\
   !*** ./resources/css/app.css ***!
   \*******************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-throw new Error("Module build failed (from ./node_modules/mini-css-extract-plugin/dist/loader.js):\nModuleBuildError: Module build failed (from ./node_modules/postcss-loader/dist/cjs.js):\nSyntaxError\n\n(132:5) C:\\laragon\\www\\amaris\\resources\\css\\app.css The `` class does not exist. If `` is a custom class, make sure it is defined within a `@layer` directive.\n\n \u001b[90m 130 | \u001b[39m\u001b[33m}\u001b[39m\n \u001b[90m 131 | \u001b[39m\u001b[33m.btn-sm\u001b[39m\u001b[33m{\u001b[39m\n\u001b[1m\u001b[31m>\u001b[39m\u001b[22m\u001b[90m 132 | \u001b[39m    \u001b[36m@apply\u001b[39m\n \u001b[90m     | \u001b[39m    \u001b[1m\u001b[31m^\u001b[39m\u001b[22m\n \u001b[90m 133 | \u001b[39m\u001b[33m}\u001b[39m\n \u001b[90m 134 | \u001b[39m\u001b[33m.btn-outline-white\u001b[39m\u001b[33m{\u001b[39m\n\n    at processResult (C:\\laragon\\www\\amaris\\node_modules\\webpack\\lib\\NormalModule.js:758:19)\n    at C:\\laragon\\www\\amaris\\node_modules\\webpack\\lib\\NormalModule.js:860:5\n    at C:\\laragon\\www\\amaris\\node_modules\\loader-runner\\lib\\LoaderRunner.js:400:11\n    at C:\\laragon\\www\\amaris\\node_modules\\loader-runner\\lib\\LoaderRunner.js:252:18\n    at context.callback (C:\\laragon\\www\\amaris\\node_modules\\loader-runner\\lib\\LoaderRunner.js:124:13)\n    at Object.loader (C:\\laragon\\www\\amaris\\node_modules\\postcss-loader\\dist\\index.js:140:7)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
 
 /***/ }),
 
@@ -49382,7 +49385,8 @@ module.exports = function (list, options) {
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
 /******/ 			"/js/app": 0,
-/******/ 			"css/swiper-bundle.min": 0
+/******/ 			"css/swiper-bundle.min": 0,
+/******/ 			"css/app": 0
 /******/ 		};
 /******/ 		
 /******/ 		// no chunk on demand loading
@@ -49437,9 +49441,9 @@ module.exports = function (list, options) {
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/swiper-bundle.min"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/swiper-bundle.min"], () => (__webpack_require__("./resources/css/app.css")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/swiper-bundle.min"], () => (__webpack_require__("./node_modules/swiper/swiper-bundle.min.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/swiper-bundle.min","css/app"], () => (__webpack_require__("./resources/js/app.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/swiper-bundle.min","css/app"], () => (__webpack_require__("./resources/css/app.css")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/swiper-bundle.min","css/app"], () => (__webpack_require__("./node_modules/swiper/swiper-bundle.min.css")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

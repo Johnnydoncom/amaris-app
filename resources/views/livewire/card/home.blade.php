@@ -1,8 +1,8 @@
 <div x-data="handler()">
-    <h2 class="text-center font-semibold text-2xl sm:text-3xl py-6">Gift Cards</h2>
+    <h2 class="text-center font-semibold text-2xl sm:text-3xl pb-4 pt-8">Gift Cards</h2>
 
     <div class="container grid grid-cols-4 gap-4 py-6">
-        <x-card class="sticky top-11 h-full p-2 border rounded-3xl">
+        <x-card class="sticky top-11 h-full p-2 border rounded-4xl">
             <form method="get" action="{{route('cards.index')}}" id="filterCards">
                 <div class="relative w-full max-w-sm">
                     <input type="text" class="w-full py-2 pr-10 pl-4 text-gray-700 bg-white border border-gray-100 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-primary dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-primary" name="keyword" value="{{request()->get('keyword')}}" placeholder="Search">
@@ -14,7 +14,6 @@
                 </div>
                 <input type="hidden" name="code" value="{{request()->get('code')}}">
                 <div class="mt-4">
-
                     <ul class="space-y-2">
                         @foreach($platforms as $pt)
                         <li>

@@ -1,5 +1,5 @@
 <x-admin-layout>
-    <x-slot name="title">{{ __('Users') }}</x-slot>
+    <x-slot name="title">{{ __('Verification Requests') }}</x-slot>
 
     <div>
         {{-- <livewire:entries-table /> --}}
