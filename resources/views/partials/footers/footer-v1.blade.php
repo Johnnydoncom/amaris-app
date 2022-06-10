@@ -1,6 +1,6 @@
 
 
-<footer class="p-4 bg-white sm:p-6 dark:bg-gray-900 border-t">
+<footer class="p-4 bg-primary text-gray-100 sm:p-6 dark:bg-gray-900 border-t">
    <div class="container">
        <div class="md:flex md:justify-between">
            <div class="mb-6 md:mb-0">
@@ -13,8 +13,8 @@
            </div>
            <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
                <div>
-                   <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Resources</h2>
-                   <ul class="text-gray-600 dark:text-gray-400 flex flex-col space-y-1">
+                   <h2 class="mb-6 text-sm font-semibold text-white uppercase dark:text-white">Resources</h2>
+                   <ul class="text-gray-200 dark:text-gray-200 flex flex-col space-y-1">
                        <li>
                            <a href="{{ route('cards.index') }}" class="hover:underline">Gift Cards</a>
                        </li>
@@ -24,8 +24,8 @@
                    </ul>
                </div>
                <div>
-                   <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Company</h2>
-                   <ul class="text-gray-600 dark:text-gray-400 flex flex-col space-y-1">
+                   <h2 class="mb-6 text-sm font-semibold text-white uppercase dark:text-white">Company</h2>
+                   <ul class="text-gray-200 dark:text-gray-400 flex flex-col space-y-1">
                        <li>
                            <a href="{{route('pages.about-us')}}" class="hover:underline hover:text-accent dark:hover:text-white">About</a>
                        </li>
@@ -38,8 +38,8 @@
                    </ul>
                </div>
                <div class="col-span-2 sm:col-span-1">
-                   <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Legal</h2>
-                   <ul class="text-gray-600 dark:text-gray-400 flex flex-col space-y-1">
+                   <h2 class="mb-6 text-sm font-semibold text-white uppercase dark:text-white">Legal</h2>
+                   <ul class="text-gray-200 dark:text-gray-400 flex flex-col space-y-1">
                        <li>
                            <a href="{{route('pages.privacy-policy')}}" class="hover:underline">Privacy Policy</a>
                        </li>
