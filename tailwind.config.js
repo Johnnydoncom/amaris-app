@@ -138,10 +138,11 @@ module.exports = {
                     "800": "#880707",
                     "900": "#440303"
                 }
+            },
+            backgroundImage: {
+                'page-heading-pattern': "url('/storage/hero-bg.png')",
+                'footer-texture': "url('/storage/Animated-Shape.svg')",
             }
-            // fontFamily: {
-            //     sans: ['Muli', ...defaultTheme.fontFamily.sans],
-            // },
         },
     },
 

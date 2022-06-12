@@ -1,38 +1,33 @@
 <x-app-layout>
     <!-- Page title -->
-    <section class="relative pt-14 lg:pb-16">
-        <picture class="pointer-events-none absolute inset-0 -z-10 dark:hidden">
-            <img src="{{Storage::url('gradient_light.jpg')}}" alt="gradient" class="h-full w-full" />
-        </picture>
-        <div class="container">
-            <!-- Page Title -->
-            <div class="mx-auto max-w-2xl py-16 text-center">
-                <h1 class="font-display text-jacarta-700 mb-8 text-4xl font-extrabold dark:text-white">About {{config('app.name')}}</h1>
-                <p class="dark:text-jacarta-300 text-lg leading-normal">
-                    At Amaris.ng, Our major focus is to help bridge the gap in which consumers gain access to products through the use of technology.
-                </p>
+
+    <section class="relative">
+
+        <div class="relative bg-primary text-white bg-cover bg-clip-padding w-full pb-5 sm:pb-0 after:absolute after:inset-0 bg-page-heading-pattern">
+            <div class="container py-6 relative z-10">
+                <div class="mx-auto max-w-2xl py-16 text-center">
+                    <h1 class="font-display text-jacarta-700 mb-8 text-4xl font-extrabold dark:text-white">About {{config('app.name')}}</h1>
+                    <p class="dark:text-jacarta-300 text-lg leading-normal">
+                        At Amaris.ng, Our major focus is to help bridge the gap in which consumers gain access to products through the use of technology.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
 
 
     <!-- Story -->
-    <section class="dark:bg-jacarta-800 relative py-14">
-        <picture class="pointer-events-none absolute inset-0 -z-10 dark:hidden">
-            <img src="{{Storage::url('gradient_light.jpg')}}" alt="gradient" class="h-full w-full" />
-        </picture>
+    <section class="dark:bg-jacarta-800 relative py-8">
 
         <div class="container">
-            <div class="lg:flex lg:justify-between">
+            <div class="lg:grid grid-cols-2">
                 <!-- Image -->
-                <div class="lg:w-[55%]">
-                    <div class="relative rounded-l-lg">
-                        <img src="{{Storage::url('amaris-3d-mock-up.jpg')}}" alt="" class="rounded-l-full animate-fly top-0 w-full"  />
-                    </div>
+                <div class="relative">
+                    <img src="{{Storage::url('amaris-3d-mock-up.jpg')}}" alt="" class="aanimate-fly top-0 w-full h-full"  />
                 </div>
 
                 <!-- Info -->
-                <div class="py-20 lg:w-[45%] lg:pl-16">
+                <div class="py-16 lg:pl-10 lg:pr-5">
                     <h2 class="text-jacarta-900 font-display font-extrabold mb-6 text-4xl dark:text-white">
                         Working with your organisation
                     </h2>
@@ -84,5 +79,4 @@
             </div>
         </div>
     </section>
-    <!-- end story -->
 </x-app-layout>

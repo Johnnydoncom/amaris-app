@@ -19,7 +19,7 @@
 
     <div class="card rounded-none">
         <div class="card-body p-1 sm:p-auto">
-            <h2 class="font-semibold text-xl sm:text-2xl">Account Information</h2>
+            <h2 class="font-semibold text-xl sm:text-2xl py-4">Account Information</h2>
             <form method="POST" action="{{ route('account.settings.store') }}" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 @csrf
                 <x-floating-input id="last_name" label="Last Name *" name="last_name" wire:model.defer="last_name" wrapperClass="w-full" type="text" placeholder="Last Name *" :value="$user->last_name" readonly required autofocus />

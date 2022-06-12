@@ -40,8 +40,14 @@
         </a>
     </section>
 
+    <section>
+        <a href="{{route('pages.products')}}" class="block">
+            <img src="{{Storage::url('Quality-services.jpg')}}" class="w-full object-cover" alt="Quality services">
+        </a>
+    </section>
+
     <section class="">
-        <div class="container grid gri-cols-1 sm:grid-cols-2">
+        <div class="sm:container grid gri-cols-1 sm:grid-cols-2">
             <div class="text-white bg-primary py-10 px-5 sm:py-10 sm:px-10 space-y-8 flex flex-col justify-center order-last sm:order-first">
                 <h2 class="font-bold text-4xl sm:text-5xl max-w-4xl text-secondary">Who We Are</h2>
                 <div class="text-lg">
@@ -74,12 +80,6 @@
     <section>
         <a href="{{route('pages.products')}}" class="block">
             <img src="{{Storage::url('Power-problem.jpg')}}" class="w-full object-cover" alt="Power-problem">
-        </a>
-    </section>
-
-    <section>
-        <a href="{{route('pages.products')}}" class="block">
-            <img src="{{Storage::url('Quality-services.jpg')}}" class="w-full object-cover" alt="Quality services">
         </a>
     </section>
 

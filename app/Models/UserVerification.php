@@ -27,4 +27,8 @@ class UserVerification extends Model implements HasMedia
     public function user(){
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function verification_type(){
+        return $this->belongsTo(VerificationType::class, 'verification_type_id');
+    }
 }

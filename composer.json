@@ -17,6 +17,7 @@
         "maatwebsite/excel": "^3.1",
         "mediconesystems/livewire-datatables": "^0.9.4",
         "psr/simple-cache": "^1.0",
+        "spatie/laravel-cookie-consent": "^3.2",
         "spatie/laravel-medialibrary": "^10.3",
         "spatie/laravel-permission": "^5.5",
         "stripe/stripe-php": "^8.5",

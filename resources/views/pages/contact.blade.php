@@ -1,11 +1,10 @@
 <x-app-layout>
     <!-- Page Title -->
-    <section
-        class="after:bg-gray-900/60 relative bg-cover bg-center bg-no-repeat py-32 after:absolute after:inset-0"
-        style="background-image: url('{{Storage::url('knowledge_base_banner.jpg')}}')"
-    >
-        <div class="container relative z-10">
-            <h1 class="font-display text-center text-4xl font-medium text-white">Get in touch</h1>
+    <section class="relative bg-primary text-white bg-cover bg-clip-padding w-full pb-5 sm:pb-0 after:absolute after:inset-0 bg-page-heading-pattern">
+        <div class="container py-6 relative z-10">
+            <div class="mx-auto max-w-2xl py-16 text-center">
+                <h1 class="font-display text-jacarta-700 mb-8 text-4xl font-extrabold dark:text-white">Get in touch</h1>
+            </div>
         </div>
     </section>
 

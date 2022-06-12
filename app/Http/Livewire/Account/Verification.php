@@ -20,7 +20,7 @@ class Verification extends Component
     public $verification_record;
 
     public $verificationTypes;
-    public $verifyType=1;
+    public $verifyType;
     public $verifyDoc;
     public $verified = false;
     public $id_no,$passport_no,$dv_license_no,$vin;
@@ -39,6 +39,7 @@ class Verification extends Component
         $this->last_name = auth()->user()->last_name;
         $this->first_name = auth()->user()->first_name;
         $this->dob = auth()->user()->dob;
+
     }
 
     public function updatedVerifyType(){
@@ -47,10 +48,11 @@ class Verification extends Component
 
     public function render()
     {
-        $this->verification_record = auth()->user()->verifications()->latest()->first();
+        $this->verification_record = auth()->user()->verifications()->where('status','pending')->latest()->first();
         if($this->verification_record){
             $this->verifyType =  $this->verification_record->verification_type_id;
             $this->id_no =  $this->verification_record->id_no;
+//            $this->verificationData = $this->verification_record;
         }
 
         return view('livewire.account.verification')->layout('layouts.account');
@@ -65,13 +67,20 @@ class Verification extends Component
             $response = $this->verifyNIN($this->id_no);
             if ($response && count($response->response)) {
 
-                $this->verificationData = $this->saveNINVerificationRecord($response->response[0]);
-
-                session()->flash('message', 'Your information has been received and will be processed within 2 working days. Thank you.');
-
-//                if (Str::lower($response->response[0]->surname) == Str::lower(auth()->user()->last_name) && Str::lower($response->response[0]->firstname) == Str::lower(auth()->user()->first_name)) {
-//                    $this->verified = true;
+                // Surname compare
+//                if(Str::lower($response->response[0]->surname) != Str::lower(auth()->user()->last_name)){
+//                    $this->addError('nin', 'Surname could not be validated. Please try again.');
+//                }else
+//                // First name compare
+//                if(Str::lower($response->response[0]->firstname) != Str::lower(auth()->user()->first_name)){
+//                    $this->addError('nin', 'First name could not be validated. Please try again.');
 //                }
+//                else {
+                    $this->verificationData = $this->saveNINVerificationRecord($response->response[0]);
+
+                    session()->flash('message', 'Your information has been received and will be processed within 2 working days. Thank you.');
+//                }
+
             }else{
 
                 $this->addError('nin', 'Invalid NIN');
