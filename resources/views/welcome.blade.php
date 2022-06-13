@@ -28,9 +28,29 @@
         </div>
     </section>
 
-    <section class="py-10 lg:py-16">
-        <div class="container">
-            <h2 class="font-bold text-2xl lg:text-4xl max-w-4xl dark:text-gray-200">A global software house delivering and integrating proprietary IT products.</h2>
+    <section class="">
+        <div class="md:container grid gri-cols-1 sm:grid-cols-2">
+            <div class="text-white bg-primary py-10 px-5 sm:py-10 sm:px-10 space-y-8 flex flex-col justify-center order-last sm:order-first">
+                <h2 class="font-bold text-4xl sm:text-5xl max-w-4xl text-secondary">Who We Are</h2>
+                <div class="text-lg">
+                    <p>At Amaris.ng, Our major focus is to help bridge the gap in which consumers gain access to products through the use of technology.</p>
+
+                    <p>We believe that technology has come to change the way and manner of which products and services get to their final consumers.</p>
+
+                    <p>Our main goal is to provide an accessible market place with a well-integrated and precise platform where it is easy for every and anyone to be able to access both physical and digital products seamlessly.</p>
+                </div>
+                <div class="flex flex-wrap sm:flex-nowrap justify-start gap-4 sm:gap-6 w-full max-w-md">
+                    <a href="#" title="Start buying" class="btn btn-outline-white">
+                        Start Buying
+                    </a>
+                    <a href="button" title="more about" class="order-first btn btn-light transition">
+                        More About
+                    </a>
+                </div>
+            </div>
+            <div class="hidden sm:block">
+                <img src="{{Storage::url('amaris-3d-mock-up.jpg')}}" alt="About Us" class="h-full object-cover">
+            </div>
         </div>
     </section>
 
@@ -46,31 +66,6 @@
         </a>
     </section>
 
-    <section class="">
-        <div class="md:container grid gri-cols-1 sm:grid-cols-2">
-            <div class="text-white bg-primary py-10 px-5 sm:py-10 sm:px-10 space-y-8 flex flex-col justify-center order-last sm:order-first">
-                <h2 class="font-bold text-4xl sm:text-5xl max-w-4xl text-secondary">Who We Are</h2>
-                <div class="text-lg">
-                    <p>At Amaris.ng, Our major focus is to help bridge the gap in which consumers gain access to products through the use of technology.</p>
-
-                    <p>We believe that technology has come to change the way and manner of which products and services get to their final consumers.</p>
-
-                    <p>Our main goal is to provide an accessible market place with a well-integrated and precise platform where it is easy for every and anyone to be able to access both physical and digital products seamlessly.</p>
-                </div>
-                <div class="flex flex-wrap sm:flex-nowrap justify-center sm:justify-start gap-4 sm:gap-6 w-full max-w-md">
-                    <a href="#" title="Start buying" class="btn btn-outline-white">
-                        Start Buying
-                    </a>
-                    <a href="button" title="more about" class="order-first btn btn-light transition">
-                        More About
-                    </a>
-                </div>
-            </div>
-            <div class="">
-                <img src="{{Storage::url('amaris-3d-mock-up.jpg')}}" alt="About Us" class="h-full object-cover">
-            </div>
-        </div>
-    </section>
     <section>
         <a href="{{route('pages.about-us')}}" class="block">
             <img src="{{Storage::url('vision.jpg')}}" class="w-full object-cover" alt="Our Vision">

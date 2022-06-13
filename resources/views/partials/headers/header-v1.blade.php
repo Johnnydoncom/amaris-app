@@ -99,31 +99,6 @@
             </ul>
         </nav>
 
-        @if(1>2)
-        <!-- Search -->
-        <form action="search" class="relative ml-12 mr-8 hidden basis-3/12 lg:block xl:ml-[8%]">
-            <input
-                type="search"
-                class="text-jacarta-700 placeholder-jacarta-500 focus:ring-accent border-slate-200 w-full rounded-2xl border py-[0.6875rem] px-4 pl-10 dark:border-transparent dark:bg-white/[.15] dark:text-white dark:placeholder-white"
-                placeholder="Search"
-            />
-            <span class="absolute left-0 top-0 flex h-full w-12 items-center justify-center rounded-2xl">
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                width="24"
-                height="24"
-                class="fill-jacarta-500 h-4 w-4 dark:fill-white"
-            >
-              <path fill="none" d="M0 0h24v24H0z" />
-              <path
-                  d="M18.031 16.617l4.283 4.282-1.415 1.415-4.282-4.283A8.96 8.96 0 0 1 11 20c-4.968 0-9-4.032-9-9s4.032-9 9-9 9 4.032 9 9a8.96 8.96 0 0 1-1.969 5.617zm-2.006-.742A6.977 6.977 0 0 0 18 11c0-3.868-3.133-7-7-7-3.868 0-7 3.132-7 7 0 3.867 3.132 7 7 7a6.977 6.977 0 0 0 4.875-1.975l.15-.15z"
-              />
-            </svg>
-          </span>
-        </form>
-        @endif
-
         <!-- Menu / Actions -->
         <div class="js-mobile-menu dark:bg-jacarta-800 invisible fixed inset-0 z-10 ml-auto items-center bg-white opacity-0 lg:visible lg:relative lg:inset-auto lg:flex lg:bg-transparent lg:opacity-100 dark:lg:bg-transparent max-w-sm w-full lg:justify-end" :class="{'nav-menu--is-open': menuOpened}" x-transition>
             <!-- Mobile Logo / Menu Close -->
@@ -191,9 +166,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="group">
-                        <a href="{{route('cards.index')}}" class="text-primary font-display hover:text-accent focus:text-accent font-semibold dark:hover:text-accent dark:focus:text-accent flex items-center justify-between py-3.5 text-base dark:text-white lg:px-5">Gift Cards</a>
-                    </li>
+                    @if(1>2)
                     <li class="js-nav-dropdown group relative">
                         <a href="#" class="dropdown-toggle text-primary font-display font-semibold hover:text-accent focus:text-accent dark:hover:text-accent dark:focus:text-accent flex items-center justify-between py-3.5 text-base dark:text-white lg:px-5" id="navDropdown-4" aria-expanded="false" role="button" data-bs-toggle="dropdown" @click="openCompanyMenu = !openCompanyMenu">The Company
                             <i class="lg:hidden">
@@ -217,6 +190,13 @@
                                 </a>
                             </li>
                         </ul>
+                    </li>
+                    @endif
+                    <li class="group">
+                        <a href="{{route('pages.about-us')}}" class="text-primary font-display hover:text-accent focus:text-accent font-semibold dark:hover:text-accent dark:focus:text-accent flex items-center justify-between py-3.5 text-base dark:text-white lg:px-5">About Us</a>
+                    </li>
+                    <li class="group">
+                        <a href="{{route('pages.contact')}}" class="text-primary font-display hover:text-accent focus:text-accent font-semibold dark:hover:text-accent dark:focus:text-accent flex items-center justify-between py-3.5 text-base dark:text-white lg:px-5">Contact Us</a>
                     </li>
                 </ul>
             </nav>

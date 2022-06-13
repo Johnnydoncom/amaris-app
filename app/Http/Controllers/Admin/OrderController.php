@@ -20,13 +20,7 @@ class OrderController extends Controller
     public function index(Request $request)
     {
 
-        if($request->user()->hasRole(UserRole::VENDOR)) {
-            $orders = Order::with('user')->whereHas('items.product', function ($q) use ($request) {
-                $q->where('user_id', $request->user()->id);
-            });
-        }else{
-            $orders = Order::with('user');
-        }
+        $orders = Order::with('user');
         return view('admin.order.home');
     }
 

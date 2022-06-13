@@ -83,6 +83,8 @@ Route::prefix('dashboard')->as('admin.')->middleware(['auth','verified', 'admin_
 
     Route::get('platforms', \App\Http\Livewire\Admin\PlatformController::class)->name('platforms.index');
 
+    Route::get('categories', \App\Http\Livewire\Admin\ProductCategory\Home::class)->name('categories.index');
+
 
     Route::resource('products', \App\Http\Controllers\Admin\ProductController::class);
 
@@ -92,9 +94,6 @@ Route::prefix('dashboard')->as('admin.')->middleware(['auth','verified', 'admin_
 
     // Settings
     Route::get('settings', [\App\Http\Controllers\Admin\SettingsController::class, 'index'])->middleware('role:'.\App\Enums\UserRole::ADMIN.'|'.\App\Enums\UserRole::SUPERADMIN)->name('settings.index');
-    Route::get('settings/earnings', [\App\Http\Controllers\Admin\SettingsController::class, 'earnings'])->middleware('role:'.\App\Enums\UserRole::ADMIN.'|'.\App\Enums\UserRole::SUPERADMIN)->name('settings.earnings');
-    Route::get('settings/product', [\App\Http\Controllers\Admin\SettingsController::class, 'product'])->name('settings.shop');
-    Route::post('settings', [\App\Http\Controllers\Admin\SettingsController::class, 'update'])->middleware('role:'.\App\Enums\UserRole::ADMIN.'|'.\App\Enums\UserRole::SUPERADMIN)->name('settings.store');
 
 });
 

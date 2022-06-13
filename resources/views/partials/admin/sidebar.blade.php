@@ -45,6 +45,20 @@ id="aside"
                         </span>
                     </a>
 
+                    <a
+                        x-data="{ linkHover: false }"
+                        @mouseover = "linkHover = true"
+                        @mouseleave = "linkHover = false"
+                        href="{{ route('admin.categories.index') }}"
+                        class="flex items-center text-gray-400 px-6 py-3 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200 {{ Request::is('dashboard/categories*') ? 'hover:bg-black hover:bg-opacity-30 active' : '' }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 transition duration-200" :class="linkHover ? 'text-gray-100' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        </svg>
+                        <span class="ml-3 transition duration-200 {{ Request::is('dashboard/categories*') ? 'text-gray-100' : '' }}" :class="linkHover ? 'text-gray-100' : ''">
+                            Categories
+                        </span>
+                    </a>
+
                     <!-- start::product link -->
                     <div x-data="{ linkHover: false, linkActive: false }">
                         <div @mouseover = "linkHover = true" @mouseleave = "linkHover = false" @click = "linkActive = !linkActive" class="flex items-center justify-between text-gray-400 hover:text-gray-100 px-6 py-3 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200" :class=" linkActive ? 'bg-black bg-opacity-30 text-gray-100' : ''">
@@ -74,21 +88,6 @@ id="aside"
                                     <span class="overflow-ellipsis">Add New</span>
                                 </a>
                             </li>
-                            <!-- end::Submenu link -->
-
-{{--                            <li class="pl-10 pr-6 py-2 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200 hover:text-gray-100">--}}
-{{--                                <a href="{{ route('admin.categories.index') }}" class="flex items-center">--}}
-{{--                                    <span class="mr-2 text-sm">&bull;</span>--}}
-{{--                                    <span class="overflow-ellipsis">Categories</span>--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-
-{{--                            <li class="pl-10 pr-6 py-2 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200 hover:text-gray-100">--}}
-{{--                                <a href="{{ route('admin.brands.index') }}" class="flex items-center">--}}
-{{--                                    <span class="mr-2 text-sm">&bull;</span>--}}
-{{--                                    <span class="overflow-ellipsis">Brands</span>--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
                         </ul>
                         <!-- end::Submenu -->
                     </div>
@@ -171,43 +170,6 @@ id="aside"
                         </span>
                     </a>
                     <!-- end::Menu link -->
-
-                    <!-- start::Menu link -->
-                    <a
-                        x-data="{ linkHover: false }"
-                        @mouseover = "linkHover = true"
-                        @mouseleave = "linkHover = false"
-                        href="{{ route('admin.settings.shop') }}"
-                        class="flex items-center text-gray-400 px-6 py-3 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200"
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 transition duration-200" :class=" linkHover ? 'text-gray-100' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                        </svg>
-                        <span
-                            class="ml-3 transition duration-200"
-                            :class="linkHover ? 'text-gray-100' : ''"
-                        >
-                            Store Settings
-                        </span>
-                    </a>
-
-                    <a
-                        x-data="{ linkHover: false }"
-                        @mouseover = "linkHover = true"
-                        @mouseleave = "linkHover = false"
-                        href="{{ route('admin.settings.earnings') }}"
-                        class="flex items-center text-gray-400 px-6 py-3 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200"
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 transition duration-200" :class=" linkHover ? 'text-gray-100' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                        </svg>
-                        <span
-                            class="ml-3 transition duration-200"
-                            :class="linkHover ? 'text-gray-100' : ''"
-                        >
-                            Earnings Settings
-                        </span>
-                    </a>
                     @endhasanyrole
                 </nav>
                 <!-- end::Navigation -->

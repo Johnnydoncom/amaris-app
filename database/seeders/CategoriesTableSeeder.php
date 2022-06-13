@@ -22,7 +22,8 @@ class CategoriesTableSeeder extends Seeder
 Worry no more, because the much sought after power solutions are finally here!</p>
 <p>With the rapid increasing cost of power supply and the unreliable power system, you would agree that having your own economic power solution Backup is the best you can do for yourself.</p>
 <p class='mt-4'>Introducing The Ninja Power System Backups</p>",
-            'Electronics'
+            'Electronics',
+            'Gift Cards'
         ];
 
         foreach ($categories as $cat => $desc){

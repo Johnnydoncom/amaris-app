@@ -41,7 +41,7 @@ class UsersTable extends LivewireDatatable
            Column::name('roles.name')
                ->filterable($this->roles->pluck('name'))
                ->label('User Role'),
-           Column::callback(['status'], function ($status) {
+           Column::callback(['active'], function ($status) {
                return $status == UserStatus::ACTIVE ? '<span class="badge badge-success badge-sm">Active</span>' : '<span class="badge badge-danger badge-sm">Inactive</span>';
            })->exportCallback(function ($status){
                return $status == UserStatus::ACTIVE ? 'Active' : 'Inactive';
