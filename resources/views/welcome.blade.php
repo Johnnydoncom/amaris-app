@@ -1,6 +1,6 @@
 <x-app-layout>
 
-    <section class="animate__animated animate__bounce mt-0 relative">
+    <section class="animate__animated animate__bounce mt-0 relative mb-4">
         @if(1>2)
         <div id="carouselExampleCrossfade" class="carousel slide carousel-fade relative" data-bs-ride="carousel">
             <div class="carousel-inner relative w-full overflow-hidden">
@@ -28,11 +28,12 @@
         </div>
     </section>
 
-    <section class="">
-        <div class="md:container grid gri-cols-1 sm:grid-cols-2">
-            <div class="text-white bg-primary py-10 px-5 sm:py-10 sm:px-10 space-y-8 flex flex-col justify-center order-last sm:order-first">
-                <h2 class="font-bold text-4xl sm:text-5xl max-w-4xl text-secondary">Who We Are</h2>
-                <div class="text-lg">
+
+    <section class="mb-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2">
+            <div class="text-white bg-primary py-10 px-5 sm:py-10 sm:px-10 space-y-4 sm:space-y-8 flex flex-col justify-center order-last sm:order-first">
+                <h2 class="font-bold text-3xl sm:text-5xl max-w-4xl text-secondary">Who We Are</h2>
+                <div class="sm:text-lg">
                     <p>At Amaris.ng, Our major focus is to help bridge the gap in which consumers gain access to products through the use of technology.</p>
 
                     <p>We believe that technology has come to change the way and manner of which products and services get to their final consumers.</p>
@@ -53,30 +54,34 @@
             </div>
         </div>
     </section>
-
-    <section>
+    <section class="bg-secondary-200 sm:bg-secondary-100 text-center py-2 mb-2">
+        <h2 class="font-medium text-xl sm:text-2xl">Don't Miss Out On These!!!</h2>
+    </section>
+    <section class="mb-4">
         <a href="{{route('pages.about-us')}}" class="block">
             <img src="{{Storage::url('Inspiring-innovative.jpg')}}" class="w-full object-cover" alt="Inspiring-innovative">
         </a>
     </section>
 
-    <section>
+    <section class="mb-4">
+
         <a href="{{route('pages.products')}}" class="block">
             <img src="{{Storage::url('Quality-services.jpg')}}" class="w-full object-cover" alt="Quality services">
         </a>
     </section>
 
-    <section>
-        <a href="{{route('pages.about-us')}}" class="block">
-            <img src="{{Storage::url('vision.jpg')}}" class="w-full object-cover" alt="Our Vision">
+    <section class="mb-4">
+        <a href="{{route('cards.index')}}" class="block">
+            <img src="{{Storage::url('One-Voucher.jpg')}}" class="w-full object-cover" alt="Our Vision">
         </a>
     </section>
 
-    <section>
+    <section class="mb-4">
         <a href="{{route('pages.products')}}" class="block">
             <img src="{{Storage::url('Power-problem.jpg')}}" class="w-full object-cover" alt="Power-problem">
         </a>
     </section>
+
 
     @if(1>2)
     <!-- Hero -->

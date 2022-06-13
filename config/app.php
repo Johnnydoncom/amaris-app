@@ -186,6 +186,7 @@ return [
          * Package Service Providers...
          */
         \Torann\GeoIP\GeoIPServiceProvider::class,
+        Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -211,7 +212,8 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'Setting' => Akaunting\Setting\Facade::class,
-        'GeoIP' => \Torann\GeoIP\Facades\GeoIP::class
+        'GeoIP' => \Torann\GeoIP\Facades\GeoIP::class,
+        'SEO' => Artesaos\SEOTools\Facades\SEOTools::class,
     ])->toArray(),
 
 ];

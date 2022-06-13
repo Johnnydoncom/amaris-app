@@ -8,7 +8,7 @@
 
 
         <div class="text-center space-y-6" >
-            <h2 class="font-semibold text-2xl sm:text-3xl 2xl:text-4xl text-center text-primary">Client Login</h2>
+            <h2 class="font-semibold text-2xl sm:text-3xl 2xl:text-4xl text-center text-primary">Login</h2>
             <p class="text-gray-600 text-sm sm:text-lg">Log in to your corporate portal account to easily create, manage, and track gift card orders.</p>
         </div>
 

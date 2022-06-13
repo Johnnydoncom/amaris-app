@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Artesaos\SEOTools\Facades\SEOTools;
+use Illuminate\Support\Facades\Storage;
 
 class PageController extends Controller
 {
@@ -34,6 +36,46 @@ class PageController extends Controller
     public function products(){
         $products = Product::default()->paginate();
         return view('pages.products', compact('products'));
+    }
+
+    public function webDesign(){
+        SEOTools::setTitle('Web Design & Development');
+        SEOTools::setDescription('Amaris Synergy specialise in Web Design and SEO. Our team of website designers build fresh, professional websites that help you achieve your business goals. Contact us today +2349063204011.');
+//        SEOTools::opengraph()->addProperty('type', 'articles');
+        SEOTools::twitter()->setSite('@Amaris');
+        SEOTools::jsonLd()->addImage(Storage::url('web-design-company-nigeria.png'));
+
+        return view('pages.web-design');
+    }
+
+    public function graphicDesign(){
+        SEOTools::setTitle('Graphic Design');
+        SEOTools::setDescription('Amaris Synergy specialise in Web Design and SEO. Our team of website designers build fresh, professional websites that help you achieve your business goals. Contact us today +2349063204011.');
+//        SEOTools::opengraph()->addProperty('type', 'articles');
+        SEOTools::twitter()->setSite('@Amaris');
+        SEOTools::jsonLd()->addImage(Storage::url('web-design-company-nigeria.png'));
+
+        return view('pages.graphic-design');
+    }
+
+    public function contentCreation(){
+        SEOTools::setTitle('Web Content Creation');
+        SEOTools::setDescription('Amaris Synergy specialise in web content creation and SEO. Our team of graphic designers build eye-catching, professional graphics that help you achieve your business goals. Contact us today +2349063204011.');
+//        SEOTools::opengraph()->addProperty('type', 'articles');
+        SEOTools::twitter()->setSite('@Amaris');
+        SEOTools::jsonLd()->addImage(Storage::url('web-design-company-nigeria.png'));
+
+        return view('pages.content-creation');
+    }
+
+    public function smm(){
+        SEOTools::setTitle('Social Media Marketing');
+        SEOTools::setDescription('Amaris Synergy specialise in web content creation and SEO. Our team of graphic designers build eye-catching, professional graphics that help you achieve your business goals. Contact us today +2349063204011.');
+//        SEOTools::opengraph()->addProperty('type', 'articles');
+        SEOTools::twitter()->setSite('@Amaris');
+        SEOTools::jsonLd()->addImage(Storage::url('web-design-company-nigeria.png'));
+
+        return view('pages.social-media-marketing');
     }
 
 }

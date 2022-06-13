@@ -125,6 +125,13 @@ Route::as('pages.')->group(function () {
     Route::get('privacy-policy', [\App\Http\Controllers\PageController::class, 'privacyPolicy'])->name('privacy-policy');
     Route::get('cookie-policy', [\App\Http\Controllers\PageController::class, 'cookiePolicy'])->name('cookie-policy');
     Route::get('return-refund-policy', [\App\Http\Controllers\PageController::class, 'refundPolicy'])->name('refund-policy');
+
+
+    Route::get('website-design', [\App\Http\Controllers\PageController::class, 'webDesign'])->name('web-design');
+    Route::get('graphic-design', [\App\Http\Controllers\PageController::class, 'graphicDesign'])->name('graphic-design');
+    Route::get('content-creation', [\App\Http\Controllers\PageController::class, 'contentCreation'])->name('content-creation');
+    Route::get('social-media-marketing', [\App\Http\Controllers\PageController::class, 'smm'])->name('social-media-marketing');
+
 });
 
 require __DIR__.'/auth.php';

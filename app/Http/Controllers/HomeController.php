@@ -22,8 +22,7 @@ class HomeController extends Controller
 
         $slides = [
             Storage::url('uploads/home-banners/slide1.jpg'),
-            Storage::url('uploads/home-banners/slide2.jpg'),
-            Storage::url('uploads/home-banners/slide3.jpg')
+            Storage::url('uploads/home-banners/slide2.jpg')
         ];
 
 
