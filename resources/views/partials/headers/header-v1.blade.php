@@ -1,4 +1,4 @@
-<header x-data="{openProSubmenu:false}" class="js-page-header top-0 z-50 w-full backdrop-blur shadow-md bg-white dark:bg-gray-900 transition-colors" :class="{'h-full fixed':menuOpened, 'sticky': !menuOpened}">
+<header x-data="{openProSubmenu:false, openCompanyMenu:false}" class="js-page-header top-0 z-50 w-full backdrop-blur shadow-md bg-white dark:bg-gray-900 transition-colors" :class="{'h-full fixed':menuOpened, 'sticky': !menuOpened}">
     <div class="flex items-center px-6 py-2 container">
 
         <a href="{{ route('index') }}" class="shrink-0">
@@ -178,8 +178,7 @@
                                 </svg>
                             </i>
                         </a>
-                        <ul
-                            class="dropdown-menu dark:bg-jacarta-800 -left-6 top-0 z-50 grid-flow-col grid-rows-5 gap-x-4 whitespace-nowrap rounded-xl bg-white transition-all will-change-transform group-hover:visible group-hover:opacity-100  lg:translate-y-4 lg:py-8 lg:px-5 lg:opacity-0 lg:shadow-2xl lg:group-hover:translate-y-2" aria-labelledby="navDropdown-products" :class="{'block': openProSubmenu, 'hidden': !openProSubmenu}">
+                        <ul class="dropdown-menu dark:bg-jacarta-800 -left-6 top-0 z-50 grid-flow-col grid-rows-5 gap-x-4 whitespace-nowrap rounded-xl bg-white transition-all will-change-transform group-hover:visible group-hover:opacity-100  lg:translate-y-4 lg:py-8 lg:px-5 lg:opacity-0 lg:shadow-2xl lg:group-hover:translate-y-2" aria-labelledby="navDropdown-products" :class="{'block': openProSubmenu, 'hidden': !openProSubmenu}">
                             <li>
                                 <a href="{{ route('pages.products') }}" class="dark:hover:bg-jacarta-600 hover:text-accent focus:text-accent hover:bg-jacarta-50 flex items-center rounded-xl px-5 py-2 transition-colors">
                                     <span class="font-display text-jacarta-700 text-sm dark:text-white">Ninja Power system</span>
@@ -196,9 +195,7 @@
                         <a href="{{route('cards.index')}}" class="text-primary font-display hover:text-accent focus:text-accent font-semibold dark:hover:text-accent dark:focus:text-accent flex items-center justify-between py-3.5 text-base dark:text-white lg:px-5">Gift Cards</a>
                     </li>
                     <li class="js-nav-dropdown group relative">
-                        <a href="#"
-                            class="dropdown-toggle text-primary font-display hover:text-accent font-semibold focus:text-accent dark:hover:text-accent dark:focus:text-accent flex items-center justify-between py-3.5 text-base dark:text-white lg:px-5" id="navDropdown-2" aria-expanded="false"
-                            role="button" data-bs-toggle="dropdown">The Company
+                        <a href="#" class="dropdown-toggle text-primary font-display font-semibold hover:text-accent focus:text-accent dark:hover:text-accent dark:focus:text-accent flex items-center justify-between py-3.5 text-base dark:text-white lg:px-5" id="navDropdown-4" aria-expanded="false" role="button" data-bs-toggle="dropdown" @click="openCompanyMenu = !openCompanyMenu">The Company
                             <i class="lg:hidden">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="h-4 w-4 dark:fill-white">
                                     <path fill="none" d="M0 0h24v24H0z" />
@@ -206,7 +203,7 @@
                                 </svg>
                             </i>
                         </a>
-                        <ul class="dropdown-menu dark:bg-jacarta-800 left-0 top-[85%] z-10 hidden min-w-[200px] gap-x-4 whitespace-nowrap rounded-xl bg-white transition-all will-change-transform group-hover:visible group-hover:opacity-100 lg:invisible lg:absolute lg:grid lg:translate-y-4 lg:py-4 lg:px-2 lg:opacity-0 lg:shadow-2xl lg:group-hover:translate-y-2" aria-labelledby="navDropdown-2">
+                        <ul class="dropdown-menu dark:bg-jacarta-800 -left-6 top-0 z-50 grid-flow-col grid-rows-5 gap-x-4 whitespace-nowrap rounded-xl bg-white transition-all will-change-transform group-hover:visible group-hover:opacity-100  lg:translate-y-4 lg:py-8 lg:px-5 lg:opacity-0 lg:shadow-2xl lg:group-hover:translate-y-2" :class="{'block': openCompanyMenu, 'hidden': !openCompanyMenu}" aria-labelledby="navDropdown-4">
                             <li>
                                 <a href="{{route('pages.about-us')}}"
                                     class="dark:hover:bg-jacarta-600 hover:text-accent focus:text-accent hover:bg-jacarta-50 flex items-center rounded-xl px-5 py-2 transition-colors">
@@ -215,10 +212,7 @@
                             </li>
 
                             <li>
-                                <a
-                                    href="{{route('pages.terms')}}"
-                                    class="dark:hover:bg-jacarta-600 hover:text-accent focus:text-accent hover:bg-jacarta-50 flex items-center rounded-xl px-5 py-2 transition-colors"
-                                >
+                                <a href="{{route('pages.terms')}}" class="dark:hover:bg-jacarta-600 hover:text-accent focus:text-accent hover:bg-jacarta-50 flex items-center rounded-xl px-5 py-2 transition-colors">
                                     <span class="font-display text-jacarta-700 text-sm dark:text-white">Terms of Service</span>
                                 </a>
                             </li>
