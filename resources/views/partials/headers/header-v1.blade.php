@@ -239,17 +239,36 @@
                     <li class="group">
                         <a href="{{route('pages.contact')}}" class="text-primary font-display hover:text-accent focus:text-accent font-semibold dark:hover:text-accent dark:focus:text-accent flex items-center justify-between py-3.5 text-base dark:text-white lg:px-5">Contact Us</a>
                     </li>
+                    @auth
+                        <li class="group">
+                            <a href="{{route('account.index')}}" class="text-primary font-display hover:text-accent focus:text-accent font-semibold dark:hover:text-accent dark:focus:text-accent flex items-center justify-between py-3.5 text-base dark:text-white lg:px-5">My Account</a>
+                        </li>
+                        <li class="group">
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button class="text-primary font-display hover:text-accent focus:text-accent font-semibold dark:hover:text-accent dark:focus:text-accent flex items-center justify-between py-3.5 text-base dark:text-white lg:px-5" onclick="event.preventDefault(); this.closest('form').submit();">
+                                    <span class="font-display text-red-700 text-sm dark:text-primary">{{ __('Log Out') }}</span>
+                                </button>
+                            </form>
+                        </li>
+                    @else
+                        <li class="group">
+                            <a href="{{route('login')}}" class="text-primary font-display hover:text-accent focus:text-accent font-semibold dark:hover:text-accent dark:focus:text-accent flex items-center justify-between py-3.5 text-base dark:text-white lg:px-5">Login</a>
+                        </li>
+                        <li class="group">
+                            <a href="{{route('register')}}" class="text-primary font-display hover:text-accent focus:text-accent font-semibold dark:hover:text-accent dark:focus:text-accent flex items-center justify-between py-3.5 text-base dark:text-white lg:px-5">Register</a>
+                        </li>
+                    @endauth
                 </ul>
             </nav>
             @endif
-
             <!-- Actions -->
             <div class="ml-8 hidden lg:flex xl:ml-12 gap-4 items-center">
                 @guest
                 <a href="{{route('login')}}" class="text-primary font-display hover:text-accent focus:text-accent dark:hover:text-accent dark:focus:text-accent flex items-center justify-between py-3.5 text-base dark:text-white font-semibold lg:px-5">Sign In</a>
                 @endguest
 
-                <a href="{{route('pages.contact')}}" class="btn btn-primary btn-sm">Get started</a>
+                <a href="{{route('register')}}" class="btn btn-primary btn-sm">Get started</a>
 
                 @auth
                 <!-- Profile -->
@@ -311,7 +330,7 @@
         <!-- Mobile Menu Actions -->
         <div class="ml-auto flex lg:hidden">
             <!-- Profile -->
-            <a href="/" class="border-jacarta-100 hover:bg-accent focus:bg-accent group dark:hover:bg-accent ml-2 flex h-10 w-10 items-center justify-center rounded-full border bg-white transition-colors hover:border-transparent focus:border-transparent dark:border-transparent dark:bg-white/[.15]" aria-label="profile">
+            <a href="{{ Auth::check() ? route('account.index') : route('login') }}" class="border-jacarta-100 hover:bg-accent focus:bg-accent group dark:hover:bg-accent ml-2 flex h-10 w-10 items-center justify-center rounded-full border bg-white transition-colors hover:border-transparent focus:border-transparent dark:border-transparent dark:bg-white/[.15]" aria-label="profile">
                 <svg xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                     width="24"

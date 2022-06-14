@@ -20,6 +20,14 @@
 
             <x-floating-input id="phone" :label="__('Phone Number')" name="phone" wrapperClass="" type="text" :placeholder="__('Phone Number')" :value="old('phone')" required />
 
+            <x-floating-select id="gender" label="Gender" name="gender" wrapperClass="" placeholder="Gender">
+                <option value="">Select</option>
+                <option value="Male" @if(old('gender') =='Male') selected @endif>Male</option>
+                <option value="Female" @if(old('gender')=='Female') selected @endif>Female</option>
+            </x-floating-select>
+
+            <x-floating-date-two id="dob" wire:model="dob" label="Date of Birth *" name="dob" wrapperClass="" type="date" placeholder="Date of Birth" value="" />
+
             <!-- Password -->
             <x-floating-input id="password" wrapperClass="" name="password" label="Password" type="password" placeholder="Password" required autocomplete="new-password" />
 
@@ -41,7 +49,7 @@
                 </a>
             @endif
 
-            <p>For help, <a class="link" href="mailto:example@example.com">email us</a> or call (234) 803 130-4346.</p>
+            <p>For help, <a class="link" href="mailto:{{setting('site_email', 'contact@amaris.ng')}}">email us</a> or call {{setting('site_phone_number', '(234) 803 130-4346')}}.</p>
         </div>
     </x-auth-card>
 </x-guest-layout>

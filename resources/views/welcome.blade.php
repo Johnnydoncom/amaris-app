@@ -41,11 +41,8 @@
                     <p>Our main goal is to provide an accessible market place with a well-integrated and precise platform where it is easy for every and anyone to be able to access both physical and digital products seamlessly.</p>
                 </div>
                 <div class="flex flex-wrap sm:flex-nowrap justify-start gap-4 sm:gap-6 w-full max-w-md">
-                    <a href="#" title="Start buying" class="btn btn-outline-white">
-                        Start Buying
-                    </a>
-                    <a href="button" title="more about" class="order-first btn btn-light transition">
-                        More About
+                    <a href="{{route('pages.about-us')}}" title="more about" class="btn btn-outline-white btn-lg">
+                        More Info
                     </a>
                 </div>
             </div>

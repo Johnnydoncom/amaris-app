@@ -6,6 +6,7 @@ use App\Enums\UserRole;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,6 +40,8 @@ class RegisteredUserController extends Controller
             'first_name' => ['required', 'string', 'max:50'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'phone' => ['required', 'string', 'max:255', 'unique:users'],
+            'gender' => ['required', 'string'],
+            'dob' => ['required', 'string'],
             'password' => ['required', Rules\Password::defaults()],
         ]);
 
@@ -47,7 +50,8 @@ class RegisteredUserController extends Controller
             'first_name' => $request->first_name,
             'email' => $request->email,
             'phone' => $request->phone,
-            'title' => $request->title,
+            'gender' => $request->gender,
+            'dob' => Carbon::parse($request->dob),
             'password' => Hash::make($request->password),
         ]);
 

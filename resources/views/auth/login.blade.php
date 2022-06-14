@@ -9,12 +9,11 @@
 
         <div class="text-center space-y-6" >
             <h2 class="font-semibold text-2xl sm:text-3xl 2xl:text-4xl text-center text-primary">Login</h2>
-            <p class="text-gray-600 text-sm sm:text-lg">Log in to your corporate portal account to easily create, manage, and track gift card orders.</p>
+            <p class="text-gray-600 text-sm sm:text-lg">Login to your account</p>
         </div>
 
         <form method="POST" action="{{ route('login') }}" class="mt-10 sm:mt-20 space-y-4 sm:space-y-6">
             @csrf
-
             <!-- Email Address -->
                 <x-floating-input id="email" label="Email" name="email" wrapperClass="" type="email" placeholder="Email" :value="old('email')" required autofocus />
 
@@ -53,7 +52,7 @@
             </a>
         @endif
 
-            <p>For help, <a class="link" href="mailto:example@example.com">email us</a> or call (234) 803 130-4346.</p>
+            <p>For help, <a class="link" href="mailto:{{setting('site_email', 'contact@amaris.ng')}}">email us</a> or call {{setting('site_phone_number', '(234) 803 130-4346')}}.</p>
         </div>
     </x-auth-card>
 </x-guest-layout>
