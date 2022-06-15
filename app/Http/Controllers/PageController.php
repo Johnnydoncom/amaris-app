@@ -38,6 +38,14 @@ class PageController extends Controller
         return view('pages.products', compact('products'));
     }
 
+    public function ninjaPower(){
+        $products = Product::whereHas('category',function ($q){
+            $q->whereSlug('ninja-power-system');
+        })->paginate();
+
+        return view('pages.power-system', compact('products'));
+    }
+
     public function webDesign(){
         SEOTools::setTitle('Web Design & Development');
         SEOTools::setDescription('Amaris Synergy specialise in Web Design and SEO. Our team of website designers build fresh, professional websites that help you achieve your business goals. Contact us today +2349063204011.');

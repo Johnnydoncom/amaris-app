@@ -1,20 +1,6 @@
 <x-app-layout>
     <!-- Page title -->
-
-    <section class="relative">
-
-        <div class="relative bg-primary text-white bg-cover bg-clip-padding w-full pb-5 sm:pb-0 after:absolute after:inset-0 bg-page-heading-pattern">
-            <div class="container py-6 relative z-10">
-                <div class="mx-auto max-w-2xl py-16 text-center">
-                    <h1 class="font-display text-jacarta-700 mb-8 text-4xl font-extrabold dark:text-white">About {{config('app.name')}}</h1>
-                    <p class="dark:text-jacarta-300 text-lg leading-normal">
-                        At Amaris.ng, Our major focus is to help bridge the gap in which consumers gain access to products through the use of technology.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    <x-page-heading title="About {{config('app.name')}}" subtitle="At Amaris.ng, Our major focus is to help bridge the gap in which consumers gain access to products through the use of technology." align="center" />
 
     <!-- Story -->
     <section class="dark:bg-jacarta-800 relative py-8">

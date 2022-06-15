@@ -11,8 +11,8 @@ class SettingSeeder extends Seeder
     public function run()
     {
         $settingArray['site_name']          = 'Amaris Synergy Limited';
-        $settingArray['site_email']         = 'info@amaris.com';
-        $settingArray['site_phone_number']  = '(234) 803 130-4346';
+        $settingArray['site_email']         = 'contact@amaris.com';
+        $settingArray['site_phone_number']  = '+234 (906) 320-4011';
         $settingArray['site_currency_name'] = 'NGN';
         $settingArray['site_currency_code'] = '₦';
         $settingArray['site_timezone']      = 'Africa/Lagos';

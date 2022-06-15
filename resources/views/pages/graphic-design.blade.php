@@ -15,32 +15,31 @@
     </section>
 
 
-    @if(1>2)
+
     <section class="text-gray-600 body-font py-10">
         <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-8">
-            <div class="lg:flex-grow lg:pr-24 md:pr-16 sm:py-10 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center">
-                <h2 class="text-3xl sm:text-5xl mb-4 font-bold text-primary">We create Design That Speaks to Your Brand.
+            <h2 class="text-3xl sm:text-5xl mb-4 font-bold text-primary">We create Design That Speaks to Your Brand.
                 </h2>
-                <p class="mb-2 leading-relaxed">At our Graphic Design Agency, take pride in creating content that not only stands out in a feed but is also proven to drive results. As a team of award-winning designers, developers, and content strategists, we are always pushing to set this year’s trends in graphic design.</p>
+                <p class="mb-2 leading-relaxed">From conception to completion, a world-class graphic design agency
+                    Amaris.ng provides a one-of-a-kind, creative, and professional graphic design for your company or event. We design eye-catching graphics such as flyers, brochures, logos, business cards, and illustrations, among other things.</p>
 
-                <p class="mb-2 leading-relaxed">From websites to paid ads, from print to digital, our team creates assets across platforms and mediums in order to build awareness and grow your business. Our graphic design agency capabilities also include brand identity, including logos, packaging, and more.</p>
+                <p class="mb-2 leading-relaxed">We understand that you need your graphic to attract more people, generate sales, differentiate your brand, and so on, and we can help you with that.</p>
+
+                <p class="mb-2 leading-relaxed">We pledge to exceed your expectations by providing high-quality graphic design services at an incomparable price, collaborating with you from beginning to end, and providing a money-back guarantee if you are not happy.</p>
+
                 <div class="flex justify-start w-full lg:w-auto">
                     <a href="{{route('pages.contact')}}" class="btn btn-primary btn-lg">
                         Start your project
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                     </a>
                 </div>
-            </div>
-            <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 order-first lg:order-last">
-                <img class="object-cover object-center rounded" alt="hero" src="{{ Storage::url('web-design-company-nigeria.png') }}">
-            </div>
         </div>
     </section>
 
 
 
 
-
+    @if(1>2)
     <div class="bg-white py-6 sm:py-10 lg:py-12">
         <div class="container">
             <!-- text - start -->

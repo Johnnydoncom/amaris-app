@@ -26,7 +26,7 @@
                 </li>
                 @if(1>0)
                 <li class="js-nav-dropdown nav-item dropdown group relative">
-                    <a href="#" class="dropdown-toggle text-primary font-display font-semibold hover:text-accent focus:text-accent dark:hover:text-accent dark:focus:text-accent flex items-center justify-between py-3.5 text-base dark:text-white lg:px-5" id="navDropdown-3" aria-expanded="false" role="button" data-bs-toggle="dropdown">Product & Services
+                    <a href="{{route('pages.products')}}" class="dropdown-toggle text-primary font-display font-semibold hover:text-accent focus:text-accent dark:hover:text-accent dark:focus:text-accent flex items-center justify-between py-3.5 text-base dark:text-white lg:px-5" id="navDropdown-3" aria-expanded="false" role="button" data-bs-toggle="dropdown">Product & Services
                         <i class="lg:hidden">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +41,7 @@
                     </a>
                     <ul class="dropdown-menu dark:bg-jacarta-800 top-[85%] z-10 hidden gap-x-4 whitespace-nowrap rounded-xl bg-white transition-all will-change-transform group-hover:visible group-hover:opacity-100 lg:invisible lg:absolute lg:!grid lg:translate-y-4 lg:py-4 lg:px-5 lg:opacity-0 lg:shadow-2xl lg:group-hover:translate-y-2" aria-labelledby="navDropdown-1">
                         <li>
-                            <a href="{{route('pages.products')}}" class="dark:hover:bg-jacarta-600 hover:text-accent focus:text-accent hover:bg-jacarta-50 flex items-center rounded-xl px-2 py-2 transition-colors">
+                            <a href="{{route('pages.ninja-power-system')}}" class="dark:hover:bg-jacarta-600 hover:text-accent focus:text-accent hover:bg-jacarta-50 flex items-center rounded-xl px-2 py-2 transition-colors">
                                 <span class="font-display text-jacarta-700 text-sm dark:text-white">Ninja Power system</span>
                             </a>
                         </li>
@@ -159,7 +159,7 @@
                         </a>
                     </li>
                     <li class="js-nav-dropdown nav-item dropdown group relative">
-                        <a href="#" class="dropdown-toggle text-primary font-display font-semibold hover:text-accent focus:text-accent dark:hover:text-accent dark:focus:text-accent flex items-center justify-between py-3.5 text-base dark:text-white lg:px-5" id="navDropdown-products" aria-expanded="false" role="button" data-bs-toggle="dropdown" @click="openProSubmenu = !openProSubmenu">
+                        <a href="javascript:void(0)" class="dropdown-toggle text-primary font-display font-semibold hover:text-accent focus:text-accent dark:hover:text-accent dark:focus:text-accent flex items-center justify-between py-3.5 text-base dark:text-white lg:px-5" id="navDropdown-products" aria-expanded="false" role="button" data-bs-toggle="dropdown" @click="openProSubmenu = !openProSubmenu">
                             Product & Services
                             <i class="lg:hidden">
                                 <svg
@@ -174,9 +174,13 @@
                             </i>
                         </a>
                         <ul class="dropdown-menu dark:bg-gray-600 -left-6 top-0 z-50 grid-flow-col grid-rows-5 gap-x-4 whitespace-nowrap rounded-xl bg-white transition-all will-change-transform group-hover:visible group-hover:opacity-100  lg:translate-y-4 lg:py-8 lg:px-5 lg:opacity-0 lg:shadow-2xl lg:group-hover:translate-y-2" aria-labelledby="navDropdown-products" :class="{'block': openProSubmenu, 'hidden': !openProSubmenu}">
-
                             <li>
                                 <a href="{{route('pages.products')}}" class="dark:hover:bg-jacarta-600 hover:text-accent focus:text-accent hover:bg-jacarta-50 flex items-center rounded-xl px-2 py-2 transition-colors">
+                                    <span class="font-display text-jacarta-700 text-sm dark:text-white">Products & Services</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{route('pages.ninja-power-system')}}" class="dark:hover:bg-jacarta-600 hover:text-accent focus:text-accent hover:bg-jacarta-50 flex items-center rounded-xl px-2 py-2 transition-colors">
                                     <span class="font-display text-jacarta-700 text-sm dark:text-white">Ninja Power system</span>
                                 </a>
                             </li>

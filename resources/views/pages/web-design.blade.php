@@ -1,19 +1,6 @@
 <x-app-layout>
     <!-- Page title -->
-
-    <section class="relative">
-
-        <div class="relative bg-primary text-white bg-cover bg-clip-padding w-full pb-5 sm:pb-0 after:absolute after:inset-0 bg-page-heading-pattern">
-            <div class="container py-6 relative z-10">
-                <div class="py-16 text-left max-w-4xl">
-                    <h1 class="text-white mb-8 text-3xl sm:text-5xl lg:text-6xl font-extrabold dark:text-white">Web Design Services</h1>
-                    <p class="dark:text-jacarta-300 text-lg leading-normal">
-                       Creative web design agency based in Nigeria, passionate in crafting beautiful and original websites for brands of different classes.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <x-page-heading title="Web Design Services" subtitle="We are creative web design agency based in Nigeria, passionate in crafting beautiful and original websites for brands of different classes." />
 
 
     <section class="text-gray-600 body-font py-10">
@@ -34,9 +21,6 @@
             </div>
         </div>
     </section>
-
-
-
 
 
     <div class="bg-white py-6 sm:py-10 lg:py-12">

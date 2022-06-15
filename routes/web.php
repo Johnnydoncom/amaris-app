@@ -117,6 +117,7 @@ Route::get('migrate', function (){
 
 Route::as('pages.')->group(function () {
     Route::get('products-services', [\App\Http\Controllers\PageController::class, 'products'])->name('products');
+    Route::get('ninja-power-system', [\App\Http\Controllers\PageController::class, 'ninjaPower'])->name('ninja-power-system');
 
     Route::get('contact-us', [\App\Http\Controllers\PageController::class, 'contact'])->name('contact');
     Route::post('contact-us', [\App\Http\Controllers\PageController::class, 'storeContact'])->name('contact.store');

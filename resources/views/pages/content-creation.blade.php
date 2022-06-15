@@ -1,46 +1,33 @@
 <x-app-layout>
     <!-- Page title -->
+    <x-page-heading title="Content Creation Services" subtitle="We create content strategy and creatives that converts." />
 
-    <section class="relative">
+    <section class="text-gray-600 body-font py-10">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-8">
+            <div class="lg:flex-grow sm:py-10 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center">
+                <h2 class="text-3xl sm:text-5xl mb-4 font-bold text-primary">We create Content That Speaks to Your Brand.
+                </h2>
+                <p class="mb-2 leading-relaxed">Consumers, media, influencers, stakeholders, and employees, we believe, are demanding more from brands than ever before.</p>
 
-        <div class="relative bg-primary text-white bg-cover bg-clip-padding w-full pb-5 sm:pb-0 after:absolute after:inset-0 bg-page-heading-pattern">
-            <div class="container py-6 relative z-10">
-                <div class="py-16 text-left max-w-4xl">
-                    <h1 class="text-white mb-8 text-3xl sm:text-5xl lg:text-6xl font-extrabold dark:text-white">Content Creation Services</h1>
-                    <p class="dark:text-jacarta-300 text-lg leading-normal">Get the right branding for your business
-                    </p>
-                </div>
+                <p class="mb-2 leading-relaxed"> To thrive, companies must communicate not only who they are, but also what they stand for, to the people who matter.
+                </p>
+
+                <p class="mb-2 leading-relaxed"><span class="font-semibold">How are we going to accomplish this?</span> By launching movements that produce tangible outcomes and long-term change.
+                </p>
+
+                <p class="mb-2 leading-relaxed">
+                    We're masters at developing unique content that gets to the essence of your brand or product, resulting in increased engagement and brand affinity over time.</p>
+            </div>
+            <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 order-first lg:order-last">
+                <img class="object-cover object-center rounded" alt="hero" src="{{ Storage::url('content-creation.jpg') }}">
             </div>
         </div>
     </section>
+
+
 
 
     @if(1>2)
-    <section class="text-gray-600 body-font py-10">
-        <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-8">
-            <div class="lg:flex-grow lg:pr-24 md:pr-16 sm:py-10 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center">
-                <h2 class="text-3xl sm:text-5xl mb-4 font-bold text-primary">We create Design That Speaks to Your Brand.
-                </h2>
-                <p class="mb-2 leading-relaxed">At our Graphic Design Agency, take pride in creating content that not only stands out in a feed but is also proven to drive results. As a team of award-winning designers, developers, and content strategists, we are always pushing to set this year’s trends in graphic design.</p>
-
-                <p class="mb-2 leading-relaxed">From websites to paid ads, from print to digital, our team creates assets across platforms and mediums in order to build awareness and grow your business. Our graphic design agency capabilities also include brand identity, including logos, packaging, and more.</p>
-                <div class="flex justify-start w-full lg:w-auto">
-                    <a href="{{route('pages.contact')}}" class="btn btn-primary btn-lg">
-                        Start your project
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                    </a>
-                </div>
-            </div>
-            <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 order-first lg:order-last">
-                <img class="object-cover object-center rounded" alt="hero" src="{{ Storage::url('web-design-company-nigeria.png') }}">
-            </div>
-        </div>
-    </section>
-
-
-
-
-
     <div class="bg-white py-6 sm:py-10 lg:py-12">
         <div class="container">
             <!-- text - start -->
@@ -106,25 +93,8 @@
             </div>
         </div>
     </div>
+    @endif
 
+    @livewire('get-in-touch', ['cta'=>'Ready to Start Creating?'])
 
-    <div class="relative flex flex-col justify-center w-full bg-secondary">
-        <div class="container p-4 sm:p-20 py-6 sm:py-12 text-center">
-            <h2 class="text-3xl sm:text-5xl font-bold leading-tight text-white">Grow rapidly with our unlimited Web Design & development</h2>
-            <p class="mt-5 text-sm sm:text-xl leading-8 text-white">
-                Get in touch with us to discuss your project
-            </p>
-            <div class="mt-6 flex items-center justify-center gap-4">
-                <a href="{{route('pages.contact')}}" class="flex items-center justify-center gap-2 rounded-full border border-white/50 px-5 py-3 text-lg font-medium text-white">
-                    <span> Contact Us</span>
-                    <span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M6.00156 13.4016L4.60156 12.0016L8.60156 8.00156L4.60156 4.00156L6.00156 2.60156L11.4016 8.00156L6.00156 13.4016Z" fill="white" /></svg>
-                    </span>
-                </a>
-            </div>
-        </div>
-    </div>
-
-@endif
 </x-app-layout>

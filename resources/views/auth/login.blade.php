@@ -12,7 +12,7 @@
             <p class="text-gray-600 text-sm sm:text-lg">Login to your account</p>
         </div>
 
-        <form method="POST" action="{{ route('login') }}" class="mt-10 sm:mt-20 space-y-4 sm:space-y-6">
+        <form method="POST" action="{{ route('login') }}" class="mt-10 space-y-4 sm:space-y-6">
             @csrf
             <!-- Email Address -->
                 <x-floating-input id="email" label="Email" name="email" wrapperClass="" type="email" placeholder="Email" :value="old('email')" required autofocus />
@@ -22,7 +22,7 @@
                    <x-floating-input id="password" wrapperClass="" name="password" label="Password" type="password" placeholder="Password" required autocomplete="new-password" />
 
                    <!-- Remember Me -->
-                   <div class="flex justify-between gap-2 sm:gap-4">
+                   <div class="flex justify-between gap-2 sm:gap-4 mt-2">
                        <x-checkbox id="remember_me" name="remember" label="{{ __('Remember me') }}" />
                        @if (Route::has('password.request'))
                            <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
@@ -45,7 +45,7 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <div class="text-center space-y-6 mt-10 sm:mt-20 mb-4">
+        <div class="text-center space-y-6 mt-10 mb-4">
         @if(Route::has('register'))
             <a class="text-center link link-primary link-hover" href="{{ route('register') }}">
                 {{ __("Don't have an account? Sign Up") }}

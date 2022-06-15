@@ -2,7 +2,7 @@
     <div class="max-w-md ml-auto px-6">
         <div class="p-2 rounded-lg bg-white/80">
             <div class="flex flex-col flex-wrap">
-                <div class="flex-1 items-center hidden sm:inline">
+                <div class="flex-1 items-center hiddenn inline sm:inline">
                     <p class="ml-3 text-black cookie-consent__message">
                         {!! trans('cookie-consent::texts.message') !!}
                     </p>

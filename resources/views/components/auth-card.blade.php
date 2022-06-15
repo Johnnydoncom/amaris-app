@@ -1,7 +1,7 @@
 <div class="min-h-screen flex flex-col items-stretch sm:justify-center items-center pt-6 sm:pt-0 bg-white relative">
 
 {{--    items-center sm:items-start   min-w-full  relative sm:flex-none--}}
-    <div class="justify-center sm:justify-start min-w-fulll max-w-max p-0 sm:p-4 flex-none flex-wrap self-start">
+    <div class="justify-center sm:justify-start min-w-fulll max-w-max p-0 sm:p-4 flex-none flex-wrap self-center sm:self-start">
 {{--        {{ $logo }}--}}
             <span>
                 <a href="/" class="block">

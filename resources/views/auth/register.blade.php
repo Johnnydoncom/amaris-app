@@ -42,7 +42,7 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <div class="text-center space-y-6 mt-10 sm:mt-20 mb-4">
+        <div class="text-center space-y-6 mt-10 mb-4">
             @if(Route::has('login'))
                 <a class="text-center link link-primary link-hover" href="{{ route('login') }}">
                     {{ __("Already have an account? Sign In") }}

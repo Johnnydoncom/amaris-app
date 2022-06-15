@@ -11,7 +11,7 @@ class Variation extends Model
 
     protected $fillable = ['name','regular_price','sales_price','quantity','product_id'];
 
-//    protected $appends = ['converted_price','price'];
+    protected $appends = ['converted_price','price'];
 
     public function product(){
         return $this->belongsTo(Product::class);
