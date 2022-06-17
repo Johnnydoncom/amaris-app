@@ -2,13 +2,11 @@
     <x-auth-card>
 
         <div class="text-center space-y-6" >
-            <h2 class="font-semibold text-2xl sm:text-3xl 2xl:text-4xl text-center">Create an account for free
-                and place your first order.</h2>
-            <p class="text-gray-600 text-sm sm:text-lg">Get bulk order pricing on popular gift cards, including custom Visa & Mastercard reward cards featuring your logo.</p>
+            <h2 class="font-semibold text-2xl sm:text-3xl 2xl:text-4xl text-center">Create your account</h2>
 
         </div>
 
-        <form method="POST" class="mt-10 sm:mt-0 space-y-4 sm:space-y-6" action="{{ route('register') }}">
+        <form method="POST" class="mt-10 space-y-4 sm:space-y-6" action="{{ route('register') }}">
             @csrf
 
             <x-floating-input id="last_name" :label="__('Last Name')" name="last_name" wrapperClass="" type="text" :placeholder="__('Last Name')" :value="old('last_name')" required autofocus />
@@ -30,6 +28,7 @@
 
             <!-- Password -->
             <x-floating-input id="password" wrapperClass="" name="password" label="Password" type="password" placeholder="Password" required autocomplete="new-password" />
+            <x-floating-input id="password_confirmation" wrapperClass="" name="password_confirmation" label="Password Confirmation" type="password" placeholder="Password" required />
 
 
             <div class="flex items-center mt-4">

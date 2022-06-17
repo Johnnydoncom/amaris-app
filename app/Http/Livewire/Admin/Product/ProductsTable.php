@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Admin;
+namespace App\Http\Livewire\Admin\Product;
 
 use App\Models\Category;
 use App\Models\Platform;
@@ -9,16 +9,9 @@ use Mediconesystems\LivewireDatatables\Action;
 use Mediconesystems\LivewireDatatables\Column;
 use Mediconesystems\LivewireDatatables\DateColumn;
 use Mediconesystems\LivewireDatatables\Http\Livewire\LivewireDatatable;
-use Mediconesystems\LivewireDatatables\NumberColumn;
 
 class ProductsTable extends LivewireDatatable
 {
-//    public $hideable = 'select';
-    public $persistComplexQuery = true;
-    public $afterTableSlot = 'components.selected';
-    public $hideable = 'inline';
-    public $exportable = true;
-
     public $model = Product::class;
 
     public function builder()
@@ -26,7 +19,7 @@ class ProductsTable extends LivewireDatatable
         return Product::query()->default();
     }
 
-    public function columns(): array
+    public function columns()
     {
         return [
             Column::checkbox(),
@@ -52,9 +45,8 @@ class ProductsTable extends LivewireDatatable
                 ->label('Created at'),
 
             Column::callback(['id','slug','title'], function ($id,$slug,$title) {
-                return view('admin.product.table-actions', ['id' => $id, 'slug' => $slug, 'name'=>$title]);
+                return view('livewire.admin.product.table-actions', ['id' => $id, 'slug' => $slug, 'name'=>$title]);
             })->unsortable()->label('Action')->excludeFromExport()
-
 
         ];
     }

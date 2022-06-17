@@ -1,32 +1,24 @@
 <?php
 
-namespace App\Http\Livewire\Admin;
+namespace App\Http\Livewire\Admin\Card;
 
-use App\Models\Category;
 use App\Models\Platform;
 use App\Models\Product;
 use Mediconesystems\LivewireDatatables\Action;
 use Mediconesystems\LivewireDatatables\Column;
 use Mediconesystems\LivewireDatatables\DateColumn;
 use Mediconesystems\LivewireDatatables\Http\Livewire\LivewireDatatable;
-use Mediconesystems\LivewireDatatables\NumberColumn;
 
-class ProductsTable extends LivewireDatatable
+class CardsTable extends LivewireDatatable
 {
-//    public $hideable = 'select';
-    public $persistComplexQuery = true;
-    public $afterTableSlot = 'components.selected';
-    public $hideable = 'inline';
-    public $exportable = true;
-
     public $model = Product::class;
 
     public function builder()
     {
-        return Product::query()->default();
+        return Product::query()->giftCard();
     }
 
-    public function columns(): array
+    public function columns()
     {
         return [
             Column::checkbox(),
@@ -37,14 +29,14 @@ class ProductsTable extends LivewireDatatable
             })->unsortable()->label('Image')->width('50px')->excludeFromExport(),
 
             Column::callback(['id','title'], function ($id,$title) {
-                return '<div class="group"><span class="mr-2 text-sm">ID: '.$id.'</span><a href="'.route('admin.products.edit', $id).'" title="'.$title.'" class="">'.$title.'</a>
+                return '<div class="group"><span class="mr-2 text-sm">ID: '.$id.'</span><a href="'.route('admin.cards.edit', $id).'" title="'.$title.'" class="">'.$title.'</a>
                        </div>';
             })->filterable()->exportCallback(function ($title){
                 return $title;
             })->searchable()->label('Title'),
 
-            Column::name('category.name')
-                ->filterable($this->categories->pluck('name'))
+            Column::name('platform.name')
+                ->filterable($this->platforms->pluck('name'))
                 ->searchable()
                 ->label('Categories'),
 
@@ -52,16 +44,15 @@ class ProductsTable extends LivewireDatatable
                 ->label('Created at'),
 
             Column::callback(['id','slug','title'], function ($id,$slug,$title) {
-                return view('admin.product.table-actions', ['id' => $id, 'slug' => $slug, 'name'=>$title]);
+                return view('livewire.admin.card.table-actions', ['id' => $id, 'slug' => $slug, 'name'=>$title]);
             })->unsortable()->label('Action')->excludeFromExport()
-
 
         ];
     }
 
-    public function getCategoriesProperty()
+    public function getPlatformsProperty()
     {
-        return Category::all();
+        return Platform::all();
     }
 
     public function buildActions()

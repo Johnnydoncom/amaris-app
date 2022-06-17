@@ -85,8 +85,17 @@ Route::prefix('dashboard')->as('admin.')->middleware(['auth','verified', 'admin_
 
     Route::get('categories', \App\Http\Livewire\Admin\ProductCategory\Home::class)->name('categories.index');
 
+    // Giftcards
+    Route::get('products/giftcards', \App\Http\Livewire\Admin\Card\Home::class)->name('cards.index');
+    Route::get('products/giftcards/create', \App\Http\Livewire\Admin\Card\Create::class)->name('cards.create');
+    Route::get('products/giftcards/{product}/edit', \App\Http\Livewire\Admin\Card\Edit::class)->name('cards.edit');
 
-    Route::resource('products', \App\Http\Controllers\Admin\ProductController::class);
+    // Products
+    Route::get('products', \App\Http\Livewire\Admin\Product\Home::class)->name('products.index');
+    Route::get('products/create', \App\Http\Livewire\Admin\Product\Create::class)->name('products.create');
+    Route::get('products/{product}/edit', \App\Http\Livewire\Admin\Product\Edit::class)->name('products.edit');
+
+//    Route::resource('products', \App\Http\Controllers\Admin\ProductController::class);
 
     Route::resource('orders', \App\Http\Controllers\Admin\OrderController::class);
 

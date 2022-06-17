@@ -167,7 +167,7 @@
                             <div class="text-sm font-medium truncate w-40 md:w-auto">{{ $f->getClientOriginalName() }}</div>
                             <div class="flex items-center space-x-1">
 {{--                                <div class="text-xs text-gray-500">{{ Str::bytesToHuman($f->getSize()) }}</div>--}}
-                                <div class="text-xs text-gray-500">{{ \Storage::size($f) }}</div>
+{{--                                <div class="text-xs text-gray-500">{{ \Storage::size($f) }}</div>--}}
                                 <div class="text-gray-400 text-xs">&bull;</div>
                                 <div class="text-xs text-gray-500 uppercase">{{ $f->getClientOriginalExtension() }}</div>
                             </div>

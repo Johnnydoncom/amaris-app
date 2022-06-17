@@ -19,4 +19,4 @@ mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'pub
     .postCss("node_modules/swiper/swiper-bundle.min.css", "public/css");
 
 mix.copyDirectory('vendor/tinymce/tinymce', 'public/vendor/tinymce');
-
+mix.copyDirectory('node_modules/sweetalert2', 'public/vendor/sweetalert2');
