@@ -15,28 +15,28 @@
                             <div class="px-4 py-5 bg-white sm:p-6">
                                 <div class="mb-6">
                                     <div class="col-span-3 sm:col-span-2">
-                                        <x-floating-input id="site_name" label="Site Name" value="{{setting('site_name')}}" type="text" />
+                                        <x-floating-input id="site_name" name="site_name" label="Site Name" value="{{setting('site_name')}}" type="text" />
                                     </div>
                                 </div>
                                 <div class="grid grid-cols-2 gap-6 mb-6">
                                     <div class="form-control">
-                                        <x-floating-input id="site_email" label="Site Email" value="{{setting('site_email')}}" type="text" />
+                                        <x-floating-input id="site_email" name="site_email" label="Site Email" value="{{setting('site_email')}}" type="text" />
                                     </div>
                                     <div class="form-control">
-                                        <x-floating-input id="site_phone" label="Site Phone" value="{{setting('site_phone')}}" type="text" />
+                                        <x-floating-input id="site_phone" name="site_phone" label="Site Phone" value="{{setting('site_phone')}}" type="text" />
                                     </div>
                                 </div>
 
                                 <div class="grid grid-cols-2 gap-6 mb-6">
                                     <div class="form-control">
-                                        <x-floating-select id="site_currency_name" label="Site Currency Name" type="text">
+                                        <x-floating-select id="site_currency_name" name="site_currency_name" label="Site Currency Name" type="text">
                                             @foreach($countries as $country)
-                                            <option value="{{$country->currency}}" @if(setting('site_currency_name') == $country->currency) selected @endif>{{$country->name.' '.$country->currency}}</option>
+                                                <option value="{{$country->currency}}" @if(setting('site_currency_name') == $country->currency) selected @endif>{{$country->name.' '.$country->currency}}</option>
                                             @endforeach
                                         </x-floating-select>
                                     </div>
                                     <div class="form-control">
-                                        <x-floating-input id="site_currency_code" label="Site Currency Code" value="{{setting('site_currency_code')}}" type="text" />
+                                        <x-floating-input id="site_currency_code" name="site_currency_code" label="Site Currency Code" value="{{setting('site_currency_code')}}" type="text" />
                                     </div>
                                 </div>
 
@@ -54,7 +54,15 @@
                                         </div>
                                     </div>
                                     <div class="">
-
+                                        <x-label for="site_logo_white" value="Site Logo (Footer)" class="" />
+                                        <div class="mt-1 flex items-center">
+                                          <span class="inline-block h-12 overflow-hidden bg-black">
+                                              <img class="h-full w-full text-gray-300" src="{{ site_logo_white() }}" alt="Site Light Logo">
+                                          </span>
+                                            <label class="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500  tracking-wide cursor-pointer">Change
+                                                <input type="file" class="hidden" name="lightLogoUpload" />
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -62,6 +70,13 @@
                                     <x-floating-textarea label="Site Description" id="site_description" name="site_description" rows="3">{!! setting('site_description') !!}</x-floating-textarea>
                                     <p class="mt-2 text-sm text-gray-500">
                                         Brief description for your site.
+                                    </p>
+                                </div>
+
+                                <div class="mb-6">
+                                    <x-floating-textarea label="Footer Text" id="site_footer_text" name="site_footer_text" rows="3">{!! setting('site_footer_text') !!}</x-floating-textarea>
+                                    <p class="mt-2 text-sm text-gray-500">
+                                        Brief description on the footer section.
                                     </p>
                                 </div>
 

@@ -34,6 +34,7 @@ class CreateCountriesTable extends Migration
             $table->text('emojiU');
             $table->boolean('flag')->default(false);
             $table->text('wikiDataId')->nullable();
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }

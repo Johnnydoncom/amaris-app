@@ -133,6 +133,8 @@ class Form extends Component
         if(!$this->product)
             $this->reset(['title','description','image', 'images', 'category_id', 'regular_price', 'sales_price', 'stock_quantity', 'featured']);
 
+        $this->reset(['images']);
+
         // Set Flash Message
         $this->dispatchBrowserEvent('alert',[
             'type'=>'success',

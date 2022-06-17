@@ -81,7 +81,7 @@
                             @endforeach
                         @endif
 
-                        @if($images)
+                        @if($images && count($images) > 0)
                             @foreach ($images as $key => $img)
 
                                 <div class="relative">

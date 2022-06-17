@@ -15,6 +15,7 @@ class SettingsController extends Controller
      */
     public function index()
     {
+        $countries = Country::whereActive(true)->get();
         $country = Country::where('name', 'nigeria')->first();
         $states = $country->states()->get()->map(function($city){
             return [
@@ -23,6 +24,7 @@ class SettingsController extends Controller
             ];
         });
         return view('admin.settings.general',[
+            'countries' => $countries,
             'settings' => setting()->all(),
             'states' => $states
         ]);

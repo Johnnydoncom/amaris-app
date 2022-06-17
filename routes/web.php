@@ -74,11 +74,11 @@ Route::prefix('account')->as('account.')->middleware(['auth','verified'])->group
 Route::prefix('dashboard')->as('admin.')->middleware(['auth','verified', 'admin_auth'])->group(function () {
     Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('index');
 
-    Route::get('users/verifications', [\App\Http\Controllers\Admin\UserController::class, 'verifications'])->middleware('role:'.\App\Enums\UserRole::ADMIN.'|'.\App\Enums\UserRole::SUPERADMIN)->name('users.verifications.index');
-    Route::get('users/verifications/{userVerification}', [\App\Http\Controllers\Admin\UserController::class, 'showVerification'])->middleware('role:'.\App\Enums\UserRole::ADMIN.'|'.\App\Enums\UserRole::SUPERADMIN)->name('users.verifications.show');
-    Route::patch('users/verifications/{userVerification}', [\App\Http\Controllers\Admin\UserController::class, 'verificationAction'])->middleware('role:'.\App\Enums\UserRole::ADMIN.'|'.\App\Enums\UserRole::SUPERADMIN)->name('users.verifications.update');
+    Route::get('users/verifications', [\App\Http\Controllers\Admin\UserController::class, 'verifications'])->name('users.verifications.index');
+    Route::get('users/verifications/{userVerification}', [\App\Http\Controllers\Admin\UserController::class, 'showVerification'])->name('users.verifications.show');
+    Route::patch('users/verifications/{userVerification}', [\App\Http\Controllers\Admin\UserController::class, 'verificationAction'])->name('users.verifications.update');
 
-    Route::resource('users', \App\Http\Controllers\Admin\UserController::class)->middleware('role:'.\App\Enums\UserRole::ADMIN.'|'.\App\Enums\UserRole::SUPERADMIN);
+    Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
 
 
     Route::get('platforms', \App\Http\Livewire\Admin\PlatformController::class)->name('platforms.index');
@@ -102,7 +102,8 @@ Route::prefix('dashboard')->as('admin.')->middleware(['auth','verified', 'admin_
     Route::post('/file-upload', [\App\Http\Controllers\Admin\DashboardController::class, 'fileUpload'])->name('file-upload');
 
     // Settings
-    Route::get('settings', [\App\Http\Controllers\Admin\SettingsController::class, 'index'])->middleware('role:'.\App\Enums\UserRole::ADMIN.'|'.\App\Enums\UserRole::SUPERADMIN)->name('settings.index');
+    Route::get('settings', [\App\Http\Controllers\Admin\SettingsController::class, 'index'])->name('settings.index');
+    Route::post('settings', [\App\Http\Controllers\Admin\SettingsController::class, 'update'])->name('settings.store');
 
 });
 
