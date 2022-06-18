@@ -5,29 +5,54 @@
     >
         <h2 class="text-center font-semibold text-2xl sm:text-3xl py-6">Checkout Gift Card</h2>
 
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pb-14">
-            <div class="col-span-2">
-                <div class="card bg-white shadow-xl h-full">
-                    <div class="card-body">
-                        <h3 class="uppercase text-xs sm:text-lg">{{ $product->title }}</h3>
-                        <div class="divider my-0"></div>
+        <div class="max-w-2xl mx-auto">
+            <x-card class="card bg-white shadow-xl mb-8 h-full">
+                <div class="card-body">
+                    <h3 class="uppercase text-xs sm:text-lg">{{ $product->title }}</h3>
+                    <div class="divider my-0"></div>
 
-                        <div class="flex gap-4 justify-between items-center w-full">
-                            <div class="flex gap-4 items-center">
-                                <img src="{{$product->featured_img_thumb}}" alt="{{$variation->name}}" class="w-16 h-16 rounded-xl object-cover">
+                    <div class="flex gap-4 justify-between items-center w-full">
+                        <div class="flex gap-4 items-center">
+                            <img src="{{$product->featured_img_thumb}}" alt="{{$variation->name}}" class="w-16 h-16 rounded-xl object-cover">
 
-                                <div class="text-xs sm:text-sm">{{$variation->name}}</div>
-                            </div>
+                            <div class="text-xs sm:text-sm">{{$variation->name}}</div>
+                        </div>
 
-                            <div class="text-xs sm:text-sm text-primary font-semibold">
-                                {{ currency($variation->price, null, null, true)}}
-                            </div>
+                        <div class="text-xs sm:text-sm text-primary font-semibold">
+                            {{ currency($variation->price, null, null, true)}}
+                        </div>
 
-                            <div class="text-xs sm:text-sm bg-gray-100 rounded-full px-4 py-1">x {{ $quantity }}</div>
+                        <div class="text-xs sm:text-sm bg-gray-100 rounded-full px-4 py-1">x {{ $quantity }}</div>
+                    </div>
+                    <div class="divider my-6"></div>
+                    <div class="flex justify-between gap-4 ">
+                        <h3 class="font-semibold">Total</h3>
+                        <div>
+                           <span class="text-primary font-semibold text-xl">
+                               {{ currency($total, null, null, true)}}
+                           </span>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                            @if($payment_gateway == 'paystack')
+                                <button id="paystackBtn" class="btn btn-primary btn-block" wire:loading.class="loading" wire:loading.attr="disabled">Pay Now</button>
+
+                            @elseif($payment_gateway == 'stripe')
+                                <div class="mb-6">
+                                    <div id="card-element">
+                                        <!-- A Stripe Element will be inserted here. -->
+                                    </div>
+                                    <!-- Used to display form errors. -->
+                                    <div id="card-errors" role="alert"></div>
+                                </div>
+
+                                <button id="stripeBtn" class="btn btn-primary btn-block" wire:loading.class="loading" wire:loading.attr="disabled">Pay Now</button>
+                            @endif
                         </div>
 
 
-                        @if(1>3)
+                    @if(1>3)
                         <div class="py-0 my-0 mt-0 relative">
                             <h3 class="uppercase text-xs sm:text-lg">{{ $product->title }}</h3>
                             <div class="divider mt-0"></div>
@@ -98,7 +123,7 @@
                                 <div class="flex justify-startt">
 
                                     <a x-transition :class="{ 'active font-semibold border-t border-l border-r border-b-0': tab === 'card' }" x-on:click.prevent="tab = 'card'" class="flex flex-grow justify-center gap-2 items-center py-2 px-4 border-b" href="#">
-                                       Credit/Debit Cards
+                                        Credit/Debit Cards
                                     </a>
                                     <a x-transition :class="{ 'active font-semibold border-t border-l border-r border-b-0': tab === 'bacs' }" x-on:click.prevent="tab = 'bacs'" class="flex flex-grow justify-center gap-2 items-center py-2 px-4 border-b" href="#">
                                         Bank Transfer
@@ -106,22 +131,22 @@
                                 </div>
                                 <div class="tab-content border-r border-l border-b p-2 sm:p-4" wire:ignore>
                                     <div x-show="tab === 'card'" class="">
-                                       <div class="">
-                                           @if($payment_gateway == 'paystack')
-                                               <button id="paystackBtn" class="btn btn-primary mb-2" wire:loading.class="loading" wire:loading.attr="disabled">Pay with Credit/Debit Card</button>
+                                        <div class="">
+                                            @if($payment_gateway == 'paystack')
+                                                <button id="paystackBtn" class="btn btn-primary mb-2" wire:loading.class="loading" wire:loading.attr="disabled">Pay with Credit/Debit Card</button>
 
-                                           @elseif($payment_gateway == 'stripe')
-                                               <div class="my-4">
-                                                   <div id="card-element">
-                                                       <!-- A Stripe Element will be inserted here. -->
-                                                   </div>
-                                                   <!-- Used to display form errors. -->
-                                                   <div id="card-errors" role="alert"></div>
-                                               </div>
+                                            @elseif($payment_gateway == 'stripe')
+                                                <div class="my-4">
+                                                    <div id="card-element">
+                                                        <!-- A Stripe Element will be inserted here. -->
+                                                    </div>
+                                                    <!-- Used to display form errors. -->
+                                                    <div id="card-errors" role="alert"></div>
+                                                </div>
 
-                                               <button id="stripeBtn" class="btn btn-primary mb-2" wire:loading.class="loading" wire:loading.attr="disabled">Pay Now</button>
-                                           @endif
-                                       </div>
+                                                <button id="stripeBtn" class="btn btn-primary mb-2" wire:loading.class="loading" wire:loading.attr="disabled">Pay Now</button>
+                                            @endif
+                                        </div>
                                     </div>
 
                                     <div x-show="tab === 'bacs'" x-transition>
@@ -132,42 +157,9 @@
 
 
                         </div>
-                        @endif
-                    </div>
+                    @endif
                 </div>
-            </div>
-            <div class="col-span-1">
-                <div class="card bg-white sticky top-0 shadow-lg h-full">
-                    <div class="card-body">
-                        <div class="flex justify-between gap-4">
-                            <h3 class="font-semibold">Total</h3>
-                            <div>
-                               <span class="text-primary font-semibold text-xl">
-                                   {{ currency($total, null, null, true)}}
-                               </span>
-                            </div>
-                        </div>
-                        <div class="divider my-0"></div>
-                        <div class="">
-                            @if($payment_gateway == 'paystack')
-                                <button id="paystackBtn" class="btn btn-primary btn-block" wire:loading.class="loading" wire:loading.attr="disabled">Pay Now</button>
-
-                            @elseif($payment_gateway == 'stripe')
-                                <div class="mb-6">
-                                    <div id="card-element">
-                                        <!-- A Stripe Element will be inserted here. -->
-                                    </div>
-                                    <!-- Used to display form errors. -->
-                                    <div id="card-errors" role="alert"></div>
-                                </div>
-
-                                <button id="stripeBtn" class="btn btn-primary btn-block" wire:loading.class="loading" wire:loading.attr="disabled">Pay Now</button>
-                            @endif
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+            </x-card>
         </div>
     </div>
 

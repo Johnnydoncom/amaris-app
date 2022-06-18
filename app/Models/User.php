@@ -96,4 +96,12 @@ class User extends Authenticatable implements MustVerifyEmail, Wallet, HasMedia
     public function verifications(){
         return $this->hasMany(UserVerification::class);
     }
+
+    public function delivery_addresses(){
+        return $this->hasMany(DeliveryAddress::class);
+    }
+
+    public function getDeliveryAddressAttribute(){
+        return $this->delivery_addresses()->firstWhere('is_default', '=', true);
+    }
 }

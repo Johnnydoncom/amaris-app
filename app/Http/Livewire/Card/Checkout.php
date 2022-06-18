@@ -73,7 +73,7 @@ class Checkout extends Component
         $order->currency = currency()->getUserCurrency();
 
         if($reference) {
-            $order->payment_status = PaymentStatus::APPROVED;
+            $order->payment_status = PaymentStatus::PAID;
             $order->status = 'processing';
             $order->payment_reference = $reference;
         }
@@ -86,28 +86,10 @@ class Checkout extends Component
         $orderItem->order_id = $order->id;
         $orderItem->product_id = $this->product->id;
         $orderItem->quantity = $this->cart['quantity'];
-
+        $orderItem->variation_id = $this->variation->id;
         $orderItem->value = currency($this->variation->price, null,null,false);
         $orderItem->final_amount = currency($this->total,null,null,false);
         $orderItem->currency = currency()->getUserCurrency();
-
-//        $orderItem->message_design_id = $this->cart['selected_design'];
-//        $orderItem->personal_message = $this->cart['personal_message'];
-
-//        $orderItem->delivery_type_id = DeliveryType::whereSlug($this->cart['delivery_type'])->first()->id;
-
-        // By Email
-//        $orderItem->recipient_name = $this->cart['recipient_name'];
-//        $orderItem->recipient_email = $this->cart['recipient_email'];
-
-        // By SMS
-//        $orderItem->recipient_phone = $this->cart['recipient_phone'];
-
-        // By Delivery
-//        $orderItem->recipient_address = $this->cart['delivery_address'];
-//        $orderItem->recipient_city = $this->cart['delivery_city'];
-//        $orderItem->recipient_state = $this->cart['delivery_state'];
-//        $orderItem->recipient_country_id = $this->cart['delivery_country'];
         $orderItem->save();
 
         session()->forget(['cart']);

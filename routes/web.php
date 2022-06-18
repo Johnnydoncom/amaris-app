@@ -46,13 +46,19 @@ Route::prefix('account')->as('account.')->middleware(['auth','verified'])->group
 
     // Order
     Route::prefix('order')->as('order.')->group(function () {
-        Route::get('/', [\App\Http\Controllers\Account\OrderController::class, 'index'])->name('index');
-        Route::get('details/{order_number}', [\App\Http\Controllers\Account\OrderController::class, 'show'])->name('show');
-        Route::delete('details/{orderItem}/cancel', [\App\Http\Controllers\Account\OrderController::class, 'cancelItem'])->name('cancelItem');
-        Route::get('details/{order_number}/download', [\App\Http\Controllers\Account\OrderController::class, 'download'])->name('download');
-
-        Route::get('track/{order_number}', [\App\Http\Controllers\Account\OrderController::class, 'track'])->name('track');
+        Route::get('/', \App\Http\Livewire\Account\Order\Home::class)->name('index');
+        Route::get('view/{order_number}', \App\Http\Livewire\Account\Order\Show::class)->name('show');
     });
+
+    // Order
+//    Route::prefix('order')->as('order.')->group(function () {
+//        Route::get('/', [\App\Http\Controllers\Account\OrderController::class, 'index'])->name('index');
+//        Route::get('details/{order_number}', [\App\Http\Controllers\Account\OrderController::class, 'show'])->name('show');
+//        Route::delete('details/{orderItem}/cancel', [\App\Http\Controllers\Account\OrderController::class, 'cancelItem'])->name('cancelItem');
+//        Route::get('details/{order_number}/download', [\App\Http\Controllers\Account\OrderController::class, 'download'])->name('download');
+//
+//        Route::get('track/{order_number}', [\App\Http\Controllers\Account\OrderController::class, 'track'])->name('track');
+//    });
 
     Route::get('wishlist', [\App\Http\Controllers\Account\AccountController::class, 'wishlist'])->name('wishlist.index');
     Route::delete('wishlist/{wishlist}', [\App\Http\Controllers\Account\AccountController::class, 'destroyWishlist'])->name('wishlist.destroy');

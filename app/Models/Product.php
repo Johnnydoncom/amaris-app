@@ -113,6 +113,10 @@ class Product extends Model implements HasMedia
         return $this->getMedia('gallery');
     }
 
+    public function getPriceAttribute(){
+        return $this->sales_price > 0 ? $this->sales_price : $this->regular_price;
+    }
+
     public function variations(){
         return $this->hasMany(Variation::class);
     }

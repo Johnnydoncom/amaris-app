@@ -17,8 +17,7 @@ class Order extends Model
 
     protected $appends = [
         'total',
-        'date',
-        'status_label'
+        'date'
     ];
 
     public static function boot()

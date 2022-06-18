@@ -5,58 +5,72 @@
     >
         <h2 class="text-center font-semibold text-2xl sm:text-3xl py-6">Checkout</h2>
 
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pb-14">
+        <form class="grid grid-cols-1 sm:grid-cols-3 gap-6 pb-14" id="checkoutForm" method="post" wire:submit.prevent="finalize">
             <div class="col-span-2">
-                <div class="card bg-white shadow-xl h-full">
+                @csrf
+                <x-card class="card bg-white shadow-xl h-full">
                     <div class="card-body">
                           <div class="grid rid-cols-1 lg:grid-cols-2 gap-8">
                                <div class="form-control">
-                                   <x-floating-input id="first_name" label="First Name" name="first_name" wrapperClass="" type="text" placeholder="First Name" :value="old('first_name')" required autofocus />
+                                   <x-floating-input id="first_name" label="First Name" name="first_name" wrapperClass="" type="text" placeholder="First Name" :value="old('first_name')" wire:model.defer="first_name" required autofocus />
 
                                </div>
                               <div class="form-control">
-                                  <x-floating-input id="last_name" label="Last Name" name="last_name" wrapperClass="" type="text" placeholder="" :value="old('last_name')" required autofocus />
+                                  <x-floating-input id="last_name" wire:model.defer="last_name" label="Last Name" name="last_name" wrapperClass="" type="text" placeholder="" :value="old('last_name')" required autofocus />
+                              </div>
 
+                              <div class="form-control ">
+                                  <x-floating-input id="phone" wire:model.defer="phone" label="Phone" name="phone" wrapperClass="" type="text" placeholder="" :value="old('phone')" />
+                              </div>
+                              <div class="form-control">
+                                  <x-floating-input id="email" label="email" wire:model.defer="email" name="email" wrapperClass="" type="email" placeholder="" :value="old('email')" />
+                              </div>
+
+                              <div class="form-control sm:col-span-2">
+                                  <x-floating-input id="company" label="Company Name (Optional)" wire:model.defer="company_name" name="company" wrapperClass="" type="text" placeholder="" :value="old('company')" />
+                              </div>
+
+                              <div class="form-control col-span-2">
+                                  <x-floating-input id="address_line_1" label="Street Address" wire:model.defer="address_line_1" name="address_line_1" wrapperClass="" type="text" placeholder="" :value="old('address_line_1')" />
                               </div>
                               <div class="form-control col-span-2">
-                                  <x-floating-input id="company" label="Company Name (Optional)" name="company" wrapperClass="" type="text" placeholder="" :value="old('company')" />
+                                  <x-floating-input id="address_line_1" label="Apartment, suite, etc" name="address_line_2" wire:model.defer="address_line_2" wrapperClass="" type="text" placeholder="" :value="old('address_line_2')" />
                               </div>
-                              <div class="form-control col-span-2">
-                                  <x-floating-select id="country" :label="__('Country')" name="country" wrapperClass="" wire:model.defer="country" placeholder="__('Country')">
+                              <div class="form-control">
+                                  <x-floating-select id="country" :label="__('Country')" name="country" wrapperClass="" wire:model="country" placeholder="__('Country')">
                                       <option value="">Select</option>
-                                      @foreach($countries as $country)
-                                          <option value="{{$country->id}}" @if(old('country_id')==$country->id) selected @endif>{{$country->name}}</option>
+                                      @foreach($countries as $ctry)
+                                          <option value="{{$ctry->id}}" @if(old('country_id')==$ctry->id) selected @endif>{{$ctry->name}}</option>
                                       @endforeach
                                   </x-floating-select>
                               </div>
-                              <div class="form-control col-span-2">
-                                  <x-floating-input id="address_line_1" label="Street Address" name="address_line_1" wrapperClass="" type="text" placeholder="" :value="old('address_line_1')" />
-                              </div>
-                              <div class="form-control col-span-2">
-                                  <x-floating-input id="address_line_1" label="Apartment, suite, etc" name="address_line_2" wrapperClass="" type="text" placeholder="" :value="old('address_line_2')" />
-                              </div>
-                              <div class="form-control">
-                                  <x-floating-input id="city" label="Town / City" name="city" wrapperClass="" type="text" placeholder="" :value="old('city')" />
-                              </div>
-                              <div class="form-control ">
-                                  <x-floating-input id="state" label="State" name="state" wrapperClass="" type="text" placeholder="" :value="old('state')" />
-                              </div>
+
+                              <x-floating-select id="region" wrapperClass="" label="Region" type="text" placeholder="Region" class="w-full" wire:model="state" autofocus autocomplete="state" wire:loading.attr="disabled" wire:target="country">
+                                  <option value="" selected>Choose state</option>
+                                  @forelse($states as $st)
+                                      <option value="{{$st->id}}">{{$st->name}}</option>
+                                  @empty
+                                  @endforelse
+                              </x-floating-select>
+
+                              <x-floating-select id="city" wrapperClass="" label="City" type="text" placeholder="City" class="w-full" wire:model.defer="city" autofocus autocomplete="city" wire:loading.attr="disabled" wire:target="state">
+                                  <option value="" selected>Choose city</option>
+                                  @forelse($cities as $cty)
+                                      <option value="{{$cty->id}}">{{$cty->name}}</option>
+                                      @empty
+                                      @endforelse
+                              </x-floating-select>
 
                               <div class="form-control">
-                                  <x-floating-input id="zipcode" label="ZIP" name="zipcode" wrapperClass="" type="text" placeholder="" :value="old('zipcode')" />
+                                  <x-floating-input id="zipcode" label="ZIP" wire:model.defer="zipcode" name="zipcode" wrapperClass="" type="text" placeholder="" :value="old('zipcode')" />
                               </div>
-                              <div class="form-control ">
-                                  <x-floating-input id="phone" label="Phone" name="phone" wrapperClass="" type="text" placeholder="" :value="old('phone')" />
-                              </div>
-                              <div class="form-control ">
-                                  <x-floating-input id="email" label="email" name="email" wrapperClass="" type="email" placeholder="" :value="old('email')" />
-                              </div>
+
                           </div>
                     </div>
-                </div>
+                </x-card>
             </div>
             <div class="col-span-1">
-                <div class="card bg-white sticky top-0 shadow-lg h-full">
+                <x-card class="card bg-white sticky top-0 shadow-lg h-full">
                     <div class="card-body">
                         <div class="flex gap-4 justify-between items-center w-full">
                             <div class="flex gap-4 items-center">
@@ -70,7 +84,7 @@
                                 <div class="text-xs sm:text-sm text-right">x {{ $quantity }}</div>
                             </div>
                         </div>
-                        <div class="divider my-0"></div>
+                        <div class="divider"></div>
                         <div class="flex justify-between gap-4">
                             <h3 class="font-semibold">Total</h3>
                             <div>
@@ -80,9 +94,12 @@
                             </div>
                         </div>
 
-                        <div class="">
+                        <x-button class="btn btn-primary btn-block" wire:loading.class="loading" wire:loading.attr="disabled" wire:target="finalize">Place Order</x-button>
+
+                        @if(1>3)
+                        <div class="pt-4">
                             @if($payment_gateway == 'paystack')
-                                <button id="paystackBtn" class="btn btn-primary btn-block" wire:loading.class="loading" wire:loading.attr="disabled">Pay Now</button>
+                                <button id="paystackBtn" class="btn btn-primary btn-block" wire:loading.class="loading" wire:target="finalize" wire:loading.attr="disabled">Pay Now</button>
 
                             @elseif($payment_gateway == 'stripe')
                                 <div class="mb-6">
@@ -93,14 +110,14 @@
                                     <div id="card-errors" role="alert"></div>
                                 </div>
 
-                                <button id="stripeBtn" class="btn btn-primary btn-block" wire:loading.class="loading" wire:loading.attr="disabled">Pay Now</button>
+                                <button id="stripeBtn" class="btn btn-primary btn-block" wire:loading.class="loading" wire:loading.attr="disabled" wire:target="finalize">Pay Now</button>
                             @endif
                         </div>
-
+                        @endif
                     </div>
-                </div>
+                </x-card>
             </div>
-        </div>
+        </form>
     </div>
 
     <script>

@@ -3,12 +3,17 @@
         <div class="card-body p-1 sm:p-auto">
             <h2 class="font-semibold text-xl sm:text-2xl">Account Verification</h2>
             <div class="divider my-0"></div>
-            @if($verified)
-                Account Verified
+            @if(Auth::user()->verified)
+
+                <div class="flex flex-col justify-center items-center gap-0">
+                    <x-cui-cil-check-circle class="w-14 h-14 sm:w-14 sm:h-14 text-success"/>
+                    <span class="font-semibold">Account Verified</span>
+                </div>
+
 
             @elseif($verification_record && $verification_record->status=='pending')
 
-                <div class="grid grid-cols-3 gap-8 my-4">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 my-4">
                     <div class="">
                         <ul class="leading-7 text-sm">
                             <li class="flex justify-between gap-4"><span>ID Type</span><span>{{$verification_record->verification_type->name }}</span></li>
@@ -33,7 +38,7 @@
                         </ul>
                     </div>
                     <div>&nbsp;</div>
-                    <div>
+                    <div class="">
                         <img src="{{$verification_record->getFirstMediaUrl('doc')}}" alt="Uploaded file" class="w-full">
                     </div>
                 </div>

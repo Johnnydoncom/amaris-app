@@ -5,5 +5,6 @@ interface PaymentStatus
 {
     const PENDING  = 5;
     const CANCELED = 7;
-    const APPROVED = 9;
+    const PAID = 9;
+    const EXPIRED = 10;
 }

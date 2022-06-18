@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedInteger('item_count');
             $table->decimal('shipping_charges')->nullable();
             $table->string('currency')->nullable()->default(env('DEFAULT_CURRENCY'));
-
+            $table->unsignedBigInteger('delivery_address_id')->nullable();
             $table->decimal('taxes')->nullable();
             $table->foreignId('user_id')->constrained();
 

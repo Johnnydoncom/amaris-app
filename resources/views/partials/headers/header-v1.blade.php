@@ -41,13 +41,13 @@
                     </a>
                     <ul class="dropdown-menu dark:bg-jacarta-800 top-[85%] z-10 hidden gap-x-4 whitespace-nowrap rounded-xl bg-white transition-all will-change-transform group-hover:visible group-hover:opacity-100 lg:invisible lg:absolute lg:!grid lg:translate-y-4 lg:py-4 lg:px-5 lg:opacity-0 lg:shadow-2xl lg:group-hover:translate-y-2" aria-labelledby="navDropdown-1">
                         <li>
-                            <a href="{{route('pages.ninja-power-system')}}" class="dark:hover:bg-jacarta-600 hover:text-accent focus:text-accent hover:bg-jacarta-50 flex items-center rounded-xl px-2 py-2 transition-colors">
-                                <span class="font-display text-jacarta-700 text-sm dark:text-white">Ninja Power system</span>
+                            <a href="{{route('cards.index')}}" class="dark:hover:bg-jacarta-600 hover:text-accent focus:text-accent hover:bg-jacarta-50 flex items-center rounded-xl px-2 py-2 transition-colors">
+                                <span class="font-display text-jacarta-700 text-sm dark:text-white">Gift Cards</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{{route('cards.index')}}" class="dark:hover:bg-jacarta-600 hover:text-accent focus:text-accent hover:bg-jacarta-50 flex items-center rounded-xl px-2 py-2 transition-colors">
-                                <span class="font-display text-jacarta-700 text-sm dark:text-white">Gift Cards</span>
+                            <a href="{{route('pages.ninja-power-system')}}" class="dark:hover:bg-jacarta-600 hover:text-accent focus:text-accent hover:bg-jacarta-50 flex items-center rounded-xl px-2 py-2 transition-colors">
+                                <span class="font-display text-jacarta-700 text-sm dark:text-white">Ninja Power system</span>
                             </a>
                         </li>
                         <li>
