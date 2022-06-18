@@ -1,5 +1,6 @@
 <div x-data="handler()">
-    <h2 class="text-center font-semibold text-2xl sm:text-3xl py-6 pt-8">Gift Cards</h2>
+{{--    <h2 class="text-center font-semibold text-2xl sm:text-3xl py-6 pt-8">Gift Cards</h2>--}}
+    <x-page-heading title="Gift Cards" align="center" />
 
     <div class="container grid grid-cols-1 lg:grid-cols-4 gap-1 sm:gap-2 lg:gap-4 py-6">
         <div class="sticky top-0 card card-body h-full w-full p-4 sm:p-2 border rounded-3xl py-4">

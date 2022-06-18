@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cceb8efaddd8fd52f7fa98c00095cdf4",
+    "content-hash": "5b23ff0aec0f56d5da0352e1e4a514fa",
     "packages": [
         {
             "name": "akaunting/laravel-setting",
@@ -227,6 +227,87 @@
                 "source": "https://github.com/bavix/laravel-wallet/tree/9.0.1"
             },
             "time": "2022-05-19T16:21:32+00:00"
+        },
+        {
+            "name": "blade-ui-kit/blade-icons",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/blade-ui-kit/blade-icons.git",
+                "reference": "57a7c41e1e79e38aed029d3e6ae690b04344c99e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/blade-ui-kit/blade-icons/zipball/57a7c41e1e79e38aed029d3e6ae690b04344c99e",
+                "reference": "57a7c41e1e79e38aed029d3e6ae690b04344c99e",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^8.0|^9.0",
+                "illuminate/filesystem": "^8.0|^9.0",
+                "illuminate/support": "^8.0|^9.0",
+                "illuminate/view": "^8.0|^9.0",
+                "php": "^7.4|^8.0",
+                "symfony/console": "^5.3|^6.0",
+                "symfony/finder": "^5.3|^6.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.3",
+                "orchestra/testbench": "^6.0|^7.0",
+                "phpunit/phpunit": "^9.0"
+            },
+            "bin": [
+                "bin/blade-icons-generate"
+            ],
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "BladeUI\\Icons\\BladeIconsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "BladeUI\\Icons\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dries Vints",
+                    "homepage": "https://driesvints.com"
+                }
+            ],
+            "description": "A package to easily make use of icons in your Laravel Blade views.",
+            "homepage": "https://github.com/blade-ui-kit/blade-icons",
+            "keywords": [
+                "blade",
+                "icons",
+                "laravel",
+                "svg"
+            ],
+            "support": {
+                "issues": "https://github.com/blade-ui-kit/blade-icons/issues",
+                "source": "https://github.com/blade-ui-kit/blade-icons"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/caneco",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/driesvints",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-05-11T12:38:11+00:00"
         },
         {
             "name": "brick/math",
@@ -7183,6 +7264,65 @@
                 "source": "https://github.com/Torann/laravel-geoip/tree/3.0.4"
             },
             "time": "2022-02-09T14:48:24+00:00"
+        },
+        {
+            "name": "ublabs/blade-coreui-icons",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ublabs/blade-coreui-icons.git",
+                "reference": "690641108cf2d8f7f9ebbcbeb920c112c5c6782c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ublabs/blade-coreui-icons/zipball/690641108cf2d8f7f9ebbcbeb920c112c5c6782c",
+                "reference": "690641108cf2d8f7f9ebbcbeb920c112c5c6782c",
+                "shasum": ""
+            },
+            "require": {
+                "blade-ui-kit/blade-icons": "^1.1",
+                "illuminate/support": "^8.0|^9.0",
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.0|^7.0",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Ublabs\\BladeCoreuiIcons\\BladeCoreuiIconsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ublabs\\BladeCoreuiIcons\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Adrián UB",
+                    "homepage": "https://github.com/adrian-ub"
+                }
+            ],
+            "description": "A package to easily make use of CoreUI Icons in your Laravel Blade views.",
+            "homepage": "https://github.com/ublabs/blade-coreui-icons",
+            "keywords": [
+                "blade-coreui-icons",
+                "laravel",
+                "ublabs"
+            ],
+            "support": {
+                "issues": "https://github.com/ublabs/blade-coreui-icons/issues",
+                "source": "https://github.com/ublabs/blade-coreui-icons/tree/0.2.0"
+            },
+            "time": "2022-02-16T00:39:00+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

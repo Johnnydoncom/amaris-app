@@ -5,7 +5,7 @@
     <div class="w-full bg-white rounded-lg px-0 sm:px-8 py-6 overflow-auto">
         <h4 class="text-xl font-semibold">Orders</h4>
         <table class="w-full my-8 whitespace-nowrap overflow-x-scroll overflow-x-auto custom-scrollbar">
-            <thead class="bg-secondary text-gray-100 font-bold">
+            <thead class="bg-primary text-gray-100 font-bold">
                 <td class="py-2 pl-2">Order ID</td>
                 <td class="py-2 pl-2">Price</td>
                 <td class="py-2 pl-2">Payment</td>
