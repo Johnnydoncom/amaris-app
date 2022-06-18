@@ -141,6 +141,7 @@ module.exports = {
             },
             backgroundImage: {
                 'page-heading-pattern': "url('/storage/hero-bg.png')",
+                'footer-pattern': "url('/storage/hero-bg.png')",
                 'footer-texture': "url('/storage/Animated-Shape.svg')",
             }
         },

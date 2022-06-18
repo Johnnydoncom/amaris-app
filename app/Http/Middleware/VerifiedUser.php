@@ -23,7 +23,7 @@ class VerifiedUser
         }elseif ($request->user()->verified){
             return $next($request);
         } else {
-            return redirect('/');
+            return redirect(route('account.verification.index'));
         }
     }
 }

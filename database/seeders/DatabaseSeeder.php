@@ -77,8 +77,8 @@ class DatabaseSeeder extends Seeder
         });
 
         // Default Currencies
-        \Artisan::call('currency:manage add ngn,usd,gbp,cad,aud,sek,inr,cny,eur');
-        \Artisan::call('currency:update -o');
+        \Artisan::call('currency:manage add ngn,usd');
+        \Artisan::call('currencies:update');
 
         \DB::table('currencies')->update(['active'=> 1]);
 

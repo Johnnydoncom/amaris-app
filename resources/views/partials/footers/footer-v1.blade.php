@@ -1,6 +1,6 @@
 
 
-<footer class="p-4 bg-primary text-gray-100 sm:p-6 dark:bg-gray-900 border-t">
+<footer class="p-4 bg-primary text-gray-100 sm:p-6 dark:bg-gray-900 border-t bg-footer-pattern">
    <div class="container">
        <div class="md:flex md:justify-between">
            <div class="mb-6 md:mb-0">
@@ -19,7 +19,7 @@
                            <a href="{{ route('cards.index') }}" class="hover:underline">Gift Cards</a>
                        </li>
                        <li>
-                           <a href="https://products.com/" class="hover:underline">Products</a>
+                           <a href="{{route('pages.ninja-power-system')}}" class="hover:underline">Ninja Power System</a>
                        </li>
                    </ul>
                </div>

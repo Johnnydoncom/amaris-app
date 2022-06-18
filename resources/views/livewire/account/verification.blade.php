@@ -8,11 +8,11 @@
 
             @elseif($verification_record && $verification_record->status=='pending')
 
-                <div class="grid grid-cols-3 gap-8">
+                <div class="grid grid-cols-3 gap-8 my-4">
                     <div class="">
-                        <ul>
-                            <li class="flex justify-between gap-4 font-bold"><span>ID Type</span><span>{{$verification_record->verification_type->name }}</span></li>
-                            <li class="flex justify-between gap-4 font-bold"><span>ID No</span><span>{{$verification_record->id_no }}</span></li>
+                        <ul class="leading-7 text-sm">
+                            <li class="flex justify-between gap-4"><span>ID Type</span><span>{{$verification_record->verification_type->name }}</span></li>
+                            <li class="flex justify-between gap-4"><span>ID No</span><span>{{$verification_record->id_no }}</span></li>
                             <li class="flex justify-between gap-4"><span>Surname</span><span>{{$verification_record->last_name}}</span></li>
                             <li class="flex justify-between gap-4"><span>First Name</span><span>{{$verification_record->first_name}}</span></li>
                             <li class="flex justify-between gap-4"><span>Middle Name</span><span>{{$verification_record->middle_name}}</span></li>
@@ -20,7 +20,16 @@
                             <li class="flex justify-between gap-4"><span>Phone</span><span>{{$verification_record->phone}}</span></li>
                             <li class="flex justify-between gap-4"><span>Date of Birth</span><span>{{$verification_record->dob}}</span></li>
                             <li class="flex justify-between gap-4"><span>Gender</span><span>{{$verification_record->gender}}</span></li>
-                            <li class="flex justify-between gap-4"><span>Marital Status</span><span class="uppercase">{{$verification_record->marital_status}}</span></li>
+                            <li class="flex justify-between gap-4"><span>Marital Status</span><span class="uppercase"> {{$verification_record->marital_status}}</span></li>
+                            <li class="flex justify-between gap-4 font-semibold"><span>Status</span>
+                                @if($verification_record->status=='pending')
+                                    <span class="text-warning font-semibold">{{ucfirst($verification_record->status)}}</span>
+                                @elseif($verification_record->status=='verified')
+                                    <span class="text-success font-semibold">{{ucfirst($verification_record->status)}}</span>
+                                @else
+                                    <span class="text-error font-semibold">{{ucfirst($verification_record->status)}}</span>
+                                @endif
+                            </li>
                         </ul>
                     </div>
                     <div>&nbsp;</div>

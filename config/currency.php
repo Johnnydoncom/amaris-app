@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('DEFAULT_CURRENCY', 'USD'),
+    'default' => env('DEFAULT_CURRENCY', 'NGN'),
 
     /*
     |--------------------------------------------------------------------------

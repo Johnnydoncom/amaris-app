@@ -56,7 +56,7 @@ class Show extends Component
             $this->variation = $v->id;
         }
 
-        $this->variations = $this->product->variations->append('price');
+        $this->variations = $this->product->variations->append(['converted_price','price']);
 
         $this->popularAmounts = array(10,20,500,100,200,500);
         $this->countries = Country::all();

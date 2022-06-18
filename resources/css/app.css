@@ -54,7 +54,9 @@
 [x-cloak] {
     display: none !important;
 }
-
+.description ol{
+    @apply list-decimal list-inside;
+}
 a.active{
     @apply bg-primary text-white;
 }
