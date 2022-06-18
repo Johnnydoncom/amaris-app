@@ -15,7 +15,7 @@ class Home extends Component
 
     public $categories, $platforms, $countries, $country, $sort='asc', $code, $keyword;
 
-    public $perPage = 12;
+    public $perPage = 5;
 
     public function mount(){
         $this->platforms = Platform::all();

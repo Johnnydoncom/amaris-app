@@ -6,7 +6,7 @@
         </a>
 
         <!-- Primary Nav -->
-        <nav class="navbar w-full ml-12 hidden sm:flex">
+        <nav class="navbar w-full ml-12 hidden lg:flex">
             <ul class="flex flex-col lg:flex-row">
                 <li class="group">
                     <a href="{{route('index')}}" class="text-primary font-display hover:text-accent focus:text-accent dark:hover:text-accent dark:focus:text-accent flex items-center justify-between py-3.5 text-base dark:text-white font-semibold lg:px-5">Home
