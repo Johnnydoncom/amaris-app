@@ -11,6 +11,7 @@ use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\State;
 use App\Models\Variation;
+use Carbon\Carbon;
 use Illuminate\Session\SessionManager;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
@@ -124,6 +125,7 @@ class Checkout extends Component
         $order->discount_code = $this->discount_code;
         $order->payment_reference = generateUniqueReferenceNumber();
         $order->currency = currency()->getUserCurrency();
+        $order->payment_expires_at = Carbon::now()->addMinutes(15);
 
         if($reference) {
             $order->payment_status = PaymentStatus::PAID;
@@ -140,7 +142,7 @@ class Checkout extends Component
         $orderItem->product_id = $this->product->id;
         $orderItem->quantity = $this->cart['quantity'];
 
-        $orderItem->value = currency($this->variation->price, null,null,false);
+        $orderItem->value = $this->product->price;
         $orderItem->final_amount = currency($this->total,null,null,false);
         $orderItem->currency = currency()->getUserCurrency();
         $orderItem->save();

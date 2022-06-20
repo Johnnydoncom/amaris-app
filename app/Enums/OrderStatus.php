@@ -1,16 +1,18 @@
 <?php
 namespace App\Enums;
+use ArchTech\Enums\InvokableCases;
+use ArchTech\Enums\Names;
+use ArchTech\Enums\Values;
+use ArchTech\Enums\Options;
 
-interface OrderStatus
+enum OrderStatus:string
 {
-    const PENDING   = 'pending';
-    const PROCESSING = 'processing';
-    const COMPLETED = 'completed';
-    const DECLINED = 'declined';
-    const CANCELED = 'canceled';
-    const PLACED  = 'Order Placed';
-    const IN_PROGRESS = 'Order in Progress';
-    const SHIPPED    = 'Shipped';
-    const OUT_FOR_DELIVERY  = 'Out for Delivery';
-    const DELIVERED  = 'Delivered';
+    use InvokableCases, Names, Values, Options;
+
+    case PENDING   = 'Pending';
+    case PROCESSING = 'Processing';
+    case SHIPPED    = 'Shipped';
+    case DELIVERED  = 'Delivered';
+    case COMPLETED = 'Completed';
+    case CANCELED = 'Canceled';
 }

@@ -58,7 +58,7 @@
     @apply list-decimal list-inside;
 }
 a.active{
-    @apply bg-primary text-white;
+    @apply text-secondary;
 }
 .container {
     @apply max-w-3xl sm:max-w-5xl lg:max-w-7xl 2xl:max-w-[90%] mx-auto px-2 md:px-4 lg:px-6;

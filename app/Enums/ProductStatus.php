@@ -1,9 +1,9 @@
 <?php
 namespace App\Enums;
 
-interface ProductStatus
+enum ProductStatus
 {
-    const PUBLISHED  = 1;
-    const DRAFT = 2;
-    const DISABLED = 0;
+    case PUBLISHED  = 1;
+    case DRAFT = 2;
+    case DISABLED = 0;
 }

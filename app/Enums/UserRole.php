@@ -1,10 +1,10 @@
 <?php
 namespace App\Enums;
 
-interface UserRole
+enum UserRole
 {
-    const SUPERADMIN     = 'Super-Admin';
-    const ADMIN     = 'Admin';
-    const SHOPMANAGER = 'Shop-Manager';
-    const CUSTOMER  = 'Customer';
+    case SUPERADMIN     = 'Super-Admin';
+    case ADMIN     = 'Admin';
+    case SHOPMANAGER = 'Shop-Manager';
+    case CUSTOMER  = 'Customer';
 }

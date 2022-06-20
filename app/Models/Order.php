@@ -20,6 +20,10 @@ class Order extends Model
         'date'
     ];
 
+    protected $casts = [
+        'payment_expires_at' => 'datetime'
+    ];
+
     public static function boot()
     {
         parent::boot();

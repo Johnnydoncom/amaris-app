@@ -7,14 +7,19 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Fonts -->
-    {{-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap"> --}}
+    <link rel="apple-touch-icon" sizes="180x180" href="{{Storage::url('favicon/apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{Storage::url('favicon/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{Storage::url('favicon/favicon-16x16.png')}}">
+    <link rel="manifest" href="{{Storage::url('favicon/site.webmanifest')}}">
 
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Neuton:wght@200;300;400;700&family=Open+Sans:wght@300;400;500;600;700&family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;600;700;800&display=swap" rel="stylesheet">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
+    <!-- Adobe Fonts -->
+    <link rel="stylesheet" href="https://use.typekit.net/uid2kib.css">
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
@@ -35,12 +40,12 @@
 
     <div class="lg:pl-64 w-full flex flex-col">
     @include('partials.admin.header')
-
     <!-- start:Page content -->
         <div class="h-full bg-slate-100 p-4">
             {{ $slot }}
         </div>
         <!-- end:Page content -->
+        @include('partials.admin.footer')
     </div>
 
 
@@ -51,11 +56,15 @@
 
 <!-- Scripts -->
 @livewireScripts
-@stack('scripts')
+{{--@stack('scripts')--}}
 <script src="https://unpkg.com/@alpinejs/collapse@3.4.2/dist/cdn.min.js"></script>
 <script src="{{ asset('js/app.js') }}"></script>
+
+@livewireChartsScripts
+
 @stack('scripts')
 <script src="{{ asset('vendor/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
+
 <script>
     const Toast = Swal.mixin({
         toast: true,

@@ -1,8 +1,8 @@
 <?php
 namespace App\Enums;
 
-interface UserStatus
+enum UserStatus
 {
-    const ACTIVE   = 5;
-    const INACTIVE = 10;
+    case ACTIVE   = 5;
+    case INACTIVE = 10;
 }

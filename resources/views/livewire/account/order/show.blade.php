@@ -1,5 +1,5 @@
 <div>
-    <x-slot name="title">Orders</x-slot>
+{{--    <x-slot name="title">Orders</x-slot>--}}
     <div class="py-4 ">
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-4">
             <x-card class="card rounded-xl">
@@ -41,29 +41,48 @@
                     </div>
                     <div class="divider"></div>
 
-                    <p class="text-sm flex justify-between">
-                        Payment Status: <span>@if($order->payment_status == \App\Enums\PaymentStatus::PENDING) Waiting payment @elseif($order->payment_status == \App\Enums\PaymentStatus::PAID) Paid @else Canceled @endif</span>
+                    <p class="text-sm flex justify-between mb-1">
+                       <strong> Payment Status:</strong> <span class="text-xs 2xl:text-sm">@if($order->payment_status == \App\Enums\PaymentStatus::PENDING) Waiting payment @elseif($order->payment_status == \App\Enums\PaymentStatus::PAID) Paid @else Canceled @endif</span>
                     </p>
-                    <p class="text-sm flex justify-between">
-                        Created on: <span>{{$order->created_at}}</span>
+                    <p class="text-sm flex justify-between items-center mb-1">
+                        <strong>Created on:</strong> <span class="text-xs 2xl:text-sm">{{$order->created_at}}</span>
                     </p>
-                    <p class="text-sm flex justify-between">
-                        Expired after: <span>{{$order->payment_expires_at}}</span>
+                    <p class="text-sm flex justify-between items-center">
+                        <strong>Expired after:</strong> <span class="text-xs 2xl:text-sm">{{$order->payment_expires_at}}</span>
                     </p>
-
                     <div class="divider"></div>
 
                     <p class="text-sm flex justify-between">
-                        Original Price Total: <span class="font-bold">{{$order->items[0]->final_amount}}</span>
+                        Original Price Total: <span class="font-bold">{{app_money_format($order->items[0]->final_amount,$order->currency)}}</span>
                     </p>
 
                     <div class="divider"></div>
                     <p class="text-lg flex justify-between">
-                        Total: <span class="font-bold">{{ $order->grand_total }}</span>
+                        Total: <span class="font-bold">{{ app_money_format($order->grand_total, $order->currency) }}</span>
                     </p>
 
-                    @if($order->payment_expires_at && !$order->payment_expires_at->isPast())
-                        <x-button class="btn btn-primary btn-block mt-8" wire:loading.class="loading" wire:target="pay">Pay Now</x-button>
+                    @if($order->payment_status == \App\Enums\PaymentStatus::PENDING && $order->payment_expires_at && !$order->payment_expires_at->isPast())
+{{--                        <x-button class="btn btn-primary btn-block mt-8" wire:loading.class="loading" wire:target="pay">Pay Now</x-button>--}}
+                            <div class="mt-8">
+                                @if($order->payment_method == 'paystack')
+                                    <x-button id="paystackBtn" class="btn btn-primary btn-block" wire:loading.class="loading" wire:target="finalize" wire:loading.attr="disabled">Pay Now</x-button>
+
+                                @elseif($order->payment_method == 'stripe')
+                                    <div class="mb-6">
+                                        <div id="card-element">
+                                            <!-- A Stripe Element will be inserted here. -->
+                                        </div>
+                                        <!-- Used to display form errors. -->
+                                        <div id="card-errors" role="alert"></div>
+                                    </div>
+
+                                    <x-button id="stripeBtn" class="btn btn-primary btn-block" wire:loading.class="loading" wire:loading.attr="disabled" wire:target="finalize">Pay Now</x-button>
+                                @endif
+                            </div>
+
+                        <x-flash-messages />
+                        <!-- Validation Errors -->
+                        <x-auth-validation-errors class="mb-4" :errors="$errors" />
                     @endif
 
                 </div>
@@ -71,8 +90,7 @@
 
             <div class="w-full col-span-2">
                 @foreach($order->items as $item)
-                    @if($item->variation)
-                        <x-card class="grid grid-cols-3 sm:grid-cols-3 gap-4 items-center">
+                    <x-card class="grid grid-cols-3 sm:grid-cols-3 gap-4 items-center">
                             <div class="col-span-2">
                                 <div class="relative flex flex-row space-y-0 space-x-3  p-0 w-full">
                                     <div class="bg-white grid place-items-center">
@@ -80,7 +98,13 @@
                                     </div>
                                     <div class="bg-white flex flex-col p-0 items-start">
 {{--                                        <div class="block relative w-full">--}}
-                                            <p class="text-xs sm:text-sm py-1"><strong>{{$item->variation->name}}</strong> ({{$item->product->title}})</p>
+                                            <h6 class="text-xs sm:text-sm py-1">
+                                                @if($item->variation)
+                                                <strong>{{$item->variation->name}}</strong> ({{$item->product->title}})
+                                                @else
+                                                    <strong>{{$item->product->title}}</strong>
+                                                @endif
+                                            </h6>
 {{--                                        </div>--}}
                                     </div>
                                 </div>
@@ -94,72 +118,68 @@
                             </div>
 
                         </x-card>
-                    @else
-                        <x-card class="grid grid-cols-3 sm:grid-cols-4 gap-4 items-center">
-                            <div class="col-span-2">
-                                <div class="relative flex flex-row space-y-0 space-x-3  p-0 w-full">
-                                    <div class="w-1/3 bg-white grid place-items-center">
-                                        <img src="{{$item->product->featured_img_thumb}}" class="rounded-xl w-full sm:w-28" alt="{{$item->product->title}}"  />
-                                    </div>
-                                    <div class="w-2/3 bg-white flex flex-col p-0 items-start">
-                                        <div class="block relative w-full">
-                                            <p class="text-xs sm:text-sm py-1">{{ $item->name }}</p>
-                                            <p class="font-light text-xs sm:text-sm text-gray-400 mt-1">QTY: {{ $item->quantity }}</p>
-                                            <div class="font-light text-xs sm:text-sm text-gray-400 mt-1">
-                                                @if($item->product->sales_price > 0)
-                                                    <p class="text-sm sm:text-sm font-medium text-gray-900">{{$item->product->formatted_sales_price}}</p>
-                                                @endif
-
-                                                <p class="@if($item->product->sales_price > 0) text-gray-500 text-xs sm:text-sm line-through @else text-gray-900 text-xs sm:text-sm font-normal @endif">
-                                                    {{ $item->product->formatted_regular_price }}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="">
-                                <div class="uppercase text-sm w-full">
-                                    @if($order->status==='order_placed' || $order->status==='processing' || $order->status==='shipped' || $order->status==='out_for_delivery')
-                                        <p class="badge badge-info uppercase badge-xs">
-                                            {{ ucwords($order->status) }}
-                                        </p>
-                                    @elseif($order->status==='delivered' || $order->status==='completed')
-                                        <p class="badge badge-success uppercase badge-xs">
-                                            {{ ucwords($order->status) }}
-                                        </p>
-                                    @else
-                                        <p class="badge badge-error uppercase badge-xs">
-                                            {{ ucwords($order->status) }}
-                                        </p>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="col-span-3 sm:col-span-1">
-                                <div class="flex flex-col flex-wrap gap-2">
-{{--                                    <form action="{{ route('account.order.cancelItem', $item->id) }}" method="post">--}}
-{{--                                        @csrf--}}
-{{--                                        @method('DELETE')--}}
-{{--                                        <x-button class="btn btn-primary btn-block btn-xs">--}}
-{{--                                            <span class='flex-1'>Cancel Item</span>--}}
-{{--                                        </x-button>--}}
-{{--                                    </form>--}}
-{{--                                    @if($item->product->type==='digital')--}}
-{{--                                        <a href="{{route('account.order.download', $item->order_number)}}" class="btn btn-secondary btn-block btn-xs rounded-none">--}}
-{{--                                            <span class='flex-1'>Download Item</span>--}}
-{{--                                        </a>--}}
-{{--                                    @else--}}
-{{--                                        <a href="/" class="btn btn-secondary btn-block btn-xs rounded-none">--}}
-{{--                                            <span class='flex-1'>Track My Item</span>--}}
-{{--                                        </a>--}}
-{{--                                    @endif--}}
-                                </div>
-                            </div>
-
-                        </x-card>
-                    @endif
                 @endforeach
             </div>
         </div>
     </div>
+
+
+
+    @if($order->payment_expires_at && !$order->payment_expires_at->isPast())
+
+        @if($order->payment_method == 'paystack')
+            <script src="https://js.paystack.co/v2/inline.js"></script>
+            <script>
+                document.addEventListener('livewire:load', function () {
+
+                    const paystackBtn = document.getElementById('paystackBtn');
+                    paystackBtn.addEventListener("click", payWithPaystack, false);
+
+                    function payWithPaystack(e) {
+                        e.preventDefault();
+
+                        const paystack = new PaystackPop();
+                        paystack.newTransaction({
+                            key: '{{setting('paystack_key')}}',
+                            email: '{{Auth::user()->email}}',
+                            amount: '{{currency($order->grand_total,$order->currency,null,false) * 100}}',
+                            currency: '{{$order->currency}}',
+                            onSuccess: (transaction) => {
+                                // Payment complete! Reference: transaction.reference
+                                // console.log(transaction)
+
+                            @this.finalize(transaction.reference)
+                            },
+                            onCancel: () => {
+                                // user closed popup
+                                alert('Transaction was not completed, window closed.');
+                            }
+                        });
+                    }
+                });
+            </script>
+        @elseif($order->payment_method == 'stripe')
+            {{--        <script src="https://checkout.stripe.com/checkout.js"></script>--}}
+
+            <script src="https://js.stripe.com/v3/"></script>
+            <script>
+                var stripe = Stripe('{{setting('stripe_key')}}');
+                var checkoutButton = document.getElementById('stripeBtn');
+
+                checkoutButton.addEventListener('click', function() {
+                    stripe.redirectToCheckout({
+                        // Make the id field from the Checkout Session creation API response
+                        // available to this file, so you can provide it as argument here
+                        sessionId: '{{$stripe_session}}'
+                    }).then(function (result) {
+                        console.log(result);
+                        // If `redirectToCheckout` fails due to a browser or network
+                        // error, display the localized error message to your customer
+                        // using `result.error.message`.
+                    });
+                });
+            </script>
+        @endif
+
+    @endif
 </div>

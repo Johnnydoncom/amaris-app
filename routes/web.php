@@ -78,7 +78,7 @@ Route::prefix('account')->as('account.')->middleware(['auth','verified'])->group
 });
 
 Route::prefix('dashboard')->as('admin.')->middleware(['auth','verified', 'admin_auth'])->group(function () {
-    Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('index');
+    Route::get('/', \App\Http\Livewire\Admin\Dashboard::class)->name('index');
 
     Route::get('users/verifications', [\App\Http\Controllers\Admin\UserController::class, 'verifications'])->name('users.verifications.index');
     Route::get('users/verifications/{userVerification}', [\App\Http\Controllers\Admin\UserController::class, 'showVerification'])->name('users.verifications.show');
@@ -101,9 +101,9 @@ Route::prefix('dashboard')->as('admin.')->middleware(['auth','verified', 'admin_
     Route::get('products/create', \App\Http\Livewire\Admin\Product\Create::class)->name('products.create');
     Route::get('products/{product}/edit', \App\Http\Livewire\Admin\Product\Edit::class)->name('products.edit');
 
-//    Route::resource('products', \App\Http\Controllers\Admin\ProductController::class);
-
-    Route::resource('orders', \App\Http\Controllers\Admin\OrderController::class);
+    // Orders
+    Route::get('orders', \App\Http\Livewire\Admin\Order\Home::class)->name('orders.index');
+    Route::get('orders/{order}/edit', \App\Http\Livewire\Admin\Order\Edit::class)->name('orders.edit');
 
     Route::post('/file-upload', [\App\Http\Controllers\Admin\DashboardController::class, 'fileUpload'])->name('file-upload');
 
@@ -116,7 +116,7 @@ Route::prefix('dashboard')->as('admin.')->middleware(['auth','verified', 'admin_
 Route::get('clear-cache', function (){
     \Illuminate\Support\Facades\Artisan::call('optimize:clear');
     \Illuminate\Support\Facades\Artisan::call('view:clear');
-    return 'Cache clear';
+    return redirect()->back()->withSuccess('Cache Cleared');
 })->name('clear-cache');
 
 Route::get('down', function (){

@@ -4,10 +4,7 @@
         <header class="flex justify-between items-center h-16 py-4 px-6 bg-white w-full">
             <!-- start::Mobile menu button -->
             <div class="flex items-center">
-                <button
-                    @click="menuOpen = true"
-                    class="text-gray-500 hover:text-primary focus:outline-none lg:hidden transition duration-200"
-                >
+                <button @click="menuOpen = true" class="text-gray-500 hover:text-primary focus:outline-none lg:hidden transition duration-200">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path></svg>
                 </button>
             </div>
@@ -16,16 +13,11 @@
             <!-- start::Right side top menu -->
             <div class="flex items-center">
 
+                @if(2>3)
                 <!-- start::Notifications -->
-                <div
-                x-data="{ linkActive: false }"
-                    class="relative mx-6"
-                >
+                <div x-data="{ linkActive: false }" class="relative mx-6">
                     <!-- start::Main link -->
-                    <div
-                        @click="linkActive = !linkActive"
-                        class="cursor-pointer flex"
-                    >
+                    <div @click="linkActive = !linkActive" class="cursor-pointer flex">
                         <svg class="w-6 h-6 cursor-pointer hover:text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
                         <sub>
                             <span class="bg-red-600 text-gray-100 px-1.5 py-0.5 rounded-full -ml-1 animate-pulse">
@@ -255,31 +247,18 @@
                     <!-- end::Submenu -->
                 </div>
                 <!-- end::Notifications -->
+                @endif
 
                 <!-- start::Profile -->
-                <div
-                    x-data="{ linkActive: false }"
-                    class="relative"
-                >
+                <div x-data="{ linkActive: false }" class="relative">
                     <!-- start::Main link -->
-                    <div
-                        @click="linkActive = !linkActive"
-                        class="cursor-pointer"
-                    >
-                        <img
-                            src="{{ Auth::user()->avatar_url }}"
-                            class="w-10 rounded-full"
-                        >
+                    <div @click="linkActive = !linkActive" class="cursor-pointer">
+                        <img src="{{ Auth::user()->avatar_url }}" class="w-10 rounded-full">
                     </div>
                     <!-- end::Main link -->
 
                     <!-- start::Submenu -->
-                    <div
-                        x-show="linkActive"
-                        @click.away="linkActive = false"
-                        x-cloak
-                        class="absolute right-0 w-40 top-11 border border-gray-300 z-20"
-                    >
+                    <div x-show="linkActive" @click.away="linkActive = false" x-cloak class="absolute right-0 w-40 top-11 border border-gray-300 z-20">
                         <!-- start::Submenu content -->
                         <div class="bg-white rounded">
                             <!-- start::Submenu link -->
@@ -293,10 +272,7 @@
                                 <div class="flex items-center">
                                     <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                                     <div class="text-sm ml-3">
-                                        <p
-                                            class="text-gray-600 font-bold capitalize"
-                                            :class=" linkHover ? 'text-primary' : ''"
-                                        >Profile</p>
+                                        <p class="text-gray-600 font-bold capitalize" :class=" linkHover ? 'text-primary' : ''">Profile</p>
                                     </div>
                                 </div>
                             </a>

@@ -6,10 +6,10 @@
     <div class="container py-6">
         <div class="border-b pt-4 pb-2 flex">
             <form method="get" action="{{route('cards.index')}}" id="filterCards" class="flex gap-2 sm:gap-6 justify-end w-full" x-transition>
-                <h3 class="hidden lg:block self-end font-semibold text-xl">Filter</h3>
+{{--                <h3 class="hidden lg:block self-end font-semibold text-xl">Filter</h3>--}}
                 <x-floating-select name="code" wrapperClass="w-full max-w-xs">
+                    <option value="">All</option>
                     @foreach($platforms as $pt)
-                        <option value="">All</option>
                         <option value="{{$pt->slug}}">
                             {{$pt->name}}<span> - ({{$pt->products->count()}})</span>
                         </option>
