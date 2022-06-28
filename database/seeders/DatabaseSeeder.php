@@ -60,8 +60,8 @@ class DatabaseSeeder extends Seeder
             RolePermissionSeeder::class,
             CategoriesTableSeeder::class,
             PlatformTableSeeder::class,
-            DeliveryTypeTableSeeder::class,
-            MessageDesignTableSeeder::class,
+//            DeliveryTypeTableSeeder::class,
+//            MessageDesignTableSeeder::class,
             VerificationTypeTableSeeder::class,
             ProductTableSeeder::class
         ]);

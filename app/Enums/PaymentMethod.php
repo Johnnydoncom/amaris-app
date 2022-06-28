@@ -5,7 +5,7 @@ use ArchTech\Enums\Names;
 use ArchTech\Enums\Values;
 use ArchTech\Enums\Options;
 
-enum PaymentMethod
+enum PaymentMethod:string
 {
     use InvokableCases, Names, Values, Options;
 

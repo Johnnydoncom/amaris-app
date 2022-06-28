@@ -30,40 +30,6 @@ class SettingsController extends Controller
         ]);
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function product()
-    {
-        $country = Country::where('name', 'nigeria')->first();
-        $states = $country->states()->get();
-        return view('admin.settings.shop',[
-            'settings' => setting()->all(),
-            'states' => $states
-        ]);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function earnings()
-    {
-        $country = Country::where('name', 'nigeria')->first();
-        $states = $country->states()->get()->map(function($city){
-            return [
-                'value' => $city->id,
-                'label' => ucfirst($city->name)
-            ];
-        });
-        return view('admin.settings.earnings',[
-            'settings' => setting()->all(),
-            'states' => $states
-        ]);
-    }
 
     public function update(Request $request){
         $request->validate([

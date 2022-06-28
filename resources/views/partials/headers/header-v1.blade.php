@@ -83,6 +83,9 @@
                     <a href="{{route('pages.about-us')}}" class="text-primary font-display hover:text-accent focus:text-accent font-semibold dark:hover:text-accent dark:focus:text-accent flex items-center justify-between py-3.5 text-base dark:text-white lg:px-5">About Us</a>
                 </li>
                 <li class="group">
+                    <a href="{{route('pages.company-policies')}}" class="text-primary font-display hover:text-accent focus:text-accent font-semibold dark:hover:text-accent dark:focus:text-accent flex items-center justify-between py-3.5 text-base dark:text-white lg:px-5">Company Policies</a>
+                </li>
+                <li class="group">
                     <a href="{{route('pages.contact')}}" class="text-primary font-display hover:text-accent focus:text-accent font-semibold dark:hover:text-accent dark:focus:text-accent flex items-center justify-between py-3.5 text-base dark:text-white lg:px-5">Contact Us</a>
                 </li>
                 @if(1>2)
@@ -239,6 +242,9 @@
                     @endif
                     <li class="group">
                         <a href="{{route('pages.about-us')}}" class="text-primary font-display hover:text-accent focus:text-accent font-semibold dark:hover:text-accent dark:focus:text-accent flex items-center justify-between py-3.5 text-base dark:text-white lg:px-5">About Us</a>
+                    </li>
+                    <li class="group">
+                        <a href="{{route('pages.company-policies')}}" class="text-primary font-display hover:text-accent focus:text-accent font-semibold dark:hover:text-accent dark:focus:text-accent flex items-center justify-between py-3.5 text-base dark:text-white lg:px-5">Company Policies</a>
                     </li>
                     <li class="group">
                         <a href="{{route('pages.contact')}}" class="text-primary font-display hover:text-accent focus:text-accent font-semibold dark:hover:text-accent dark:focus:text-accent flex items-center justify-between py-3.5 text-base dark:text-white lg:px-5">Contact Us</a>

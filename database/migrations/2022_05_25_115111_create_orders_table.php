@@ -25,12 +25,12 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
 
             $table->text('notes')->nullable();
-            $table->tinyInteger('payment_status')->default(\App\Enums\PaymentStatus::PENDING);
+            $table->tinyInteger('payment_status')->default(\App\Enums\PaymentStatus::PENDING());
             $table->timestamp('payment_expires_at')->nullable();
-            $table->string('status')->default(\App\Enums\OrderStatus::PENDING);
+            $table->string('status')->default(\App\Enums\OrderStatus::PENDING());
 
             $table->string('discount_code')->nullable();
-            $table->string('payment_method')->default(\App\Enums\PaymentMethod::PAYSTACK);
+            $table->string('payment_method')->default(\App\Enums\PaymentMethod::PAYSTACK());
             $table->string('payment_reference')->nullable();
             $table->timestamps();
             $table->softDeletes();

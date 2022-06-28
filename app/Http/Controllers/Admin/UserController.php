@@ -164,7 +164,7 @@ class UserController extends Controller
 
            $userVerification->user->update(['verified'=>true]);
         }
-        return redirect()->back()->withSuccess('Record Updated');
+        return redirect()->route('admin.users.verifications.index')->withSuccess('Record Updated');
     }
 
 }

@@ -26,11 +26,12 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('city')->nullable();
             $table->date('dob')->nullable();
+            $table->string('gender')->nullable();
             $table->string('state')->nullable();
             $table->string('zipcode')->nullable();
             $table->foreignId('country_id')->nullable()->constrained();
             $table->timestamp('email_verified_at')->nullable();
-            $table->tinyInteger('active')->default(\App\Enums\UserStatus::ACTIVE);
+            $table->tinyInteger('active')->default(\App\Enums\UserStatus::ACTIVE());
             $table->boolean('verified')->default(false);
             $table->rememberToken();
             $table->timestamps();

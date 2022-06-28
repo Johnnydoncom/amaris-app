@@ -44,21 +44,14 @@ Route::get('order/{order}/success', function (\Illuminate\Http\Request $request,
 Route::prefix('account')->as('account.')->middleware(['auth','verified'])->group(function () {
     Route::get('/', [\App\Http\Controllers\Account\AccountController::class, 'index'])->name( 'index');
 
+    Route::get('affiliate', \App\Http\Livewire\Account\Affiliate::class)->name( 'affiliate.index');
+
+
     // Order
     Route::prefix('order')->as('order.')->group(function () {
         Route::get('/', \App\Http\Livewire\Account\Order\Home::class)->name('index');
         Route::get('view/{order_number}', \App\Http\Livewire\Account\Order\Show::class)->name('show');
     });
-
-    // Order
-//    Route::prefix('order')->as('order.')->group(function () {
-//        Route::get('/', [\App\Http\Controllers\Account\OrderController::class, 'index'])->name('index');
-//        Route::get('details/{order_number}', [\App\Http\Controllers\Account\OrderController::class, 'show'])->name('show');
-//        Route::delete('details/{orderItem}/cancel', [\App\Http\Controllers\Account\OrderController::class, 'cancelItem'])->name('cancelItem');
-//        Route::get('details/{order_number}/download', [\App\Http\Controllers\Account\OrderController::class, 'download'])->name('download');
-//
-//        Route::get('track/{order_number}', [\App\Http\Controllers\Account\OrderController::class, 'track'])->name('track');
-//    });
 
     Route::get('wishlist', [\App\Http\Controllers\Account\AccountController::class, 'wishlist'])->name('wishlist.index');
     Route::delete('wishlist/{wishlist}', [\App\Http\Controllers\Account\AccountController::class, 'destroyWishlist'])->name('wishlist.destroy');
@@ -73,9 +66,11 @@ Route::prefix('account')->as('account.')->middleware(['auth','verified'])->group
 
     Route::get('verification', \App\Http\Livewire\Account\Verification::class)->name('verification.index');
 
-    Route::get('withdraw-request', [\App\Http\Controllers\Account\AccountController::class, 'withdrawRequest'])->name('withdraw.index');
-    Route::post('withdraw-request', [\App\Http\Controllers\Account\AccountController::class, 'submitWithdrawRequest'])->name('withdraw.store');
+    Route::get('withdraw-request', \App\Http\Livewire\Account\WithdrawRequest::class)->name('withdraw.index');
+    Route::get('payment-info', \App\Http\Livewire\Account\PaymentInfo::class)->name('payment-info.index');
+
 });
+
 
 Route::prefix('dashboard')->as('admin.')->middleware(['auth','verified', 'admin_auth'])->group(function () {
     Route::get('/', \App\Http\Livewire\Admin\Dashboard::class)->name('index');
@@ -108,8 +103,10 @@ Route::prefix('dashboard')->as('admin.')->middleware(['auth','verified', 'admin_
     Route::post('/file-upload', [\App\Http\Controllers\Admin\DashboardController::class, 'fileUpload'])->name('file-upload');
 
     // Settings
-    Route::get('settings', [\App\Http\Controllers\Admin\SettingsController::class, 'index'])->name('settings.index');
-    Route::post('settings', [\App\Http\Controllers\Admin\SettingsController::class, 'update'])->name('settings.store');
+    Route::get('settings', \App\Http\Livewire\Admin\Settings::class)->name('settings.index');
+
+    Route::get('affiliate/transactions', \App\Http\Livewire\Admin\Affiliate\Transactions::class)->name('affiliate.transactions');
+    Route::get('affiliate/withdraw-requests', \App\Http\Livewire\Admin\Affiliate\Withdraws::class)->name('affiliate.withdraw-requests');
 
 });
 
@@ -131,6 +128,17 @@ Route::get('migrate', function (){
     \Illuminate\Support\Facades\Artisan::call('migrate:fresh --seed');
 })->name('migrate');
 
+Route::get('/notification', function () {
+//    \Illuminate\Support\Facades\Mail::send([], [], function ($message) {
+//        $message->to('moriouly@gmail.com')
+//        ->subject('Hello')
+//        ->setBody('Hi, welcome user!'); // assuming text/plain
+//    });
+
+    $user = \App\Models\User::find(1);
+    return $user->sendEmailVerificationNotification();
+});
+
 Route::as('pages.')->group(function () {
     Route::get('products-services', [\App\Http\Controllers\PageController::class, 'products'])->name('products');
     Route::get('ninja-power-system', [\App\Http\Controllers\PageController::class, 'ninjaPower'])->name('ninja-power-system');
@@ -142,6 +150,8 @@ Route::as('pages.')->group(function () {
     Route::get('privacy-policy', [\App\Http\Controllers\PageController::class, 'privacyPolicy'])->name('privacy-policy');
     Route::get('cookie-policy', [\App\Http\Controllers\PageController::class, 'cookiePolicy'])->name('cookie-policy');
     Route::get('return-refund-policy', [\App\Http\Controllers\PageController::class, 'refundPolicy'])->name('refund-policy');
+    Route::get('disclaimer', [\App\Http\Controllers\PageController::class, 'disclaimer'])->name('disclaimer');
+    Route::get('company-policies', [\App\Http\Controllers\PageController::class, 'policyCompliance'])->name('company-policies');
 
 
     Route::get('website-design', [\App\Http\Controllers\PageController::class, 'webDesign'])->name('web-design');

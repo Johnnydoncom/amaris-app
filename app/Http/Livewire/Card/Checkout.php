@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Card;
 
+use App\Enums\OrderStatus;
 use App\Enums\PaymentStatus;
 use App\Models\DeliveryType;
 use App\Models\Order;
@@ -73,8 +74,8 @@ class Checkout extends Component
         $order->currency = currency()->getUserCurrency();
 
         if($reference) {
-            $order->payment_status = PaymentStatus::PAID;
-            $order->status = 'processing';
+            $order->payment_status = PaymentStatus::PAID();
+            $order->status = OrderStatus::PROCESSING();
             $order->payment_reference = $reference;
         }
 

@@ -1,10 +1,17 @@
 <?php
 namespace App\Enums;
 
-enum UserRole
+use ArchTech\Enums\InvokableCases;
+use ArchTech\Enums\Names;
+use ArchTech\Enums\Options;
+use ArchTech\Enums\Values;
+
+enum UserRole:string
 {
-    case SUPERADMIN     = 'Super-Admin';
-    case ADMIN     = 'Admin';
+    use InvokableCases, Names, Values, Options;
+
+    case SUPERADMIN = 'Super-Admin';
+    case ADMIN = 'Admin';
     case SHOPMANAGER = 'Shop-Manager';
-    case CUSTOMER  = 'Customer';
+    case CUSTOMER = 'Customer';
 }

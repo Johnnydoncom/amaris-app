@@ -1,11 +1,12 @@
 <x-admin-layout>
     <x-slot name="title">{{ __('Show Verification') }}</x-slot>
+
     <div>
         <x-card class="card bg-white">
             <div class="card-body">
-                <h4 class="text-gray-900 text-xl leading-tight font-bold mb-2">Verificatoin Data</h4>
+                <h4 class="text-gray-900 text-xl leading-tight font-bold mb-2">Verification Data</h4>
                 <hr>
-                <div class="grid grid-cols-2 my-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 my-4 gap-4">
                     <div class="text-left">
                         <h5 class="text-gray-900 text-lg leading-tight font-semibold mb-2">Site Data</h5>
                         <table class="w-full whitespace-nowrap">

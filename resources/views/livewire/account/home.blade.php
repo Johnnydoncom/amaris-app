@@ -26,21 +26,7 @@
                     <h2 class="font-semibold text-lg sm:text-2xl">{{Auth::user()->name}}</h2>
                     <p class="font-normal text-sm text-gray-400">Account ID: {{Auth::user()->account_id}}</p>
                 </div>
-{{--                <div class="text-right flex justify-end items-center">--}}
-{{--                    <div class="flex gap-2 items-center text-xs sm:text-sm">--}}
-{{--                        @if(Auth::user()->verified)--}}
-{{--                            <x-cui-cil-check-circle class="w-6 h-6  text-success"/>--}}
-{{--                            <h5 class="font-semibold">Status:</h5>--}}
-{{--                            <h4 class="text-sm">Verified</h4>--}}
-{{--                        @else--}}
-{{--                            <x-cui-cil-warning class="w-6 h-6  text-warning"/>--}}
-{{--                            <h5 class="font-semibold">Status:</h5>--}}
-{{--                            <h4 class="text-sm"><a href="{{route('account.verification.index')}}" class="underline">Unverified</a></h4>--}}
-{{--                        @endif--}}
-{{--                    </div>--}}
-{{--                </div>--}}
             </div>
-
 
             <div class="text-right flex justify-end float-right items-center absolute top-0 right-0">
                 <div class="flex gap-2 items-center text-xs sm:text-sm">
@@ -55,7 +41,6 @@
                     @endif
                 </div>
             </div>
-
         </div>
     </div>
     <div class="divider my-0"></div>

@@ -33,7 +33,7 @@ return new class extends Migration
             $table->boolean('manage_stock')->default(false);
             $table->bigInteger('stock_quantity')->nullable();
             $table->bigInteger('views_count')->default(0);
-            $table->tinyInteger('status')->default(\App\Enums\ProductStatus::PUBLISHED);
+            $table->tinyInteger('status')->default(\App\Enums\ProductStatus::PUBLISHED());
             $table->timestamps();
         });
     }

@@ -9,7 +9,7 @@
 <div x-data="{
 	isMultiple: Boolean('{{ $multiple }}') || false,
 	progress: 0,
-	isFocused: false,
+	isFocused:false,
 	handleFiles() {
 		if (this.isMultiple === true) {
 			@this.uploadMultiple('{{ $attributes->wire('model')->value }}', this.$refs.input.files, () => {

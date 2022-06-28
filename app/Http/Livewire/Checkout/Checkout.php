@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Checkout;
 
+use App\Enums\OrderStatus;
 use App\Enums\PaymentStatus;
 use App\Models\City;
 use App\Models\Country;
@@ -128,8 +129,8 @@ class Checkout extends Component
         $order->payment_expires_at = Carbon::now()->addMinutes(15);
 
         if($reference) {
-            $order->payment_status = PaymentStatus::PAID;
-            $order->status = 'processing';
+            $order->payment_status = PaymentStatus::PAID();
+            $order->status = OrderStatus::PROCESSING;
             $order->payment_reference = $reference;
         }
 

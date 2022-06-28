@@ -1,8 +1,15 @@
 <?php
 namespace App\Enums;
 
-interface CountryStatus
+use ArchTech\Enums\InvokableCases;
+use ArchTech\Enums\Names;
+use ArchTech\Enums\Options;
+use ArchTech\Enums\Values;
+
+enum CountryStatus:int
 {
-    const ENABLE  = 5;
-    const DISABLE = 10;
+    use InvokableCases, Names, Values, Options;
+
+    case ENABLE  = 5;
+    case DISABLE = 10;
 }

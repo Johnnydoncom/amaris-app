@@ -86,6 +86,6 @@ class Dashboard extends Component
     public function getPercentageChange($oldNumber, $newNumber){
         $decreaseValue = $newNumber - $oldNumber;
 
-        return number_format(($decreaseValue / $oldNumber) * 100, 2);
+        return number_format($oldNumber>0 ? ($decreaseValue / $oldNumber) * 100 : 0, 2);
     }
 }

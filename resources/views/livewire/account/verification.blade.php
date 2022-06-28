@@ -53,34 +53,42 @@
                         </div>
 
                        <div class="max-w-lg space-y-4">
-                           @switch($verifyType)
-                               @case(1)
+                           @switch($verificationTypes->find($verifyType)->slug)
+                               @case(\Illuminate\Support\Str::lower('NIN'))
                                 <p>Enter your NIN and provide a clear photo of your National ID Card.</p>
                                <x-floating-input id="nin" label="National Identification Number *" name="id_no" wrapperClass="w-full" wire:model.defer="id_no" type="text" placeholder="National Identification Number" />
+                               <x-file-attachment id="verifyDoc" wire:model="verifyDoc" :file="$verifyDoc" />
                                @break
-                               @case(2)
-                               <x-floating-input id="passport_no" label="Passport Number *" name="id_no" wrapperClass="" wire:model.defer="id_no" type="text" placeholder="Passport Number" required autofocus />
+                               @case(\Illuminate\Support\Str::lower('PASSPORT'))
+                               <x-floating-input id="passport_no" label="Passport Number *" name="id_no" wrapperClass="" wire:model.defer="id_no" type="text" placeholder="Passport Number" />
+                               <x-file-attachment id="verifyDoc" wire:model="verifyDoc" :file="$verifyDoc" />
                                @break
-                               @case(3)
-                               <x-floating-input id="dv_license_no" label="Drivers License Number *" name="id_no" wrapperClass="" wire:model.defer="id_no" type="text" placeholder="Driver's License Number" required autofocus />
+                               @case(\Illuminate\Support\Str::lower('DRIVERSLICENSE'))
+                               <x-floating-input id="dv_license_no" label="Drivers License Number *" wrapperClass="" wire:model.defer="id_no" type="text" placeholder="Driver's License Number" />
+                               <x-file-attachment id="verifyDoc" wire:model="verifyDoc" :file="$verifyDoc" />
                                @break
-                               @case(4)
-                               <x-floating-input id="vin" label="VIN *" name="id_no" wrapperClass="" wire:model.defer="id_no" type="text" placeholder="VIN" required autofocus />
+                               @case(\Illuminate\Support\Str::lower('VOTERSCARD'))
+                               <x-floating-input id="vin" label="VIN *" name="id_no" wrapperClass="" wire:model.defer="id_no" type="text" placeholder="VIN" />
+                               <x-file-attachment id="verifyDoc" wire:model="verifyDoc" :file="$verifyDoc" />
+                               @break
+                               @case(\Illuminate\Support\Str::lower('ADDRESS'))
+                                <x-label>Utility Bill</x-label>
+                               <input type="hidden" wire:model="id_no" value="1">
+                               <x-file-attachment id="verifyDoc" wire:model="verifyDoc" :file="$verifyDoc" />
                                @break
                            @endswitch
 
-                           <x-file-attachment wire:model="verifyDoc" :file="$verifyDoc" />
 
-                           <x-button class="btn btn-primary btn-block" wire:loading.class="loading" wire:target="verify" wire:loading.attr="disabled">{{ __('Confirm') }}</x-button>
+
+                           <x-button class="btn btn-primary btn-block" wire:loading.class="loading" wire:target="verify" wire:loading.attr="disabled" :disabled="!$verifyDoc">{{ __('Confirm') }}</x-button>
                        </div>
-
 
                     @else
                         <div class="flex justify-between gap-4">
                             <h4 class="font-semibold text-lg">Select a verification type to get started</h4>
 {{--                            <button class="btn btn-xs btn-secondary">Go Back</button>--}}
                         </div>
-                        <div class="grid grid-cols-2 gap-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
                             @foreach($verificationTypes as $vtype)
                                 <div class="card card-body flex-row bg-white group group-hover:cursor-pointer cursor-pointer p-4 shadow-xl w-full rounded-3xl hover:shadow-lg dark:border-transparent transition-shadow">
                                     <label class="flex flex-row gap-4 items-center w-full cursor-pointer btn" for="verifyType-{{$vtype->id}}" wire:loading.class="loading" wire:target="verifyType">
@@ -91,7 +99,6 @@
                                         <div class="w-full">
                                             <div class="text-xs sm:text-sm font-semibold">{{$vtype->name}}</div>
                                             <p class="text-xs text-gray-600 font-thin">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium alias aperiam atque dolorem dolorum.
                                             </p>
                                         </div>
                                         <input id="verifyType-{{$vtype->id}}" type="radio" wire:model="verifyType" class="hidden" value="{{$vtype->id}}">

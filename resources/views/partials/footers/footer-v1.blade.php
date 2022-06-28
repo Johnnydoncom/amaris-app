@@ -41,6 +41,9 @@
                    <h2 class="mb-6 text-sm font-semibold text-white uppercase dark:text-white">Legal</h2>
                    <ul class="text-gray-200 dark:text-gray-400 flex flex-col space-y-1">
                        <li>
+                           <a href="{{route('pages.disclaimer')}}" class="hover:underline">Disclaimer</a>
+                       </li>
+                       <li>
                            <a href="{{route('pages.privacy-policy')}}" class="hover:underline">Privacy Policy</a>
                        </li>
                        <li>
@@ -52,6 +55,10 @@
                        <li>
                            <a href="{{route('pages.terms')}}" class="hover:underline">Terms &amp; Conditions</a>
                        </li>
+{{--                       <li>--}}
+{{--                           <a href="{{route('pages.company-policies')}}" class="hover:underline">Company Policies</a>--}}
+{{--                       </li>--}}
+
                    </ul>
                </div>
            </div>
@@ -79,6 +86,7 @@
            </div>
        </div>
    </div>
+
 </footer>
 
 

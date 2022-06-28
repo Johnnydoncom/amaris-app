@@ -23,7 +23,7 @@ class UserTableSeeder extends Seeder
             'last_name'         => 'Administrator',
             'email'             => 'john44real@gmail.com',
             'phone'             => '08031304346',
-            'active'            => UserStatus::ACTIVE,
+            'active'            => UserStatus::ACTIVE(),
             'email_verified_at' => Carbon::now(),
             'password'          => bcrypt('password'),
             'remember_token'    => Str::random(60)
@@ -32,20 +32,9 @@ class UserTableSeeder extends Seeder
         User::create([
             'first_name'        => 'Site',
             'last_name'         => 'Administrator',
-            'email'             => 'admin@example.com',
+            'email'             => 'contact@amaris.ng',
             'phone'             => '08031304347',
-            'active'            => UserStatus::ACTIVE,
-            'email_verified_at' => Carbon::now(),
-            'password'          => bcrypt('password'),
-            'remember_token'    => Str::random(60)
-        ]);
-
-        User::create([
-            'first_name'        => 'Shop',
-            'last_name'         => 'Manager',
-            'email'             => 'manager@example.com',
-            'phone'             => '08031304348',
-            'active'            => UserStatus::ACTIVE,
+            'active'            => UserStatus::ACTIVE(),
             'email_verified_at' => Carbon::now(),
             'password'          => bcrypt('password'),
             'remember_token'    => Str::random(60)
@@ -56,7 +45,7 @@ class UserTableSeeder extends Seeder
             'last_name'         => 'Customer',
             'email'             => 'customer@example.com',
             'phone'             => '08031304349',
-            'active'            => UserStatus::ACTIVE,
+            'active'            => UserStatus::ACTIVE(),
             'email_verified_at' => Carbon::now(),
             'password'          => bcrypt('password'),
             'remember_token'    => Str::random(60)

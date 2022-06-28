@@ -26,6 +26,16 @@
 
             <x-floating-date-two id="dob" wire:model="dob" label="Date of Birth *" name="dob" wrapperClass="" type="date" placeholder="Date of Birth" value="" />
 
+            <x-floating-input id="address" :label="__('Address')" name="address" wrapperClass="" type="text" :placeholder="__('Address')" :value="old('address')" required />
+
+            <x-floating-input id="state" :label="__('State')" name="state" wrapperClass="" type="text" :placeholder="__('State')" :value="old('state')" required />
+            <x-floating-select id="country_id" label="Country" name="country_id" wrapperClass="mb-4" placeholder="Country" required>
+                <option value="">Select Country</option>
+                @foreach ($countries as $country)
+                    <option value="{{ $country->id }}" @selected(old('country_id') == $country->id)>{{ $country->name }}</option>
+                @endforeach
+            </x-floating-select>
+
             <!-- Password -->
             <x-floating-input id="password" wrapperClass="" name="password" label="Password" type="password" placeholder="Password" required autocomplete="new-password" />
             <x-floating-input id="password_confirmation" wrapperClass="" name="password_confirmation" label="Password Confirmation" type="password" placeholder="Password" required />
@@ -51,4 +61,32 @@
             <p>For help, <a class="link" href="mailto:{{setting('site_email', 'contact@amaris.ng')}}">email us</a> or call {{setting('site_phone_number', '(234) 803 130-4346')}}.</p>
         </div>
     </x-auth-card>
+
+    @push('styles')
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
+    @endpush
+    @push('scripts')
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+        <script>
+            const phoneInputField = document.querySelector("#phone");
+            const phoneInput = window.intlTelInput(phoneInputField, {
+                initialCountry: "auto",
+                hiddenInput:"telephone",
+                nationalMode: false,
+                // formatOnDisplay: true,
+                utilsScript:
+                    "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+            });
+
+            phoneInputField.addEventListener("change", function() {
+                // if (typeof intlTelInputUtils !== 'undefined') { // utils are lazy loaded, so must check
+                    var currentText = phoneInput.getNumber(intlTelInputUtils.numberFormat.E164);
+                    if (typeof currentText === 'string') { // sometimes the currentText is an object :)
+                        phoneInput.setNumber(currentText); // will autoformat because of formatOnDisplay=true
+                    }
+                // }
+            });
+        </script>
+    @endpush
 </x-guest-layout>

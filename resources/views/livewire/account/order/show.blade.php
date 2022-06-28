@@ -61,7 +61,7 @@
                         Total: <span class="font-bold">{{ app_money_format($order->grand_total, $order->currency) }}</span>
                     </p>
 
-                    @if($order->payment_status == \App\Enums\PaymentStatus::PENDING && $order->payment_expires_at && !$order->payment_expires_at->isPast())
+                    @if($order->payment_status == \App\Enums\PaymentStatus::PENDING() && $order->payment_expires_at && !$order->payment_expires_at->isPast())
 {{--                        <x-button class="btn btn-primary btn-block mt-8" wire:loading.class="loading" wire:target="pay">Pay Now</x-button>--}}
                             <div class="mt-8">
                                 @if($order->payment_method == 'paystack')

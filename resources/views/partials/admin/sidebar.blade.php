@@ -31,6 +31,52 @@ id="aside"
                     </a>
                     <!-- end::Menu link -->
 
+                    <p class="text-xs text-gray-600 mt-6 mb-2 px-6 uppercase">Products</p>
+                    <!-- start::product link -->
+                    <a
+                        x-data="{ linkHover: false }"
+                        @mouseover = "linkHover = true"
+                        @mouseleave = "linkHover = false"
+                        href="{{ route('admin.categories.index') }}"
+                        class="flex items-center text-gray-400 px-6 py-3 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200 {{ Request::is('dashboard/categories*') ? 'hover:bg-black hover:bg-opacity-30 active' : '' }}">
+                        <svg class="w-5 h-5 transition duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                        <span class="ml-3 transition duration-200 {{ Request::is('dashboard/categories*') ? 'text-gray-100' : '' }}" :class="linkHover ? 'text-gray-100' : ''">
+                            Categories
+                        </span>
+                    </a>
+                    <div x-data="{ linkHover: false, linkActive: false }">
+                        <div @mouseover = "linkHover = true" @mouseleave = "linkHover = false" @click = "linkActive = !linkActive" class="flex items-center justify-between text-gray-400 hover:text-gray-100 px-6 py-3 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200" :class=" linkActive ? 'bg-black bg-opacity-30 text-gray-100' : ''">
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 transition duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+
+                                <span class="ml-3">Products</span>
+                            </div>
+                            <svg class="w-3 h-3 transition duration-300" :class="linkActive ? 'rotate-90' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </div>
+                        <!-- start::Submenu -->
+                        <ul x-show="linkActive" x-cloak x-collapse.duration.300ms class="text-gray-400">
+                            <!-- start::Submenu link -->
+                            <li class="pl-10 pr-6 py-2 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200 hover:text-gray-100">
+                                <a href="{{ route('admin.products.index') }}" class="flex items-center">
+                                    <span class="mr-2 text-sm">&bull;</span>
+                                    <span class="overflow-ellipsis">All Products</span>
+                                </a>
+                            </li>
+                            <!-- end::Submenu link -->
+
+                            <!-- start::Submenu link -->
+                            <li class="pl-10 pr-6 py-2 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200 hover:text-gray-100">
+                                <a href="{{ route('admin.products.create') }}" class="flex items-center">
+                                    <span class="mr-2 text-sm">&bull;</span>
+                                    <span class="overflow-ellipsis">Add New</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- end::Submenu -->
+                    </div>
+                    <!-- end::Menu link -->
+
+                    <p class="text-xs text-gray-600 mt-6 mb-2 px-6 uppercase">Gift Cards</p>
                     <a
                         x-data="{ linkHover: false }"
                         @mouseover = "linkHover = true"
@@ -41,18 +87,6 @@ id="aside"
                         <svg class="w-5 h-5 transition duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"></path></svg>
                         <span class="ml-3 transition duration-200" :class="linkHover ? 'text-gray-100' : ''">
                             Platforms
-                        </span>
-                    </a>
-
-                    <a
-                        x-data="{ linkHover: false }"
-                        @mouseover = "linkHover = true"
-                        @mouseleave = "linkHover = false"
-                        href="{{ route('admin.categories.index') }}"
-                        class="flex items-center text-gray-400 px-6 py-3 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200 {{ Request::is('dashboard/categories*') ? 'hover:bg-black hover:bg-opacity-30 active' : '' }}">
-                        <svg class="w-5 h-5 transition duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
-                        <span class="ml-3 transition duration-200 {{ Request::is('dashboard/categories*') ? 'text-gray-100' : '' }}" :class="linkHover ? 'text-gray-100' : ''">
-                            Categories
                         </span>
                     </a>
 
@@ -89,39 +123,6 @@ id="aside"
                     <!-- end::Menu link -->
 
                     <!-- start::product link -->
-                    <div x-data="{ linkHover: false, linkActive: false }">
-                        <div @mouseover = "linkHover = true" @mouseleave = "linkHover = false" @click = "linkActive = !linkActive" class="flex items-center justify-between text-gray-400 hover:text-gray-100 px-6 py-3 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200" :class=" linkActive ? 'bg-black bg-opacity-30 text-gray-100' : ''">
-                            <div class="flex items-center">
-                                <svg class="w-5 h-5 transition duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
-
-                                <span class="ml-3">Products</span>
-                            </div>
-                            <svg class="w-3 h-3 transition duration-300" :class="linkActive ? 'rotate-90' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                        </div>
-                        <!-- start::Submenu -->
-                        <ul x-show="linkActive" x-cloak x-collapse.duration.300ms class="text-gray-400">
-                            <!-- start::Submenu link -->
-                            <li class="pl-10 pr-6 py-2 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200 hover:text-gray-100">
-                                <a href="{{ route('admin.products.index') }}" class="flex items-center">
-                                    <span class="mr-2 text-sm">&bull;</span>
-                                    <span class="overflow-ellipsis">All Products</span>
-                                </a>
-                            </li>
-                            <!-- end::Submenu link -->
-
-                            <!-- start::Submenu link -->
-                            <li class="pl-10 pr-6 py-2 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200 hover:text-gray-100">
-                                <a href="{{ route('admin.products.create') }}" class="flex items-center">
-                                    <span class="mr-2 text-sm">&bull;</span>
-                                    <span class="overflow-ellipsis">Add New</span>
-                                </a>
-                            </li>
-                        </ul>
-                        <!-- end::Submenu -->
-                    </div>
-                    <!-- end::Menu link -->
-
-                    <!-- start::product link -->
                     <a
                         x-data="{ linkHover: false }"
                         @mouseover = "linkHover = true"
@@ -137,6 +138,42 @@ id="aside"
                         </span>
                     </a>
                     <!-- end::Menu link -->
+
+                    <p class="text-xs text-gray-600 mt-6 mb-2 px-6 uppercase">Affiliate</p>
+                    <a
+                        x-data="{ linkHover: false }"
+                        @mouseover = "linkHover = true"
+                        @mouseleave = "linkHover = false"
+                        href="{{ route('admin.affiliate.transactions') }}"
+                        class="flex items-center text-gray-400 px-6 py-3 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 transition duration-200" :class=" linkHover ? 'text-gray-100' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        <span
+                            class="ml-3 transition duration-200"
+                            :class="linkHover ? 'text-gray-100' : ''"
+                        >
+                            Transactions
+                        </span>
+                    </a>
+                    <a
+                        x-data="{ linkHover: false }"
+                        @mouseover = "linkHover = true"
+                        @mouseleave = "linkHover = false"
+                        href="{{ route('admin.affiliate.withdraw-requests') }}"
+                        class="flex items-center text-gray-400 px-6 py-3 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 transition duration-200" :class=" linkHover ? 'text-gray-100' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        <span
+                            class="ml-3 transition duration-200"
+                            :class="linkHover ? 'text-gray-100' : ''"
+                        >
+                            Withdrawal
+                        </span>
+                    </a>
 
                     <p class="text-xs text-gray-600 mt-6 mb-2 px-6 uppercase">User Management</p>
                     <!-- start::Menu link -->

@@ -37,17 +37,18 @@ class Show extends Component
     ];
 
     public function mount($slug){
-        $this->product = Product::whereStatus(ProductStatus::PUBLISHED)->whereSlug($slug)->firstOrFail();
+        $this->product = Product::whereStatus(ProductStatus::PUBLISHED())->whereSlug($slug)->firstOrFail();
         $f = $this->product->getMedia('featured_image');
 
-        $this->gallery[] = $f[0]->getUrl();
+        $this->gallery[] = $f[0]->getUrl('thumb');
         $g = $this->product->getMedia('gallery');
+
         foreach($g as $key => $m){
-            $this->gallery[$key+1] = $m->getUrl();
+            $this->gallery[$key+1] = $m->getUrl('thumb');
         }
 
         // Related products
-        $this->related = Product::whereStatus(ProductStatus::PUBLISHED)->whereHas('categories', function ($q) {
+        $this->related = Product::whereStatus(ProductStatus::PUBLISHED())->whereHas('categories', function ($q) {
             $q->whereIn('category_id', $this->product->categories->pluck('id'))->orWhereIn('category_id', $this->product->categories->pluck('parent_id'));
         })->where('id', '!=', $this->product->id)->inRandomOrder()->limit(4)->get();
 

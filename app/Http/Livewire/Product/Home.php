@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Product;
 
+use App\Enums\ProductStatus;
 use App\Models\Category;
 use App\Models\Country;
 use App\Models\Product;
@@ -31,7 +32,7 @@ class Home extends Component
 
     public function render()
     {
-        $products = Product::whereStatus(true);
+        $products = Product::whereStatus(ProductStatus::PUBLISHED());
 
         if($this->search){
             $products->where('title','like','%'.$this->search.'%')->orWhere('description','like','%'.$this->search.'%');

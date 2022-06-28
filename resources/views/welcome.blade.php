@@ -1,22 +1,5 @@
 <x-app-layout>
-
     <section class="animate__animated animate__bounce mt-0 relative mb-4">
-        @if(1>2)
-        <div id="carouselExampleCrossfade" class="carousel slide carousel-fade relative" data-bs-ride="carousel">
-            <div class="carousel-inner relative w-full overflow-hidden">
-                @foreach($slides as $slide)
-                    <div class="carousel-item @if($loop->first) active @endif float-left w-full">
-                        <img
-                            src="{{$slide}}"
-                            class="block w-full sm:max-h-96 lg:max-h-[35rem] object-fill"
-                            alt="Wild Landscape"
-                        />
-                    </div>
-                @endforeach
-            </div>
-        </div>
-        @endif
-
         <div class="swiper home-slider">
             <div class="swiper-wrapper">
                 @foreach($slides as $slide)

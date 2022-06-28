@@ -14,6 +14,7 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         @livewireStyles
+        @stack('styles')
     </head>
     <body>
         <div class="font-sans text-gray-900 antialiased">
@@ -23,5 +24,6 @@
         <!-- Scripts -->
         @livewireScripts
         <script src="{{ asset('js/app.js') }}"></script>
+        @stack('scripts')
     </body>
 </html>

@@ -1,10 +1,17 @@
 <?php
 namespace App\Enums;
 
-interface PaymentStatus
+use ArchTech\Enums\InvokableCases;
+use ArchTech\Enums\Names;
+use ArchTech\Enums\Options;
+use ArchTech\Enums\Values;
+
+enum PaymentStatus:int
 {
-    const PENDING  = 5;
-    const CANCELED = 7;
-    const PAID = 9;
-    const EXPIRED = 10;
+    use InvokableCases, Names, Values, Options;
+
+    case PENDING  = 5;
+    case CANCELED = 7;
+    case PAID = 9;
+    case EXPIRED = 10;
 }

@@ -1,8 +1,15 @@
 <?php
 namespace App\Enums;
 
-interface SmtpStatus
+use ArchTech\Enums\InvokableCases;
+use ArchTech\Enums\Names;
+use ArchTech\Enums\Options;
+use ArchTech\Enums\Values;
+
+enum SmtpStatus:int
 {
-    const ACTIVE   = 5;
-    const INACTIVE = 10;
+    use InvokableCases, Names, Values, Options;
+
+    case ACTIVE   = 5;
+    case INACTIVE = 10;
 }

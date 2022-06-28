@@ -71,11 +71,11 @@ class Product extends Model implements HasMedia
             ->singleFile()
             ->registerMediaConversions(function (Media $media) {
                 $this->addMediaConversion('thumb')
-                    ->width(240)
-                    ->height(320)
+                    ->width(400)
+                    ->height(400)
                     ->sharpen(10)
                     ->format('webp')
-                    ->fit(Manipulations::FIT_CROP, 240,320)
+                    ->fit(Manipulations::FIT_CROP, 400,400)
                     ->nonQueued();
             });
 
@@ -84,11 +84,11 @@ class Product extends Model implements HasMedia
             ->registerMediaConversions(function (Media $media) {
                 $this
                     ->addMediaConversion('thumb')
-                    ->width(368)
-                    ->height(232)
+                    ->width(400)
+                    ->height(400)
                     ->sharpen(10)
                     ->format('webp')
-                    ->fit(Manipulations::FIT_CROP, 368,232);
+                    ->fit(Manipulations::FIT_CROP, 400,400);
             });
     }
 

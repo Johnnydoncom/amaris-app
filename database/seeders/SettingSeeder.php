@@ -28,7 +28,7 @@ class SettingSeeder extends Seeder
         $settingArray['mail_password']     = '';
         $settingArray['mail_from_name']    = '';
         $settingArray['mail_from_address'] = '';
-        $settingArray['mail_disabled']     = SmtpStatus::INACTIVE;
+        $settingArray['mail_disabled']     = SmtpStatus::INACTIVE();
 
         $settingArray['social_facebook']  = 'https://web.facebook.com/AmarisNG-107910631954871';
         $settingArray['social_twitter']   = 'https://twitter.com/@ng_amaris';
@@ -48,6 +48,9 @@ class SettingSeeder extends Seeder
         $settingArray['verifyafrica_nin_key']   = env('VERIFYAFRICA_NIN_KEY');
         $settingArray['verifyafrica_voters_key']   = env('VERIFYAFRICA_VOTERS_CARD_KEY');
         $settingArray['verifyafrica_passport_key']   = env('VERIFYAFRICA_INTL_PASSPORT_KEY');
+
+        $settingArray['min_commission_withdrawal'] =  5000;
+        $settingArray['referral_commission'] = 1.4;
 
         SettingInsert::set($settingArray);
         SettingInsert::save();

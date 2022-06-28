@@ -39,25 +39,19 @@ class RolePermissionSeeder extends Seeder
 
         Role::insert([
             [
-                'name'       => UserRole::SUPERADMIN,
+                'name'       => UserRole::SUPERADMIN(),
                 'guard_name' => 'web',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'       => UserRole::ADMIN,
+                'name'       => UserRole::ADMIN(),
                 'guard_name' => 'web',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'       => UserRole::SHOPMANAGER,
-                'guard_name' => 'web',
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s'),
-            ],
-            [
-                'name'       => UserRole::CUSTOMER,
+                'name'       => UserRole::CUSTOMER(),
                 'guard_name' => 'web',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
@@ -78,16 +72,10 @@ class RolePermissionSeeder extends Seeder
             $adminUser->assignRole($adminRole->name);
         }
 
-        // Shop Manager
-        $mrole = Role::find(3);
-        $muser = User::find(3);
-        if (!blank($muser) && !blank($mrole)) {
-            $muser->assignRole($mrole->name);
-        }
 
         // Customer
-        $crole = Role::find(4);
-        $cuser = User::find(4);
+        $crole = Role::find(3);
+        $cuser = User::find(3);
         if (!blank($cuser) && !blank($crole)) {
             $cuser->assignRole($crole->name);
         }

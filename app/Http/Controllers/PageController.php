@@ -33,6 +33,14 @@ class PageController extends Controller
         return view('pages.cookie-policy');
     }
 
+    public function disclaimer(){
+        return view('pages.disclaimer');
+    }
+
+    public function policyCompliance(){
+        return view('pages.company-policies');
+    }
+
     public function products(){
         $products = Product::default()->paginate();
         return view('pages.products', compact('products'));

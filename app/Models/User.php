@@ -35,7 +35,8 @@ class User extends Authenticatable implements MustVerifyEmail, Wallet, HasMedia
         'active',
         'verified',
         'gender',
-        'dob'
+        'dob',
+        'referrer_id'
     ];
 
     /**
@@ -103,5 +104,38 @@ class User extends Authenticatable implements MustVerifyEmail, Wallet, HasMedia
 
     public function getDeliveryAddressAttribute(){
         return $this->delivery_addresses()->firstWhere('is_default', '=', true);
+    }
+
+    public function getReferralLinkAttribute()
+    {
+        return route('register', ['ref' => $this->account_id]);
+    }
+
+    /**
+     * A user has a referrer.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function referrer()
+    {
+        return $this->belongsTo(User::class, 'referrer_id', 'id');
+    }
+
+    /**
+     * A user has many referrals.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function referrals()
+    {
+        return $this->hasMany(User::class, 'referrer_id', 'id');
+    }
+
+    public function withdraws(){
+        return $this->hasMany(WithdrawRequest::class);
+    }
+
+    public function payment_information() {
+        return $this->hasOne(PaymentInformation::class);
     }
 }

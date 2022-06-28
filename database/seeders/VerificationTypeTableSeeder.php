@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Enums\VerificationTypes;
 use App\Models\VerificationType;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class VerificationTypeTableSeeder extends Seeder
 {
@@ -15,11 +17,11 @@ class VerificationTypeTableSeeder extends Seeder
      */
     public function run()
     {
-        $types = config('giftcard.verification_types');
+        $types = VerificationTypes::options();
         foreach ($types as $key => $type){
             VerificationType::create([
                 'name' => $type,
-                'slug' => $key
+                'slug' => Str::lower($key)
             ]);
         }
     }

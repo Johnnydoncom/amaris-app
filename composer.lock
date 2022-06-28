@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ea7394021c6a25ae252c38fc801e1101",
+    "content-hash": "eaac30758788941aefd39bdb06b9d697",
     "packages": [
         {
             "name": "akaunting/laravel-setting",
@@ -254,16 +254,16 @@
         },
         {
             "name": "bavix/laravel-wallet",
-            "version": "9.0.1",
+            "version": "9.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bavix/laravel-wallet.git",
-                "reference": "150f248cb8cc3b28551d6125f7b60e02475ceaf2"
+                "reference": "aff320c42ae488dd85d15bb452072c98aefe0460"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bavix/laravel-wallet/zipball/150f248cb8cc3b28551d6125f7b60e02475ceaf2",
-                "reference": "150f248cb8cc3b28551d6125f7b60e02475ceaf2",
+                "url": "https://api.github.com/repos/bavix/laravel-wallet/zipball/aff320c42ae488dd85d15bb452072c98aefe0460",
+                "reference": "aff320c42ae488dd85d15bb452072c98aefe0460",
                 "shasum": ""
             },
             "require": {
@@ -278,17 +278,17 @@
             },
             "require-dev": {
                 "brianium/paratest": "^6.4",
-                "cknow/laravel-money": "^6.3",
+                "cknow/laravel-money": "^7.0",
                 "ergebnis/phpstan-rules": "^1.0",
                 "infection/infection": "~0.26",
-                "laravel/cashier": "^13.8",
+                "laravel/cashier": "^13.11",
                 "nunomaduro/collision": "^6.2",
-                "orchestra/testbench": "^7.4",
-                "phpstan/phpstan": "^1.6",
+                "orchestra/testbench": "^7.5",
+                "phpstan/phpstan": "^1.7",
                 "phpunit/phpunit": "^9.5",
-                "rector/rector": "^0.12",
-                "symplify/easy-coding-standard": "^10.2",
-                "vimeo/psalm": "^4.22"
+                "rector/rector": "^0.13",
+                "symplify/easy-coding-standard": "^11.0",
+                "vimeo/psalm": "^4.23"
             },
             "suggest": {
                 "bavix/laravel-wallet-swap": "Addition to the laravel-wallet library for quick setting of exchange rates",
@@ -332,9 +332,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bavix/laravel-wallet/issues",
-                "source": "https://github.com/bavix/laravel-wallet/tree/9.0.1"
+                "source": "https://github.com/bavix/laravel-wallet/tree/9.0.2"
             },
-            "time": "2022-05-19T16:21:32+00:00"
+            "time": "2022-06-18T12:23:01+00:00"
         },
         {
             "name": "blade-ui-kit/blade-icons",
@@ -10369,7 +10369,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.0.2"
+        "php": "^8.1"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"

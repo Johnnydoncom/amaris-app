@@ -23,7 +23,7 @@ class Verification extends Component
     public $verifyType;
     public $verifyDoc;
     public $verified = false;
-    public $id_no,$passport_no,$dv_license_no,$vin;
+    public $id_no,$vin, $phone;
     public $verificationData = [];
 
     protected $rules = [
@@ -39,6 +39,7 @@ class Verification extends Component
         $this->last_name = auth()->user()->last_name;
         $this->first_name = auth()->user()->first_name;
         $this->dob = auth()->user()->dob;
+        $this->phone = auth()->user()->phone;
 
     }
 
@@ -59,38 +60,34 @@ class Verification extends Component
     }
 
     public function verify(){
-        $this->validate();
+//        $this->validate();
 
         $verifyType = VerificationType::find($this->verifyType);
 
-        if($verifyType->slug=='nin') {
+        if($verifyType->slug == Str::slug('NIN')) {
+            $this->validate([
+                'id_no' => 'required',
+                'verifyDoc' => 'required|image'
+            ]);
+
             $response = $this->verifyNIN($this->id_no);
             if ($response && count($response->response)) {
-
-                // Surname compare
-//                if(Str::lower($response->response[0]->surname) != Str::lower(auth()->user()->last_name)){
-//                    $this->addError('nin', 'Surname could not be validated. Please try again.');
-//                }else
-//                // First name compare
-//                if(Str::lower($response->response[0]->firstname) != Str::lower(auth()->user()->first_name)){
-//                    $this->addError('nin', 'First name could not be validated. Please try again.');
-//                }
-//                else {
-                    $this->verificationData = $this->saveNINVerificationRecord($response->response[0]);
-
-                    session()->flash('message', 'Your information has been received and will be processed within 2 working days. Thank you.');
-//                }
-
+                $this->verificationData = $this->saveNINVerificationRecord($response->response[0]);
+                session()->flash('message', 'Your information has been received and will be processed within 2 working days. Thank you.');
             }else{
-
                 $this->addError('nin', 'Invalid NIN');
             }
-        }elseif ($verifyType->slug=='passport'){
+        }elseif ($verifyType->slug==Str::slug('PASSPORT')){
+            $this->validate([
+                'id_no' => 'required',
+                'verifyDoc' => 'required|image'
+            ]);
+
             $response = $this->verifyPassport([
                 'passport_no' => $this->id_no,
                 'first_name' => auth()->user()->first_name,
                 'last_name' => auth()->user()->last_name,
-                'dob' => auth()->user()->dob
+                'dob' => Carbon::parse(auth()->user()->dob)->format('Y-m-d')
             ]);
 
             if ($response && isset($response->response)) {
@@ -101,21 +98,15 @@ class Verification extends Component
                 $this->addError('passport_no', 'Invalid Passport Number');
             }
 
-        }elseif($verifyType->slug=='drivers_license'){
-            $response = $this->verifyByDriversLicense($this->id_no, $this->first_name, $this->last_name, $this->phone, $this->dob);
+        }elseif($verifyType->slug== Str::slug('DRIVERSLICENSE')){
+            $this->validate([
+                'id_no' => 'required',
+                'verifyDoc' => 'required|image'
+            ]);
 
-            echo json_encode($response);
-            exit();
+            $media = auth()->user()->getMedia('avatar');
 
-            if ($response && $response->status=='VERIFIED') {
-                $this->verified = true;
-            }
-
-            session()->flash('message', 'Your information has been received and will be processed within 2 working days. Thank you.');
-
-
-        }elseif ($verifyType->slug=='voters_card'){
-            if($media = auth()->user()->getMedia('avatar')){
+            if(!blank($media)){
                 $mime = $media[0]->mime_type;
                 $selfieUrl = $media[0]->getPath('thumb');
                 $base64string = 'data:image/jpg;base64,'.base64_encode($selfieUrl);
@@ -125,11 +116,39 @@ class Verification extends Component
                 $base64string = 'data:image/jpg;base64,'.base64_encode(Storage::disk('public')->get($selfieUrl));
             }
 
+            $response = $this->verifyByDriversLicense([
+                'frsc' => $this->id_no,
+                'firstname' => $this->first_name,
+                'surname' => $this->last_name,
+                'dob' => Carbon::parse(auth()->user()->dob)->format('Y-m-d'),
+                'selfie' => $base64string
+            ]);
 
-//            echo $base64string;
-//            exit();
+//            FFF4028711111
+            if ($response && $response->status=='VERIFIED') {
+                $this->saveDVLicenseRecord($response);
+            }
 
-//            $this->addError('vin', 'Invalid Voters Card Information');
+            session()->flash('message', 'Your information has been received and will be processed within 2 working days. Thank you.');
+
+        }elseif ($verifyType->slug == Str::slug('VOTERSCARD')){
+            $this->validate([
+                'id_no' => 'required',
+                'verifyDoc' => 'required|image'
+            ]);
+
+            $media = auth()->user()->getMedia('avatar');
+
+            if(!blank($media)){
+                $mime = $media[0]->mime_type;
+                $selfieUrl = $media[0]->getPath('thumb');
+                $base64string = 'data:image/jpg;base64,'.base64_encode($selfieUrl);
+            }else {
+                $selfieUrl = Str::remove('/storage', auth()->user()->avatar_url);
+                $mime = Storage::disk('public')->mimeType($selfieUrl);
+                $base64string = 'data:image/jpg;base64,'.base64_encode(Storage::disk('public')->get($selfieUrl));
+            }
+//          $this->addError('vin', 'Invalid Voters Card Information');
 
             $response = $this->verifyVotersCard([
                 'vin' => $this->id_no,
@@ -138,22 +157,41 @@ class Verification extends Component
                 'match_selfie_to_db' => true
             ]);
 
-//            $this->addError('vin', 'Invalid Voters Card Information');
-//            echo json_encode($response);
-//            exit();
-
             if ($response && isset($response->response)) {
+//                echo json_encode($response->response);
+//                exit();
                 $this->verificationData = $this->saveVotersCardVerificationRecord($response->response);
-
                 session()->flash('message', 'Your information has been received and will be processed within 2 working days. Thank you.');
             }else{
                 $this->addError('vin', 'Invalid Voters Card Information');
             }
+        }elseif ($verifyType->slug == Str::slug('ADDRESS')){
+            $this->validate([
+                'verifyDoc' => 'required|image'
+            ]);
+
+            $this->verificationData = $this->saveAddressVerification();
+            session()->flash('message', 'Your information has been received and will be processed within 2 working days. Thank you.');
         }
 
         session()->flash('verified');
     }
 
+
+    private function saveAddressVerification(){
+        $verifyType = VerificationType::find($this->verifyType);
+
+        $record = new UserVerification();
+        $record->user_id = auth()->user()->id;
+        $record->verification_type_id = $verifyType->id;
+        $record->id_no = auth()->user()->account_id;
+        $record->first_name = auth()->user()->first_name;
+        $record->last_name = auth()->user()->last_name;
+        $record->save();
+
+        $record->addMedia($this->verifyDoc->getRealPath())->toMediaCollection('doc');
+        return $record;
+    }
 
     private function saveNINVerificationRecord($data){
         $verifyType = VerificationType::find($this->verifyType);
@@ -161,7 +199,7 @@ class Verification extends Component
         $record = new UserVerification();
         $record->user_id = auth()->user()->id;
         $record->verification_type_id = $verifyType->id;
-        $record->id_no = $data->nin;
+        $record->id_no = $data->nin ?? $this->id_no;
         $record->first_name = $data->firstname;
         $record->last_name = $data->surname;
         $record->middle_name = $data->middlename;
@@ -186,13 +224,29 @@ class Verification extends Component
         return $record;
     }
 
+    private function saveDVLicenseRecord($data){
+        $verifyType = VerificationType::find($this->verifyType);
+
+        $record = new UserVerification();
+        $record->user_id = auth()->user()->id;
+        $record->verification_type_id = $verifyType->id;
+        $record->id_no = $this->id_no;
+        $record->first_name = auth()->user()->first_name;
+        $record->last_name = auth()->user()->last_name;
+        $record->email = auth()->user()->email;
+        $record->phone = auth()->user()->phone;
+        $record->save();
+
+        return $record;
+    }
+
     private function savePassportVerificationRecord($data){
         $verifyType = VerificationType::find($this->verifyType);
 
         $record = new UserVerification();
         $record->user_id = auth()->user()->id;
         $record->verification_type_id = $verifyType->id;
-        $record->id_no = $data->reference_id;
+        $record->id_no = $data->reference_id ?? $this->id_no;
         $record->first_name = $data->first_name;
         $record->last_name = $data->last_name;
         $record->middle_name = $data->middle_name;
@@ -220,7 +274,7 @@ class Verification extends Component
         $record = new UserVerification();
         $record->user_id = auth()->user()->id;
         $record->verification_type_id = $verifyType->id;
-        $record->id_no = $data->reference_id;
+        $record->id_no = $data->reference_id ?? $this->id_no;
         $record->first_name = $data->first_name;
         $record->last_name = $data->last_name;
         $record->middle_name = $data->middle_name;

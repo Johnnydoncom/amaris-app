@@ -58,6 +58,8 @@ class Home extends Component
 
     public function render()
     {
+//        auth()->user()->deposit(1000);
+
         return view('livewire.account.home');
     }
 

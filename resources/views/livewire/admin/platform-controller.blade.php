@@ -14,9 +14,9 @@
 
                 <form method="post" wire:submit.prevent="store">
                     @csrf
-                    <div class="form-control mb-4">
+                    <div class="form-controll mb-4">
                         <x-label>Platform Name</x-label>
-                        <x-input wire:model.defer="name" required />
+                        <x-input wire:model.defer="name" name="name" id="name" class="w-full" required />
                     </div>
                     <div class="form-control mb-4">
                         <x-label for="image" :value="__('Featured Image')" />

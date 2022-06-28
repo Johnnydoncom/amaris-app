@@ -33,7 +33,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(auth()->user()->hasAnyRole([UserRole::SUPERADMIN,UserRole::ADMIN]) ? RouteServiceProvider::HOME : '/account');
+        return redirect()->intended(auth()->user()->hasAnyRole([UserRole::SUPERADMIN(),UserRole::ADMIN()]) ? RouteServiceProvider::HOME : '/account');
     }
 
     /**
