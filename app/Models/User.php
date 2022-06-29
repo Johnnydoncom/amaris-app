@@ -34,9 +34,16 @@ class User extends Authenticatable implements MustVerifyEmail, Wallet, HasMedia
         'password',
         'active',
         'verified',
+        'address_verified',
         'gender',
         'dob',
-        'referrer_id'
+        'referrer_id',
+        'address',
+        'city',
+        'state',
+        'country_id',
+        'zipcode',
+        'company'
     ];
 
     /**
@@ -137,5 +144,9 @@ class User extends Authenticatable implements MustVerifyEmail, Wallet, HasMedia
 
     public function payment_information() {
         return $this->hasOne(PaymentInformation::class);
+    }
+
+    public function getAccountVerifiedAttribute(){
+        return $this->verified && $this->address_verified;
     }
 }

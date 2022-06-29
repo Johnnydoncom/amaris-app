@@ -143,20 +143,28 @@
                         </div>
                     @elseif($address_verification_record)
                         <ul class="leading-7 text-sm">
-                            <li class="flex justify-between gap-4"><span>Address</span><span>{{Auth::user()->address }}</span></li>
-                            <li class="flex justify-between gap-4"><span>City</span><span>{{Auth::user()->city}}</span></li>
-                            <li class="flex justify-between gap-4"><span>State</span><span>{{Auth::user()->state}}</span></li>
-                            <li class="flex justify-between gap-4"><span>Country</span><span>{{Auth::user()->country->name}}</span></li>
-                            <li class="flex justify-between gap-4"><span>Zip Code</span><span>{{Auth::user()->zipcode}}</span></li>
-                            <li class="flex justify-between gap-4"><span>Status</span><span class="text-warning font-semibold">{{ucfirst($address_verification_record->status)}}</span></li>
+                            <li class="flex justify-between gap-4"><span>Address:</span><span>{{Auth::user()->address }}</span></li>
+                            <li class="flex justify-between gap-4"><span>City:</span><span>{{Auth::user()->city}}</span></li>
+                            <li class="flex justify-between gap-4"><span>State:</span><span>{{Auth::user()->state}}</span></li>
+                            <li class="flex justify-between gap-4"><span>Country:</span><span>{{Auth::user()->country ? Auth::user()->country->name : ''}}</span></li>
+                            <li class="flex justify-between gap-4"><span>Zip Code:</span><span>{{Auth::user()->zipcode}}</span></li>
+                            <li class="flex justify-between gap-4"><span>Status:</span><span class="text-warning font-semibold">{{ucfirst($address_verification_record->status)}}</span></li>
                         </ul>
+
+                        <div class="mt-4">
+                            <img src="{{$address_verification_record->getFirstMediaUrl('doc')}}" alt="Uploaded file" class="w-48 mx-auto">
+                        </div>
                     @else
-                        @if(!Auth::user()->verified)
-                        <div class="z-20 bg-white/50 absolute w-full h-full"></div>
-                        @endif
+{{--                        @if(!Auth::user()->verified)--}}
+{{--                        <div class="z-20 bg-white/50 absolute w-full h-full"></div>--}}
+{{--                        @endif--}}
                         <form class="" wire:submit.prevent="verifyAddress">
                             <h4 class="font-semibold text-lg mb-4">Address Verification</h4>
+
+                            <x-label>Upload an utility bill or bank statement</x-label>
                             <x-file-attachment id="utilityBill" wire:model="utilityBill" :file="$utilityBill" />
+                            <x-button class="btn btn-primary btn-block mt-4" wire:loading.class="loading" wire:target="verifyAddress" wire:loading.attr="disabled" :disabled="!$utilityBill">{{ __('Confirm') }}</x-button>
+
                         </form>
                     @endif
                 </x-card>

@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Enums\UserRole;
 use App\Enums\UserStatus;
+use App\Enums\VerificationTypes;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\UserVerification;
 use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
@@ -162,7 +164,11 @@ class UserController extends Controller
 
        if($request->status == 'verified'){
 
-           $userVerification->user->update(['verified'=>true]);
+           if($userVerification->verification_type->slug == Str::slug(VerificationTypes::ADDRESS())){
+               $userVerification->user->update(['address_verified'=>true]);
+           }else{
+               $userVerification->user->update(['verified'=>true]);
+           }
         }
         return redirect()->route('admin.users.verifications.index')->withSuccess('Record Updated');
     }

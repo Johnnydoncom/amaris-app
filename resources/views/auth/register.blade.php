@@ -16,7 +16,11 @@
             <!-- Email Address -->
             <x-floating-input id="email" label="Email" name="email" wrapperClass="" type="email" placeholder="Email" :value="old('email')" required autofocus />
 
-            <x-floating-input id="phone" :label="__('Phone Number')" name="phone" wrapperClass="" type="text" :placeholder="__('Phone Number')" :value="old('phone')" required />
+           <div>
+               <x-floating-input id="phone" :label="__('Phone Number')" name="phone" wrapperClass="" type="text" :placeholder="__('Phone Number')" :value="old('phone')" required />
+               <span id="valid-msg" class="hidden text-success text-xs">✓ Valid</span>
+               <span id="error-msg" class="hidden text-red-600 text-xs"></span>
+           </div>
 
             <x-floating-select id="gender" label="Gender" name="gender" wrapperClass="" placeholder="Gender">
                 <option value="">Select</option>
@@ -42,7 +46,7 @@
 
 
             <div class="flex items-center mt-4">
-                <x-button class="btn-primary btn-block">
+                <x-button class="btn-primary btn-block" id="regbtn" disabled="disabled">
                     {{ __('Register') }}
                 </x-button>
             </div>
@@ -69,8 +73,12 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
         <script>
-            const phoneInputField = document.querySelector("#phone");
-            const phoneInput = window.intlTelInput(phoneInputField, {
+            var phoneInputField = document.querySelector("#phone"),
+                errorMsg = document.querySelector("#error-msg"),
+                validMsg = document.querySelector("#valid-msg"),
+                regBtn = document.querySelector("#regbtn");
+
+            var iti = window.intlTelInput(phoneInputField, {
                 initialCountry: "auto",
                 hiddenInput:"telephone",
                 nationalMode: false,
@@ -79,13 +87,49 @@
                     "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
             });
 
-            phoneInputField.addEventListener("change", function() {
-                // if (typeof intlTelInputUtils !== 'undefined') { // utils are lazy loaded, so must check
-                    var currentText = phoneInput.getNumber(intlTelInputUtils.numberFormat.E164);
+            var errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+
+            var validatePhone = function() {
+                phoneInputField.classList.remove("border-red-600");
+                errorMsg.innerHTML = "";
+                errorMsg.classList.add("hidden");
+                validMsg.classList.add("hidden");
+
+                if(typeof intlTelInputUtils != 'undefined') {
+                    var currentText = iti.getNumber(intlTelInputUtils.numberFormat.E164);
                     if (typeof currentText === 'string') { // sometimes the currentText is an object :)
-                        phoneInput.setNumber(currentText); // will autoformat because of formatOnDisplay=true
+                        iti.setNumber(currentText); // will autoformat because of formatOnDisplay=true
                     }
-                // }
+                }
+
+                if (phoneInputField.value.trim()) {
+                    if (iti.isValidNumber()) {
+                        validMsg.classList.remove("hidden");
+                        regBtn.removeAttribute('disabled')
+                    } else {
+                        regBtn.setAttribute('disabled')
+                        phoneInputField.classList.add("border-red-600");
+                        var errorCode = iti.getValidationError();
+                        errorMsg.innerHTML = errorMap[errorCode];
+                        errorMsg.classList.remove("hidden");
+                    }
+                }
+            };
+
+            (function() {
+            // if(typeof intlTelInputUtils != 'undefined') {
+                validatePhone();
+            // }
+            })();
+            // on blur: validate
+            phoneInputField.addEventListener('change', function() {
+                validatePhone();
+            });
+            phoneInputField.addEventListener('keydown', function() {
+                validatePhone();
+            });
+            phoneInputField.addEventListener('keyup', function() {
+                validatePhone();
             });
         </script>
     @endpush

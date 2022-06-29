@@ -35,13 +35,13 @@ class VerificationRequestsTable extends LivewireDatatable
        return [
            Column::name('user.account_id')->label('Account ID'),
 
-           Column::callback(['last_name','first_name'], function ($last_name,$first_name) {
+           Column::callback(['user.last_name','user.first_name'], function ($last_name,$first_name) {
                return $last_name.' '.$first_name;
            })->exportCallback(function ($last_name,$first_name){
                return $last_name.' '.$first_name;
            })->searchable()->label('Name'),
 
-           Column::name('email')->searchable()->label('Email'),
+           Column::name('user.email')->searchable()->label('Email'),
 
            Column::callback(['verification_type_id'], function ($verification_type) {
                if(VerificationType::find($verification_type)->slug == Str::slug(VerificationTypes::ADDRESS())){

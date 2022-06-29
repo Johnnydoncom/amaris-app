@@ -178,11 +178,12 @@ class Verification extends Component
             'utilityBill'=>'required|image'
         ]);
 
-        $verifyType = VerificationType::find($this->verifyType);
+        $verifyType = VerificationType::where('slug', Str::slug(VerificationTypes::ADDRESS()))->first();
 
         if($this->verification_record){
             $this->addError('address', 'ID verification is required before verifying address');
         }
+
         if($verifyType->slug != Str::slug(VerificationTypes::ADDRESS())){
             $this->addError('address', 'An unknown error occurred');
         }

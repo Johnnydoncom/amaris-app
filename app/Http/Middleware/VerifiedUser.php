@@ -20,7 +20,7 @@ class VerifiedUser
     {
         if(!Auth::check()) {
             return redirect(route('login'));
-        }elseif ($request->user()->verified){
+        }elseif ($request->user()->verified && $request->user()->address_verified){
             return $next($request);
         } else {
             return redirect(route('account.verification.index'));

@@ -27,7 +27,7 @@ class Home extends Component
     public $avatar;
     public $verified = false;
 
-    public $last_name, $first_name, $email, $phone, $dob, $address, $city, $zipcode, $verification_record;
+    public $last_name, $first_name, $email, $phone, $dob, $address, $city, $state, $zipcode, $country, $gender, $verification_record;
 
     protected $rules = [
         'avatar' => 'image|max:1024'
@@ -42,6 +42,12 @@ class Home extends Component
         $this->email = auth()->user()->email;
         $this->phone = auth()->user()->phone;
         $this->dob = auth()->user()->dob;
+        $this->address = auth()->user()->address;
+        $this->city = auth()->user()->city;
+        $this->state = auth()->user()->state;
+        $this->country = auth()->user()->country_id;
+        $this->zipcode = auth()->user()->zipcode;
+        $this->gender = auth()->user()->gender;
 
         $this->verification_record = auth()->user()->verifications()->latest()->first();
     }
@@ -74,12 +80,16 @@ class Home extends Component
         $user = User::find(auth()->user()->id);
         $user->last_name = $this->last_name;
         $user->first_name = $this->first_name;
+        $user->gender = $this->gender;
+        $user->dob = Carbon::parse($this->dob);
+        $user->address = $this->address;
+        $user->city = $this->city;
+        $user->state = $this->state;
+        $user->country_id = $this->country;
+        $user->zipcode = $this->zipcode;
         $user->save();
 
         // Set Flash Message
-        $this->dispatchBrowserEvent('alert', [
-            'type' => 'success',
-            'message' => "Record Saved!"
-        ]);
+        session()->flash('message', 'Record Saved.');
     }
 }
