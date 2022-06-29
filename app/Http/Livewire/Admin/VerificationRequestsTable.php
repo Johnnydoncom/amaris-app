@@ -4,8 +4,11 @@ namespace App\Http\Livewire\Admin;
 
 use App\Enums\UserRole;
 use App\Enums\UserStatus;
+use App\Enums\VerificationTypes;
 use App\Models\User;
 use App\Models\UserVerification;
+use App\Models\VerificationType;
+use Illuminate\Support\Str;
 use Mediconesystems\LivewireDatatables\Action;
 use Mediconesystems\LivewireDatatables\Column;
 use Mediconesystems\LivewireDatatables\DateColumn;
@@ -39,6 +42,15 @@ class VerificationRequestsTable extends LivewireDatatable
            })->searchable()->label('Name'),
 
            Column::name('email')->searchable()->label('Email'),
+
+           Column::callback(['verification_type_id'], function ($verification_type) {
+               if(VerificationType::find($verification_type)->slug == Str::slug(VerificationTypes::ADDRESS())){
+                   return 'Address Verification';
+               }else{
+                   return 'ID Verification';
+               }
+           })->searchable()->label('Type'),
+
 
            Column::callback(['status'], function ($status) {
                return '<span class="badge badge-danger badge-sm">'.$status.'</span>';
