@@ -46,7 +46,7 @@
             </div>
             <div class="divider my-0"></div>
             <div class="text-center">
-                <button class="text-secondary" wire:click.prevent="$">Edit</button>
+                <button class="text-secondary" wire:click.prevent="$set('editing', true)" wire:loading.class="loading">Edit</button>
             </div>
         @endif
     </x-card>
