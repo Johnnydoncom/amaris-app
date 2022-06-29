@@ -34,7 +34,7 @@ class Verification extends Component
 
     public function mount(){
         $this->user = User::find(auth()->user()->id);
-        $this->verificationTypes = VerificationType::all();
+        $this->verificationTypes = VerificationType::where('slug', '!=', Str::slug(VerificationTypes::ADDRESS()))->get();
         $this->verifyType = $this->verificationTypes->first()->id;
         $this->countries = Country::get(['id','name']);
 
@@ -130,7 +130,6 @@ class Verification extends Component
                 'dob' => Carbon::parse(auth()->user()->dob)->format('Y-m-d'),
                 'selfie' => $base64string
             ]);
-
 //            FFF4028711111
             if ($response && $response->status=='VERIFIED') {
                 $this->saveDVLicenseRecord($response);
@@ -180,9 +179,9 @@ class Verification extends Component
 
         $verifyType = VerificationType::where('slug', Str::slug(VerificationTypes::ADDRESS()))->first();
 
-        if($this->verification_record){
-            $this->addError('address', 'ID verification is required before verifying address');
-        }
+//        if($this->verification_record){
+//            $this->addError('address', 'ID verification is required before verifying address');
+//        }
 
         if($verifyType->slug != Str::slug(VerificationTypes::ADDRESS())){
             $this->addError('address', 'An unknown error occurred');

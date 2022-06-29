@@ -9,6 +9,7 @@ use Livewire\Component;
 class PaymentInfo extends Component
 {
     public $payment_information, $countries=[], $bank_name, $bank_account_no, $bank_account_name, $bank_swift_code, $bank_branch, $country_id;
+    public $editing = false;
 
     public function mount(){
         $this->payment_information = auth()->user()->payment_information ? auth()->user()->payment_information->load('country') : null;
@@ -46,6 +47,8 @@ class PaymentInfo extends Component
         $paymentInformation->country_id = $this->country_id;
         $paymentInformation->user_id = auth()->user()->id;
         $paymentInformation->save();
+
+        $this->editing = false;
 
         session()->flash('success', 'Your information has been saved');
     }

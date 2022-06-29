@@ -36,8 +36,8 @@ class SettingSeeder extends Seeder
         $settingArray['social_instagram'] = 'https://instagram.com/Amaris.ng';
 
         $settingArray['paystack_active']   = 1;
-        $settingArray['paystack_key']  = 'pk_test_505cd494933907dd3e1ec07a6eef96e1aef633f1';
-        $settingArray['paystack_secret']   = 'sk_test_c3c0ac59072eee6f6af5c6a909a2a019da7e48c0';
+        $settingArray['paystack_key']  = 'pk_live_840844c2b25d6ed006362384bf987d6514c8f20d';
+        $settingArray['paystack_secret']   = 'sk_live_4760727ff7192f73ccd085b583f983c2f72d4f9e';
 
         $settingArray['stripe_active']   = 1;
         $settingArray['stripe_key']  = 'pk_test_51L4gM4HPfoAuKwnmFouS5lTErlK9ZFYtE8w7EdyEVozXoWsy9o1U776PwmfnO1CgVJbdGjNLolAD0dnr3HCzAKlf00Cy0LHN3p';

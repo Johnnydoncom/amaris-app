@@ -44,7 +44,7 @@ Route::get('order/{order}/success', function (\Illuminate\Http\Request $request,
 Route::prefix('account')->as('account.')->middleware(['auth','verified'])->group(function () {
     Route::get('/', [\App\Http\Controllers\Account\AccountController::class, 'index'])->name( 'index');
 
-    Route::get('affiliate', \App\Http\Livewire\Account\Affiliate::class)->name( 'affiliate.index');
+    Route::get('affiliate', \App\Http\Livewire\Account\Affiliate::class)->middleware('verified_user')->name( 'affiliate.index');
 
 
     // Order
@@ -66,8 +66,8 @@ Route::prefix('account')->as('account.')->middleware(['auth','verified'])->group
 
     Route::get('verification', \App\Http\Livewire\Account\Verification::class)->name('verification.index');
 
-    Route::get('withdraw-request', \App\Http\Livewire\Account\WithdrawRequest::class)->name('withdraw.index');
-    Route::get('payment-info', \App\Http\Livewire\Account\PaymentInfo::class)->name('payment-info.index');
+    Route::get('withdraw-request', \App\Http\Livewire\Account\WithdrawRequest::class)->middleware('verified_user')->name('withdraw.index');
+    Route::get('payment-info', \App\Http\Livewire\Account\PaymentInfo::class)->middleware('verified_user')->name('payment-info.index');
 
 });
 

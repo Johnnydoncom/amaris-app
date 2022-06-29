@@ -58,7 +58,7 @@ trait VerificationServices{
 
     public function verifyByDriversLicense($data){
         $response = Http::withHeaders([
-            'api-key' => env('VERIFYAFRICA_DV_LICENSE_BOOLEAN_KEY'),
+            'api-key' => setting('verifyafrica_dvl_key', env('VERIFYAFRICA_DV_LICENSE_BOOLEAN_KEY')),
             'userid' => setting('verifyafrica_userid', env('VERIFYAFRICA_USERID'))
         ])->post('https://app.verified.ng/sfx-verify/v2/frsc', [
             'frsc' =>  (string)$data['frsc'],
