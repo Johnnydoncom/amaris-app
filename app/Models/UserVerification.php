@@ -20,6 +20,9 @@ class UserVerification extends Model implements HasMedia
         $this->addMediaCollection('doc')
             ->singleFile();
 
+        $this->addMediaCollection('doc_back')
+            ->singleFile();
+
         $this->addMediaCollection('user_photo')
             ->singleFile();
     }

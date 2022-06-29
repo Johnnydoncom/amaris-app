@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Account;
 
+use App\Enums\VerificationTypes;
 use App\Models\Country;
 use App\Models\User;
 use App\Models\UserVerification;
@@ -17,23 +18,24 @@ class Verification extends Component
 {
     use WithFileUploads, VerificationServices;
 
-    public $verification_record;
+    public $verification_record, $address_verification_record;
 
     public $verificationTypes;
     public $verifyType;
-    public $verifyDoc;
+    public $frontId, $backId, $utilityBill;
     public $verified = false;
     public $id_no,$vin, $phone;
     public $verificationData = [];
 
     protected $rules = [
         'id_no' => 'required',
-        'verifyDoc' => 'required|image'
+        'frontId' => 'required|image'
     ];
 
     public function mount(){
         $this->user = User::find(auth()->user()->id);
         $this->verificationTypes = VerificationType::all();
+        $this->verifyType = $this->verificationTypes->first()->id;
         $this->countries = Country::get(['id','name']);
 
         $this->last_name = auth()->user()->last_name;
@@ -49,25 +51,29 @@ class Verification extends Component
 
     public function render()
     {
-        $this->verification_record = auth()->user()->verifications()->where('status','pending')->latest()->first();
+        $this->verification_record = auth()->user()->verifications()->whereHas('verification_type', function ($query){
+            $query->where('slug', '!=', Str::slug(VerificationTypes::ADDRESS()));
+        })->where('status','pending')->latest()->first();
         if($this->verification_record){
             $this->verifyType =  $this->verification_record->verification_type_id;
             $this->id_no =  $this->verification_record->id_no;
-//            $this->verificationData = $this->verification_record;
         }
+
+        $this->address_verification_record = auth()->user()->verifications()->whereHas('verification_type', function ($query){
+            $query->where('slug', Str::slug(VerificationTypes::ADDRESS()));
+        })->where('status','pending')->latest()->first();
 
         return view('livewire.account.verification')->layout('layouts.account');
     }
 
     public function verify(){
-//        $this->validate();
-
         $verifyType = VerificationType::find($this->verifyType);
 
         if($verifyType->slug == Str::slug('NIN')) {
             $this->validate([
                 'id_no' => 'required',
-                'verifyDoc' => 'required|image'
+                'frontId' => 'required|image',
+                'backId' => 'required|image'
             ]);
 
             $response = $this->verifyNIN($this->id_no);
@@ -80,7 +86,7 @@ class Verification extends Component
         }elseif ($verifyType->slug==Str::slug('PASSPORT')){
             $this->validate([
                 'id_no' => 'required',
-                'verifyDoc' => 'required|image'
+                'frontId' => 'required|image'
             ]);
 
             $response = $this->verifyPassport([
@@ -101,7 +107,8 @@ class Verification extends Component
         }elseif($verifyType->slug== Str::slug('DRIVERSLICENSE')){
             $this->validate([
                 'id_no' => 'required',
-                'verifyDoc' => 'required|image'
+                'frontId' => 'required|image',
+                'backId' => 'required|image'
             ]);
 
             $media = auth()->user()->getMedia('avatar');
@@ -134,7 +141,8 @@ class Verification extends Component
         }elseif ($verifyType->slug == Str::slug('VOTERSCARD')){
             $this->validate([
                 'id_no' => 'required',
-                'verifyDoc' => 'required|image'
+                'frontId' => 'required|image',
+                'backId' => 'required|image'
             ]);
 
             $media = auth()->user()->getMedia('avatar');
@@ -148,7 +156,6 @@ class Verification extends Component
                 $mime = Storage::disk('public')->mimeType($selfieUrl);
                 $base64string = 'data:image/jpg;base64,'.base64_encode(Storage::disk('public')->get($selfieUrl));
             }
-//          $this->addError('vin', 'Invalid Voters Card Information');
 
             $response = $this->verifyVotersCard([
                 'vin' => $this->id_no,
@@ -158,28 +165,27 @@ class Verification extends Component
             ]);
 
             if ($response && isset($response->response)) {
-//                echo json_encode($response->response);
-//                exit();
                 $this->verificationData = $this->saveVotersCardVerificationRecord($response->response);
                 session()->flash('message', 'Your information has been received and will be processed within 2 working days. Thank you.');
             }else{
                 $this->addError('vin', 'Invalid Voters Card Information');
             }
-        }elseif ($verifyType->slug == Str::slug('ADDRESS')){
-            $this->validate([
-                'verifyDoc' => 'required|image'
-            ]);
-
-            $this->verificationData = $this->saveAddressVerification();
-            session()->flash('message', 'Your information has been received and will be processed within 2 working days. Thank you.');
         }
-
-        session()->flash('verified');
     }
 
+    public function verifyAddress(){
+        $this->validate([
+            'utilityBill'=>'required|image'
+        ]);
 
-    private function saveAddressVerification(){
         $verifyType = VerificationType::find($this->verifyType);
+
+        if($this->verification_record){
+            $this->addError('address', 'ID verification is required before verifying address');
+        }
+        if($verifyType->slug != Str::slug(VerificationTypes::ADDRESS())){
+            $this->addError('address', 'An unknown error occurred');
+        }
 
         $record = new UserVerification();
         $record->user_id = auth()->user()->id;
@@ -189,8 +195,8 @@ class Verification extends Component
         $record->last_name = auth()->user()->last_name;
         $record->save();
 
-        $record->addMedia($this->verifyDoc->getRealPath())->toMediaCollection('doc');
-        return $record;
+        $record->addMedia($this->utilityBill->getRealPath())->toMediaCollection('doc');
+        session()->flash('message', 'Your information has been received and will be processed within 2 working days. Thank you.');
     }
 
     private function saveNINVerificationRecord($data){
@@ -214,7 +220,11 @@ class Verification extends Component
         $record->religion = $data->religion;
         $record->save();
 
-        $record->addMedia($this->verifyDoc->getRealPath())->toMediaCollection('doc');
+        $record->addMedia($this->frontId->getRealPath())->toMediaCollection('doc');
+
+        if($this->backId){
+            $record->addMedia($this->backId->getRealPath())->toMediaCollection('doc_back');
+        }
 
         $imageName = Str::random(10).'.'.'png';
         Storage::disk('public')->put($imageName, base64_decode($data->photo));
@@ -237,6 +247,10 @@ class Verification extends Component
         $record->phone = auth()->user()->phone;
         $record->save();
 
+        $record->addMedia($this->frontId->getRealPath())->toMediaCollection('doc');
+        if($this->backId){
+            $record->addMedia($this->backId->getRealPath())->toMediaCollection('doc_back');
+        }
         return $record;
     }
 
@@ -258,7 +272,10 @@ class Verification extends Component
         $record->issued_date = $data->issued_date;
         $record->save();
 
-        $record->addMedia($this->verifyDoc->getRealPath())->toMediaCollection('doc');
+        $record->addMedia($this->frontId->getRealPath())->toMediaCollection('doc');
+        if($this->backId){
+            $record->addMedia($this->backId->getRealPath())->toMediaCollection('doc_back');
+        }
 
         $imageName = Str::random(10).'.'.'png';
         Storage::disk('public')->put($imageName, base64_decode($data->photo));
@@ -286,8 +303,10 @@ class Verification extends Component
         $record->issued_date = $data->issued_date;
         $record->save();
 
-        $record->addMedia($this->verifyDoc->getRealPath())->toMediaCollection('doc');
-
+        $record->addMedia($this->frontId->getRealPath())->toMediaCollection('doc');
+        if($this->backId){
+            $record->addMedia($this->backId->getRealPath())->toMediaCollection('doc_back');
+        }
         $imageName = Str::random(10).'.'.'png';
         Storage::disk('public')->put($imageName, base64_decode($data->photo));
         $record->addMediaFromUrl(Storage::disk('public')->url($imageName))->toMediaCollection('user_photo');
