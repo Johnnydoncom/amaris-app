@@ -12,6 +12,11 @@ class PaymentInfo extends Component
     public $editing = false;
 
     public function mount(){
+
+    }
+
+    public function render()
+    {
         $this->payment_information = auth()->user()->payment_information ? auth()->user()->payment_information->load('country') : null;
         $this->countries = Country::get(['id','name']);
 
@@ -23,10 +28,7 @@ class PaymentInfo extends Component
             $this->bank_branch = $this->payment_information->bank_branch;
             $this->country_id = $this->payment_information->country_id;
         }
-    }
 
-    public function render()
-    {
         return view('livewire.account.payment-info')->layout('layouts.account');
     }
 
@@ -49,6 +51,7 @@ class PaymentInfo extends Component
         $paymentInformation->save();
 
         $this->editing = false;
+
 
         session()->flash('success', 'Your information has been saved');
     }
