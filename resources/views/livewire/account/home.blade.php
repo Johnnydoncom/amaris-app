@@ -2,7 +2,7 @@
     <div class="card rounded-none">
         <div class="card-body flex px-0 py-2 sm:py-1 flex-row items-center gap-2 sm:gap-4 relative">
             <div class="avatar online">
-                <label class="w-16 sm:w-24 rounded-full leading-tight bg-white hover:bg-gray-100 cursor-pointer inline-flex items-center transition duration-500 ease-in-out group overflow-hidden group relative" for="avatar-input">
+                <label class="w-14 sm:w-24 rounded-full leading-tight bg-white hover:bg-gray-100 cursor-pointer inline-flex items-center transition duration-500 ease-in-out group overflow-hidden group relative" for="avatar-input">
                     <img src="{{ Auth::user()->avatar_url }}" />
                     <input id="avatar-input" type="file" name="avatar" wire:model="avatar" class="hidden" style="display: none">
                     <div wire:loading.remove class="hidden group-hover:block absolute bottom-0 inset-x-0 mx-auto bg-primary bg-opacity-70">
@@ -23,13 +23,13 @@
 
             <div class="grid grid-cols-3 gap-2 sm:gap-4 w-full">
                 <div class="col-span-2">
-                    <h2 class="font-semibold text-lg sm:text-2xl">{{Auth::user()->name}}</h2>
+                    <h2 class="font-semibold text-md sm:text-2xl">{{Auth::user()->name}}</h2>
                     <p class="font-normal text-sm text-gray-400">Account ID: {{Auth::user()->account_id}}</p>
                 </div>
             </div>
 
             <div class="text-right flex justify-end float-right items-center absolute top-0 right-0">
-                <div class="flex gap-2 items-center text-xs sm:text-sm">
+                <div class="flex flex-col sm:flex-row gap-1 sm:gap-2 items-center text-xs sm:text-sm">
                     @if(Auth::user()->account_verified)
                         <x-cui-cil-check-circle class="w-4 h-4 sm:w-6 sm:h-6 text-success"/>
                         <h5 class="font-semibold">Status:</h5>
@@ -47,7 +47,16 @@
 
     <div class="card rounded-none">
         <div class="card-body p-1 sm:p-auto">
-            <h2 class="font-semibold text-xl sm:text-2xl py-4">Account Information</h2>
+            <div class="flex justify-between">
+                <h2 class="font-semibold text-xl sm:text-2xl py-4">Account Information</h2>
+                @if(!$editing)
+                <div>
+                    <button class="btn btn-link text-secondary" wire:click.prevent="$set('editing', true)" wire:loading.class="loading">Edit</button>
+                </div>
+                @endif
+            </div>
+
+            @if($editing)
             <form method="POST" wire:submit.prevent="update" >
                 <div class="grid grid-cols-2 sm:grid-cols-2 gap-4">
                     @csrf
@@ -86,6 +95,53 @@
                     </div>
                 </div>
             </form>
+
+            @else
+              <div class="w-full max-w-xl">
+                  <table class="w-full whitespace-nowrap text-left leading-7">
+                      <tr class="transition duration-200">
+                          <th>Last Name</th>
+                          <td>{{$last_name}}</td>
+                      </tr>
+                      <tr class="transition duration-200">
+                          <th>First Name</th>
+                          <td>{{$first_name}}</td>
+                      </tr>
+                      <tr class="transition duration-200">
+                          <th>Email</th>
+                          <td>{{$email}}</td>
+                      </tr>
+                      <tr class="transition duration-200">
+                          <th>Phone</th>
+                          <td>{{$phone}}</td>
+                      </tr>
+                      <tr class="transition duration-200">
+                          <th>Gender</th>
+                          <td>{{$gender}}</td>
+                      </tr>
+                      <tr class="transition duration-200">
+                          <th>Address</th>
+                          <td>{{$address}}</td>
+                      </tr>
+                      <tr class="transition duration-200">
+                          <th>City</th>
+                          <td>{{$city}}</td>
+                      </tr>
+                      <tr class="transition duration-200">
+                          <th>State</th>
+                          <td>{{$state}}</td>
+                      </tr>
+                      <tr class="transition duration-200">
+                          <th>Country</th>
+                          <td>{{Auth::user()->country ? Auth::user()->country->name : ''}}</td>
+                      </tr>
+                      <tr class="transition duration-200">
+                          <th>Zip Code</th>
+                          <td>{{$zipcode}}</td>
+                      </tr>
+                  </table>
+              </div>
+            @endif
 
         </div>
         <x-flash-messages class="mt-4" />

@@ -25,7 +25,7 @@ class Home extends Component
     public $verificationTypes;
     public $countries=[];
     public $avatar;
-    public $verified = false;
+    public $verified = false, $editing=false;
 
     public $last_name, $first_name, $email, $phone, $dob, $address, $city, $state, $zipcode, $country, $gender, $verification_record;
 
